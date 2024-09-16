@@ -1,23 +1,29 @@
-Creazione Utenti (anche con oauth google, Facebook ecc)
-Profilo utente con dati di base + immagine profilo, condivisibile
-Ricette dell'utente (visibili in modalità taccuino e poi ricetta) ricercabili per tag sul profilo (quelle pubbliche)
 
-Ricette
-Raggruppamento Ricette (Taccuini)
-Tag Multipli Ricette (Forse ridondante con il taccuino)
-Testata Ricetta (Nome ricetta, autore, data creazione, mini descrizione (max char 100))
-Elenco ingredienti necessari (tipo, qta, um, extra info possibilità di convertire da burro a olio, da grammi a ounce\spoons ecc) - db di ingredienti
-Elenco fasi preparazione (eventualmente con foto, descrizione, gli ingredienti usati in quella fase di quelli totali, link esterni)
+# Website basic functions
 
-- Possibilità di condividere la singola ricetta o il risultato di un filtro di tag o il profilo (accessi specifici determinati dall'utente?
-- se ricetta pubblica, generare stringa da 16 caratteri che viene embeddata nel link di condivisione, il backend verifica che ci sia).
-- [Possibilità di esportare le ricette in formato stampabile?]
-- Possibilità di partire da ingredienti presenti in frigo e il tipo di ricetta e tirare fuori le ricette compatibili
-- Lista della spesa su ricette selezionate
+- User Profile Creation or Oauth Login with Google (maybe other)
+- User Avatar 
+- Personal ingredients creation
+- Personal Tags creation
+- Recipes creation with standard ingredients, personal ingredients, multiple optional tags and personal tags
+- Recipes can be private or public
+- Recipes are composed also by phases, that can contain the specific amount of ingredients used in that phase, and an optional photo
+- User Recipes, searcheable by name or tags
+- Search for public recipes by name or tags
 
-- We'll have potentially a table conversion, given the starting quantity, measure unit and resulting unit
-- We'll have a fixed set of ingredients, and the user will be able to have his set of personalized ones
+# Extra functions
+- Embedding video recipes
+- Convertible ingredients measure units (cups to grams and so on)
+- Recipe Portion multiplicator (it scales ingredients based on the number of portions desired)
+- Shop list (select multiple recipes and it gives you the aggregated list of ingredients needed)
+- Sharing of a single recipe or set of recipes (found by search or tags combination)
+- To share a public recipe, I will embed a token corresponding to the user in the recipe url
+- Search recipes by ingredients in the fridge and tags
+- Account validation via mail
 
-- Pounds <-> Grammi <-> Cups <-> Tablespoons
-- Spoons <-> Millilitri
+## Possible Ingredients Conversions
+
+- Pounds <-> Grams <-> Cups <-> Tablespoons
+- Spoons <-> Milliliters
 - Farenheit Degrees <-> Celsius Degrees
+- https://en.wikibooks.org/wiki/Cookbook:Units_of_measurement#List_of_Units
