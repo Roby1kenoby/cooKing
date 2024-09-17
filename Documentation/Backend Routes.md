@@ -116,3 +116,15 @@
 ## DELETE
 
 - /:id/deletePrivateTag -> delete specific personal tag
+----------------------------------
+
+# Login Routes
+
+## GET
+
+- /me -> get logged user infos (from request, after authentication with jwt)
+- /login-google -> route to google auth
+- /callback-google -> route called by google after auth
+
+## POST
+- / -> login user with email and password

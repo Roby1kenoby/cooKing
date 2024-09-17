@@ -1,0 +1,15 @@
+@baseUrl=http://localhost:5000/users
+
+### CREATE NEW USER
+POST {{baseUrl}}/createUser
+Content-Type: application/json
+
+{
+    "email": "asd2@gmail.com",
+    "password": "asd2",
+    "username": "asd2Username",
+    "avatarUrl": "https://picsum.photos/200/300",
+    "name": "asd2Name",
+    "surname": "asd2Surname",
+    "preferredMu": "metric"
+}

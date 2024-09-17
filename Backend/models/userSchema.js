@@ -27,9 +27,6 @@ const userSchema = new Schema(
         },
         preferredMu :{
             type: String
-        },
-        creationDate: {
-            type: Date
         }
     },
     {

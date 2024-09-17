@@ -1,0 +1,608 @@
+[
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": null,
+        "Name": "Farina",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pasta",
+        "Name": "Spaghetti",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pasta",
+        "Name": "Penne",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Riso",
+        "Name": "Riso Arborio",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Riso",
+        "Name": "Riso integrale",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Manzo",
+        "Name": "Costata di manzo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Maiale",
+        "Name": "Prosciutto crudo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Maiale",
+        "Name": "Salsiccia",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Pollo",
+        "Name": "Cosce di pollo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Tacchino",
+        "Name": "Petto di tacchino",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Pesce bianco",
+        "Name": "Branzino",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Pesce azzurro",
+        "Name": "Sarde",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Crostecei",
+        "Name": "Gamberetti",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Ortaggi",
+        "Name": "Carote",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Ortaggi",
+        "Name": "Zucchine",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Ortaggi",
+        "Name": "Peperoni",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Radici",
+        "Name": "Ravanelli",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Tuberi",
+        "Name": "Patate dolci",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Foglia verde",
+        "Name": "Lattuga",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Foglia verde",
+        "Name": "Bieta",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Citrus",
+        "Name": "Limone",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Citrus",
+        "Name": "Arancia",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Tropicale",
+        "Name": "Ananas",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Tropicale",
+        "Name": "Mango",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutti di bosco",
+        "Name": "Mirtilli",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutti di bosco",
+        "Name": "Lamponi",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Noci e semi",
+        "Name": "Mandorle",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Noci e semi",
+        "Name": "Noci",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Latte",
+        "Name": "Latte intero",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Latte",
+        "Name": "Latte scremato",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Formaggi",
+        "Name": "Mozzarella",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Formaggi",
+        "Name": "Gorgonzola",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Formaggi",
+        "Name": "Grana Padano",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Creme",
+        "Name": "Panna da cucina",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Creme",
+        "Name": "Panna montata",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Spezie",
+        "Name": "Pepe nero",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Spezie",
+        "Name": "Zenzero in polvere",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Spezie",
+        "Name": "Cannella",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Erbe aromatiche",
+        "Name": "Origano",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Erbe aromatiche",
+        "Name": "Basilico",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Salse",
+        "Name": "Ketchup",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Salse",
+        "Name": "Maionese",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Oli e Grassi",
+        "ingredientCategory2": "Olio",
+        "Name": "Olio di semi di girasole",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Oli e Grassi",
+        "ingredientCategory2": "Grassi",
+        "Name": "Burro",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Oli e Grassi",
+        "ingredientCategory2": "Grassi",
+        "Name": "Strutto",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Legumi",
+        "ingredientCategory2": null,
+        "Name": "Fagioli cannellini",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Legumi",
+        "ingredientCategory2": null,
+        "Name": "Lenticchie rosse",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Legumi",
+        "ingredientCategory2": null,
+        "Name": "Ceci secchi",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Zuccheri",
+        "Name": "Zucchero semolato",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Zuccheri",
+        "Name": "Zucchero di canna",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Cioccolato",
+        "Name": "Cioccolato fondente",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Cioccolato",
+        "Name": "Cioccolato al latte",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Frutta secca",
+        "Name": "Uvetta",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Frutta secca",
+        "Name": "Fichi secchi",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pasta",
+        "Name": "Fusilli",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pasta",
+        "Name": "Tagliatelle",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pane",
+        "Name": "Pane integrale",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pane",
+        "Name": "Pane bianco",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pane",
+        "Name": "Grissini",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Pane",
+        "Name": "Focaccia",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Farine speciali",
+        "Name": "Farina di mais",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Cereali",
+        "ingredientCategory2": "Farine speciali",
+        "Name": "Farina di riso",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Manzo",
+        "Name": "Carne macinata",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Maiale",
+        "Name": "Lardo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Maiale",
+        "Name": "Pancetta",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Salumi",
+        "Name": "Salame",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Salumi",
+        "Name": "Mortadella",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Pollame",
+        "Name": "Anatra",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Carne",
+        "ingredientCategory2": "Pollame",
+        "Name": "Fegato di pollo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Molluschi",
+        "Name": "Calamari",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Molluschi",
+        "Name": "Seppie",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Molluschi",
+        "Name": "Polpo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Crostacei",
+        "Name": "Aragosta",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Pesce",
+        "ingredientCategory2": "Crostacei",
+        "Name": "Scampi",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Tuberi",
+        "Name": "Barbabietole",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Legumi freschi",
+        "Name": "Piselli",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Legumi freschi",
+        "Name": "Fave",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Ortaggi",
+        "Name": "Cavolo cappuccio",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Ortaggi",
+        "Name": "Broccoli",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Erbe aromatiche",
+        "Name": "Prezzemolo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Verdure",
+        "ingredientCategory2": "Erbe aromatiche",
+        "Name": "Coriandolo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Agrumi",
+        "Name": "Pompelmo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutti tropicali",
+        "Name": "Papaya",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutti tropicali",
+        "Name": "Guava",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutti di bosco",
+        "Name": "More",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutta secca",
+        "Name": "Nocciole",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutta secca",
+        "Name": "Pistacchi",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutta essiccata",
+        "Name": "Albicocche secche",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Frutta",
+        "ingredientCategory2": "Frutta essiccata",
+        "Name": "Prugne secche",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Formaggi freschi",
+        "Name": "Ricotta",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Formaggi freschi",
+        "Name": "Stracchino",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Latticini",
+        "ingredientCategory2": "Yogurt",
+        "Name": "Yogurt greco",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Oli e Grassi",
+        "ingredientCategory2": "Olio",
+        "Name": "Olio di cocco",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Oli e Grassi",
+        "ingredientCategory2": "Burro",
+        "Name": "Burro chiarificato",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Salse",
+        "Name": "Senape",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Salse",
+        "Name": "Salsa barbecue",
+        "MeasurementUnitCategory": "Liquid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Spezie",
+        "Name": "Pepe bianco",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Condimenti",
+        "ingredientCategory2": "Spezie",
+        "Name": "Curcuma",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Cioccolato",
+        "Name": "Cioccolato bianco",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Zuccheri",
+        "Name": "Zucchero a velo",
+        "MeasurementUnitCategory": "Solid"
+    },
+    {
+        "ingredientCategory1": "Dolci",
+        "ingredientCategory2": "Frutta secca",
+        "Name": "Mandorle",
+        "MeasurementUnitCategory": "Solid"
+    }
+]

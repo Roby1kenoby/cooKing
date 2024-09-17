@@ -9,14 +9,15 @@ const measurementUnitSchema = new Schema(
             minLength: 1,
             maxLength: 10
         },
-        // I'll be saving ums on the db in a small set of base measurement units, like all wights in grams,
-        // all liquids in milliliters and so on. The frontend will then convert them to the desired units
-        conversionRateToStdMu:{
+        // I'll be saving ums on the db in a small set of base measurement units, all wights in grams,
+        // all liquids in milliliters. The frontend will then convert them to the desired measurement units
+        conversionRateFromStdMu:{
             type: Number,
             required: true
         },
-        standardMuOfReference:{
+        measurementCategory:{
             type: String,
+            enum: ['Solid','Liquid','Other'],
             required: true
         }
     },
