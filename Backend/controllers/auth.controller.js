@@ -4,11 +4,9 @@ import jwt from 'jsonwebtoken'
 
 export const loginUser = async function(req, res) {
     const data = req.body
-    console.log(data)
     try {
         // searching for the user
         const foundUser = await User.findOne({email: data.email})
-        console.log(foundUser)
         if(!foundUser){
             const error = new Error('Unauthorized access lvl 1')
             error.status = 400

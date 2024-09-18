@@ -1,0 +1,21 @@
+@baseUrl=http://localhost:5000/ingredients
+
+### GET PUBLIC INGREDIENTS
+GET {{baseUrl}}/public
+
+### GET PRIVATE INGREDIENTS
+GET {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY2OTU5NDAsImV4cCI6MTcyNjY5OTU0MH0.sUemvw8HQxepnqH72QstXIIUSVdCKJrQVjC6r7YzZEA
+
+### CREATE NEW PRIVATE INGREDIENT
+POST {{baseUrl}}/createPrivateIngredient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY2OTIyOTAsImV4cCI6MTcyNjY5NTg5MH0.4RZeWGTFXi3iQIyrTfC5REH7Y5RQjCkxpH04cBm_uSg
+
+{
+    "category1":"Liquidi",
+    "category2": null,
+    "name": "Acqua",
+    "measurementCategory": "Liquid",
+    "userId": "66e9e8b66f379cea82c39785"
+}

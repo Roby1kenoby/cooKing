@@ -30,7 +30,7 @@ const ingredientSchema = new Schema(
         }
     },
     {
-        collection: 'Ingredients',
+        collection: 'ingredients',
         timestamps: true
     }
 )
