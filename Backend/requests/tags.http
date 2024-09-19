@@ -1,0 +1,35 @@
+@baseUrl=http://localhost:5000/tags
+
+### GET PUBLIC TAGS
+GET {{baseUrl}}/public?searchString=ac
+
+### GET ALL TAGS
+GET {{baseUrl}}?searchString=a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3NzM2MTUsImV4cCI6MTcyNjc3NzIxNX0.E7llXLe6P_bWCIfoFVXsr45xWgXsjFZkwlVaisp-Ak4
+
+### GET PRIVATE TAGS
+GET {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3NzM2MTUsImV4cCI6MTcyNjc3NzIxNX0.E7llXLe6P_bWCIfoFVXsr45xWgXsjFZkwlVaisp-Ak4
+
+### CREATE NEW PRIVATE TAG
+POST {{baseUrl}}/createPrivateTag
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3NzM2MTUsImV4cCI6MTcyNjc3NzIxNX0.E7llXLe6P_bWCIfoFVXsr45xWgXsjFZkwlVaisp-Ak4
+
+{
+    "tagName": "Rinfrescanti!"
+}
+
+### UPDATE NEW PRIVATE TAG
+PUT {{baseUrl}}/66ec7aad35c1315f4f58da2c/editPrivateTag
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3NzM2MTUsImV4cCI6MTcyNjc3NzIxNX0.E7llXLe6P_bWCIfoFVXsr45xWgXsjFZkwlVaisp-Ak4
+
+{
+    "tagName": "Aqua"
+}
+
+### DELETE PRIVATE TAG
+DELETE {{baseUrl}}/66ec7aad35c1315f4f58da2c/deletePrivateTag
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3NzM2MTUsImV4cCI6MTcyNjc3NzIxNX0.E7llXLe6P_bWCIfoFVXsr45xWgXsjFZkwlVaisp-Ak4

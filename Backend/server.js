@@ -6,6 +6,7 @@ import mongoDbConnection from './configs/db.js'
 import userRouter from './routes/users.rotuer.js'
 import authRouter from './routes/auth.router.js'
 import ingredientRouter from './routes/ingredients.router.js'
+import tagRouter from './routes/tags.router.js'
 
 const server = express()
 server.use(express.json())
@@ -24,3 +25,4 @@ mongoDbConnection()
 server.use('/users', userRouter)
 server.use('/login', authRouter)
 server.use('/ingredients', ingredientRouter)
+server.use('/tags', tagRouter)

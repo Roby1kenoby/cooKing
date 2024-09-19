@@ -4,16 +4,18 @@ import * as ingredientController from '../controllers/ingredient.controller.js'
 
 const router = express.Router()
 
-router.get('/', ingredientController.getAllIngredients)
-
-router.get('/private', authentication, ingredientController.getPrivateIngredients)
-
 router.get('/public', ingredientController.getPublicIngredients)
 
-router.post('/createPrivateIngredient', authentication, ingredientController.createNewPrivateIngredient)
+router.use(authentication)
 
-router.put('/:id/editPrivateIngredient', authentication, ingredientController.editPrivateIngredient)
+router.get('/', ingredientController.getAllIngredients)
 
-router.delete('/:id/deletePrivateIngredient', authentication, ingredientController.deletePrivateIngredient)
+router.get('/private', ingredientController.getPrivateIngredients)
+
+router.post('/createPrivateIngredient', ingredientController.createNewPrivateIngredient)
+
+router.put('/:id/editPrivateIngredient', ingredientController.editPrivateIngredient)
+
+router.delete('/:id/deletePrivateIngredient', ingredientController.deletePrivateIngredient)
 
 export default router
