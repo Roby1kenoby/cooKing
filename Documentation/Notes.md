@@ -6,7 +6,7 @@ Rotte per ricerca con insieme di tag
 Categorie per ingredienti base (2 liv)
 
 
-Su esposizione delle quantità lato frontend, avere una funzione che in base alla quantità fa visualizzare in k, etti o gr, stessa cosa per i liquidi
+Su esposizione delle quantità lato frontend, avere una funzione che in base alla quantità fa visualizzare in k, etti o gr, stessa cosa per i liquidi, e che in base alle preferenze dell'utente usi unità di misura regionali (metrico\imperiale ecc)
 
 
 Per condivisione ricerche
@@ -22,3 +22,9 @@ nel db devo avere una struttura così:
 - userId
 
 Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare i link.
+
+
+TODO: 
+- Testare RecipeIngredients
+- Testare Phases
+- Testare Recipes

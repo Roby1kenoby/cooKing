@@ -12,9 +12,10 @@ const recipeIngredientSchema = new Schema(
             ref: 'Ingredient',
             required: true
         },
-        measurementUnitId: {
-            type: Schema.Types.ObjectId,
-            ref: 'MeasurementUnit',
+        measurementUnit: {
+            type: String,
+            // type: Schema.Types.ObjectId,
+            // ref: 'MeasurementUnit',
             required: true
         },
         // if a recipeIngredient has a phase, it means it's used inside a specific phase.
@@ -24,7 +25,7 @@ const recipeIngredientSchema = new Schema(
             ref: 'Phase'
         },
         quantity: {
-            type: Number,
+            type: String,
             required: true
         },
         additionalInfos: {

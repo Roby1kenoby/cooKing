@@ -7,6 +7,9 @@ import userRouter from './routes/users.rotuer.js'
 import authRouter from './routes/auth.router.js'
 import ingredientRouter from './routes/ingredients.router.js'
 import tagRouter from './routes/tags.router.js'
+import phaseRouter from './routes/phase.rotuer.js'
+import recipeIngredientRouter from './routes/recipeIngredients.router.js'
+
 
 const server = express()
 server.use(express.json())
@@ -26,3 +29,6 @@ server.use('/users', userRouter)
 server.use('/login', authRouter)
 server.use('/ingredients', ingredientRouter)
 server.use('/tags', tagRouter)
+server.use('/phases', phaseRouter) // todo
+server.use('/recipeIngredients', recipeIngredientRouter) // todo
+

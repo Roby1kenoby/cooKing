@@ -1,0 +1,34 @@
+@baseUrl=http://localhost:5000/recipeIngredients
+
+### CREATE NEW RECIPE INGREDIENT
+POST {{baseUrl}}/createRecipeIngredient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3ODAxNjIsImV4cCI6MTcyNjc4Mzc2Mn0.ml19VXPcGChVivLAHggXwlas1MMDw-Osag0muRSCIj4
+
+{
+    "recipeId": "data.recipeId",
+    "ingredientId": "data.ingredientId",
+    "measurementUnit": "data.measurementUnit",
+    "phaseId": "phaseId",
+    "quantity": "data.quantity",
+    "additionalInfos": "data.additionalInfos"
+}
+
+### UPDATE NEW PRIVATE INGREDIENT
+PUT {{baseUrl}}/66ec726249030c3d2ccd1967/editRecipeIngredient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+
+{
+    "recipeId": "data.recipeId",
+    "ingredientId": "data.ingredientId",
+    "measurementUnit": "data.measurementUnit",
+    "phaseId": "phaseId",
+    "quantity": "data.quantity",
+    "additionalInfos": "data.additionalInfos"
+}
+
+### DELETE PRIVATE INGREDIENT
+DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deleteRecipeIngredient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ

@@ -90,7 +90,7 @@
 
 ## PUT
 
-- /:id/editRecipePhase -> edit specific recipe phase
+- /:id/editPhase -> edit specific recipe phase
 
 ## DELETE
 
