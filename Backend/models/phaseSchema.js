@@ -28,7 +28,7 @@ const phaseSchema = new Schema(
         }
     },
     {
-        collation: 'phases',
+        collection: 'phases',
         timestamps: true
     }
 )

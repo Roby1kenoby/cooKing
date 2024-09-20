@@ -3,22 +3,21 @@
 ### CREATE NEW RECIPE INGREDIENT
 POST {{baseUrl}}/createRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3ODAxNjIsImV4cCI6MTcyNjc4Mzc2Mn0.ml19VXPcGChVivLAHggXwlas1MMDw-Osag0muRSCIj4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjU4MTYsImV4cCI6MTcyNjg2OTQxNn0.WZPc0eiGNGzaMu38f755GtGFi0plLcfYvody9rbUz3w
 
 {
-    "recipeId": "data.recipeId",
-    "ingredientId": "data.ingredientId",
-    "measurementUnit": "data.measurementUnit",
-    "phaseId": "phaseId",
-    "quantity": "data.quantity",
-    "additionalInfos": "data.additionalInfos"
+    "recipeId": "66eddb6dd83658245ea06df1",
+    "ingredientId": "66eb43ae558e722c226da740",
+    "measurementUnit": "kg",
+    "phaseId": null,
+    "quantity": "5",
+    "additionalInfos": "dolcissimo"
 }
 
-### UPDATE NEW PRIVATE INGREDIENT
+### UPDATE RECIPE INGREDIENT
 PUT {{baseUrl}}/66ec726249030c3d2ccd1967/editRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
 {
     "recipeId": "data.recipeId",
     "ingredientId": "data.ingredientId",
@@ -28,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
     "additionalInfos": "data.additionalInfos"
 }
 
-### DELETE PRIVATE INGREDIENT
+### DELETE RECIPE INGREDIENT
 DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deleteRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA

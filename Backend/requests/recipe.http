@@ -1,0 +1,46 @@
+@baseUrl=http://localhost:5000/recipe
+
+### GET PUBLIC INGREDIENTS
+GET {{baseUrl}}/public?searchString=ac
+
+### GET ALL INGREDIENTS
+GET {{baseUrl}}?searchString=ac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+
+### GET PRIVATE INGREDIENTS
+GET {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+
+### CREATE NEW RECIPE
+POST {{baseUrl}}/createRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjQwMDgsImV4cCI6MTcyNjg2NzYwOH0.wjU37itREVVmIKA2mCF6cibHynWBjTn933EEyQeLRCk
+
+{
+    "userId": "66e9e8b66f379cea82c39785",
+    "tagsIds": [],
+    "title": "Ricetta Test 1",
+    "description": "Descrizione Ricetta Test 1",
+    "portions": "4",
+    "preparationTime": "10",
+    "recipeImageUrl": "https://picsum.photos/200/300",
+    "recipeVideoUrl": "",
+    "privateRecipe": false,
+    "phases": [],
+    "recipeIngredients": []
+}
+
+### UPDATE RECIPE
+PUT {{baseUrl}}/66eddb6dd83658245ea06df1/editRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjQwMDgsImV4cCI6MTcyNjg2NzYwOH0.wjU37itREVVmIKA2mCF6cibHynWBjTn933EEyQeLRCk
+
+{
+    "phases": ["66eddbacd83658245ea06df4","66eddbb7d83658245ea06df7","66eddbbdd83658245ea06dfa"],
+    "recipeIngredients":["66ede1a1738fc3ce45bb9fd6"]
+}
+
+### DELETE RECIPE
+DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deletePrivateIngredient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ

@@ -7,7 +7,7 @@ const recipeIngredientSchema = new Schema(
             ref: 'Recipe',
             required: true
         },
-        igredientId: {
+        ingredientId: {
             type: Schema.Types.ObjectId,
             ref: 'Ingredient',
             required: true
@@ -33,10 +33,10 @@ const recipeIngredientSchema = new Schema(
         }
     },
     {
-        collection: 'RecipeIngredients',
+        collection: 'recipeIngredients',
         timestamps: true
     }
 )
 
-const RecipeIngredient = model('RecipeIngredient', recipeIngredientSchema)
+const RecipeIngredient = model('recipeIngredient', recipeIngredientSchema)
 export default RecipeIngredient

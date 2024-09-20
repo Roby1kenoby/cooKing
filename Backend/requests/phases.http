@@ -1,0 +1,42 @@
+@baseUrl=http://localhost:5000/phases
+
+### CREATE NEW PHASE
+POST {{baseUrl}}/createPhase
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+
+{
+    "recipeId": "66eddb6dd83658245ea06df1",
+    "recipeIngredientsIds": [],
+    "phaseNumber": "3",
+    "description": "fase 3",
+    "phaseImageUrl": "https://picsum.photos/200/300"
+}
+
+### UPDATE PHASE
+PUT {{baseUrl}}/66eddbacd83658245ea06df4/editPhase
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+
+{
+    "recipeId": "66eddb6dd83658245ea06df1",
+    "recipeIngredientsIds": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539","66eddcb6a28dd3e83237a53c"],
+    "phaseNumber": "1",
+    "description": "fase 1 modificata",
+    "phaseImageUrl": "https://picsum.photos/200/300"
+}
+
+
+### UPDATE PHASE
+PUT {{baseUrl}}/66eddbacd83658245ea06df4/editPhase
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+
+{
+    "recipeIngredientsIds": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539"]
+}
+
+### DELETE PHASE
+DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deletePhase
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA

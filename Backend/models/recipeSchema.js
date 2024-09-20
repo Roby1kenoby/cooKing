@@ -36,7 +36,19 @@ const recipeSchema = new Schema(
         privateRecipe: {
             type: Boolean,
             required: true
-        }
+        },
+        phases: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Phase"
+            }
+        ],
+        recipeIngredients:[
+            {
+                type:Schema.Types.ObjectId,
+                ref: "RecipeIngredient"
+            }
+        ]
     },
     {
         collection: 'recipes',
