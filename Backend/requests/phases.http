@@ -3,26 +3,26 @@
 ### CREATE NEW PHASE
 POST {{baseUrl}}/createPhase
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzk0OTYsImV4cCI6MTcyNjk0MzA5Nn0.PxoitS2tgoUOqvkXsLjyJuCtFQbjzp5lcS0Nxu4KY08
 
 {
     "recipeId": "66eddb6dd83658245ea06df1",
     "recipeIngredientsIds": [],
-    "phaseNumber": "3",
-    "description": "fase 3",
+    "phaseNumber": "4",
+    "description": "fase 4",
     "phaseImageUrl": "https://picsum.photos/200/300"
 }
 
 ### UPDATE PHASE
-PUT {{baseUrl}}/66eddbacd83658245ea06df4/editPhase
+PUT {{baseUrl}}/66ef01780c51392295e3e4af/editPhase
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzk0OTYsImV4cCI6MTcyNjk0MzA5Nn0.PxoitS2tgoUOqvkXsLjyJuCtFQbjzp5lcS0Nxu4KY08
 
 {
     "recipeId": "66eddb6dd83658245ea06df1",
     "recipeIngredientsIds": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539","66eddcb6a28dd3e83237a53c"],
-    "phaseNumber": "1",
-    "description": "fase 1 modificata",
+    "phaseNumber": "4",
+    "description": "fase 4 modificata",
     "phaseImageUrl": "https://picsum.photos/200/300"
 }
 
@@ -37,6 +37,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 }
 
 ### DELETE PHASE
-DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deletePhase
+DELETE {{baseUrl}}/66eddbacd83658245ea06df4/deletePhase
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzk0OTYsImV4cCI6MTcyNjk0MzA5Nn0.PxoitS2tgoUOqvkXsLjyJuCtFQbjzp5lcS0Nxu4KY08

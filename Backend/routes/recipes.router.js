@@ -12,7 +12,12 @@ router.use(authentication)
 
 // router.get('/private', recipeController.getPrivateRecipes)
 
-router.post('/createRecipe', recipeController.createNewRecipeHeader)
+// this route saves the recipe header in the db
+router.post('/createRecipeHeader', recipeController.createNewRecipeHeader)
+
+// this route takes a full recipe object from the frontend, and calls other routes to save every component
+// of the recipe, referencing them with one another after the save
+router.post('/saveRecipe', recipeController.saveRecipe)
 
 router.put('/:id/editRecipe', recipeController.editRecipe)
 

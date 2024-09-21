@@ -3,31 +3,32 @@
 ### CREATE NEW RECIPE INGREDIENT
 POST {{baseUrl}}/createRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjU4MTYsImV4cCI6MTcyNjg2OTQxNn0.WZPc0eiGNGzaMu38f755GtGFi0plLcfYvody9rbUz3w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzc0NzIsImV4cCI6MTcyNjk0MTA3Mn0.dG6kL7G2s9Vu0i3D-cwJV27a0jRZrvAg0kvRDqLzNLs
 
 {
     "recipeId": "66eddb6dd83658245ea06df1",
-    "ingredientId": "66eb43ae558e722c226da740",
-    "measurementUnit": "kg",
+    "ingredientId": "66eb43ae558e722c226da75c",
+    "measurementUnit": "g",
     "phaseId": null,
-    "quantity": "5",
-    "additionalInfos": "dolcissimo"
+    "quantity": "10",
+    "additionalInfos": "scioto al microonde"
 }
 
 ### UPDATE RECIPE INGREDIENT
-PUT {{baseUrl}}/66ec726249030c3d2ccd1967/editRecipeIngredient
+PUT {{baseUrl}}/66eef9d0f10b621c1cca8840/editRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzc0NzIsImV4cCI6MTcyNjk0MTA3Mn0.dG6kL7G2s9Vu0i3D-cwJV27a0jRZrvAg0kvRDqLzNLs
+
 {
-    "recipeId": "data.recipeId",
-    "ingredientId": "data.ingredientId",
-    "measurementUnit": "data.measurementUnit",
-    "phaseId": "phaseId",
-    "quantity": "data.quantity",
-    "additionalInfos": "data.additionalInfos"
+    "recipeId": "66eddb6dd83658245ea06df1",
+    "ingredientId": "66eb43ae558e722c226da75c",
+    "measurementUnit": "g",
+    "phaseId": null,
+    "quantity": "10",
+    "additionalInfos": "sciolto al microonde"
 }
 
 ### DELETE RECIPE INGREDIENT
-DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deleteRecipeIngredient
+DELETE {{baseUrl}}/66eef9d0f10b621c1cca8840/deleteRecipeIngredient
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5Mzc0NzIsImV4cCI6MTcyNjk0MTA3Mn0.dG6kL7G2s9Vu0i3D-cwJV27a0jRZrvAg0kvRDqLzNLs

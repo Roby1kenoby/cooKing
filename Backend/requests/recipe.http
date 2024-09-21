@@ -11,8 +11,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 GET {{baseUrl}}/private
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
 
-### CREATE NEW RECIPE
-POST {{baseUrl}}/createRecipe
+### CREATE RECIPE HEADER
+POST {{baseUrl}}/createRecipeHeader
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjQwMDgsImV4cCI6MTcyNjg2NzYwOH0.wjU37itREVVmIKA2mCF6cibHynWBjTn933EEyQeLRCk
 
@@ -28,6 +28,40 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
     "privateRecipe": false,
     "phases": [],
     "recipeIngredients": []
+}
+
+### SAVE RECIPE
+POST {{baseUrl}}/saveRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5NDk3MTgsImV4cCI6MTcyNjk1MzMxOH0.ItiAHRd5gb1eahkB2NXR5965NKI5K5YWv6jeXQCOXto
+
+{
+    "userId": "66e9e8b66f379cea82c39785",
+    "tagsIds": [],
+    "title": "Ricetta Test 2",
+    "description": "Descrizione Ricetta Test 2",
+    "portions": "8",
+    "preparationTime": "20",
+    "recipeImageUrl": "https://picsum.photos/200/300",
+    "recipeVideoUrl": "",
+    "privateRecipe": false,
+    "phases": [],
+    "recipeIngredients": [
+        {
+            "ingredientId": "66eb43ae558e722c226da767",
+            "measurementUnit": "g",
+            "phaseId": null,
+            "quantity": "10",
+            "additionalInfos": "battuta al coltello"
+        },
+        {
+            "ingredientId": "66eb43ae558e722c226da772",
+            "measurementUnit": "g",
+            "phaseId": null,
+            "quantity": "10",
+            "additionalInfos": "puliti bene"
+        }
+    ]
 }
 
 ### UPDATE RECIPE

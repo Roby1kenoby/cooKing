@@ -1,5 +1,5 @@
 import Phase from '../models/phaseSchema.js'
-
+import * as PhaseService from '../services/phase.service.js'
 
 /* -------------- GET --------------*/
 
@@ -16,21 +16,7 @@ export const createNewPhase = async function(req, res){
             throw error
         }
 
-        const newPhase = new Phase({
-            recipeId: data.recipeId,
-            recipeIngredientsIds: data.recipeIngredientsIds,
-            phaseNumber: data.phaseNumber,
-            description: data.description,
-            phaseImageUrl: data.phaseImageUrl
-        })
-
-        const createdPhase = await newPhase.save()
-
-        if(!createdPhase){
-            const error = new Error('Failed to create phase')
-            error.status = 500
-            throw error
-        }
+        const createdPhase = await PhaseService.createPhase(data)
 
         res.status(201).send(createdPhase)
 
@@ -55,24 +41,8 @@ export const editPhase = async function(req, res){
             throw error
         }
 
-        const phaseExists = await Phase.exists({_id: phaseId})
+        const updatedPhase = await PhaseService.editPhase(data, phaseId)
 
-        if(!phaseExists){
-            const error = new Error('Phase Not Found')
-            error.status = 404
-            throw error
-        }
-
-        const editedPhase = {
-            recipeId: data.recipeId,
-            recipeIngredientsIds: data.recipeIngredientsIds,
-            phaseNumber: data.phaseNumber,
-            description: data.description,
-            phaseImageUrl: data.phaseImageUrl
-        }
-
-        const updatedPhase = await Phase.findByIdAndUpdate(phaseId, editedPhase, {new: true})
-        await updatedPhase.save()
         res.status(202).send(updatedPhase)
 
     } catch (error) {
@@ -94,15 +64,8 @@ export const deletePhase = async function(req, res){
             throw error
         }
 
-        const phaseExists = await Phase.exists({_id: phaseId})
-
-        if(!phaseExists){
-            const error = new Error('Recipe Ingredient Not Found')
-            error.status = 404
-            throw error
-        }
-
-        const deletedPhase = await Phase.findByIdAndDelete(phaseId, {new: true})
+        const deletedPhase = await PhaseService.deletePhase(phaseId)
+        
         res.status(202).send(deletedPhase)
 
     } catch (error) {

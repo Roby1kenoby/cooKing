@@ -1,5 +1,5 @@
 import RecipeIngredient from '../models/recipeIngredientSchema.js'
-
+import * as RecipeIngredientService from '../services/recipeIngredient.service.js'
 
 /* -------------- GET --------------*/
 
@@ -8,7 +8,7 @@ import RecipeIngredient from '../models/recipeIngredientSchema.js'
 export const createNewRecipeIngredient = async function(req, res){
     const userId = req.loggedUser._id
     const data = req.body
-    
+
     try {
         if (!userId){
             const error = new Error('Unauthorized access lvl 1')
@@ -16,21 +16,7 @@ export const createNewRecipeIngredient = async function(req, res){
             throw error
         }
 
-        const newRecipeIngredient = new RecipeIngredient({
-            recipeId: data.recipeId,
-            ingredientId: data.ingredientId,
-            measurementUnit: data.measurementUnit,
-            quantity: data.quantity,
-            additionalInfos: data.additionalInfos
-        })
-
-        const createdRecipeIngredient = await newRecipeIngredient.save()
-
-        if(!createdRecipeIngredient){
-            const error = new Error('Failed to create recipe ingredient')
-            error.status = 500
-            throw error
-        }
+        const createdRecipeIngredient = await RecipeIngredientService.createRecipeIngredient(data)
 
         res.status(201).send(createdRecipeIngredient)
 
@@ -55,25 +41,10 @@ export const editRecipeIngredient = async function(req, res){
             throw error
         }
 
-        const recipeIngredientExists = await RecipeIngredient.exists({_id: recipeIngredientId})
-
-        if(!recipeIngredientExists){
-            const error = new Error('Recipe Ingredient Not Found')
-            error.status = 404
-            throw error
-        }
-
-        const editedRecipeIngredient = {
-            recipeId: data.recipeId,
-            ingredientId: data.ingredientId,
-            measurementUnit: data.measurementUnit,
-            quantity: data.quantity,
-            additionalInfos: data.additionalInfos
-        }
-
-        const updatedRecipeIngredient = await RecipeIngredient.findByIdAndUpdate(recipeIngredientId, editedRecipeIngredient, {new: true})
-        await updatedRecipeIngredient.save()
+        const updatedRecipeIngredient = await RecipeIngredientService.editRecipeIngredient(data, recipeIngredientId)
+        
         res.status(202).send(updatedRecipeIngredient)
+        
 
     } catch (error) {
         console.log(error)
@@ -93,16 +64,9 @@ export const deleteRecipeIngredient = async function(req, res){
             error.status = 401
             throw error
         }
+        
+        const deletedRecipeIngredient = await RecipeIngredientService.deleteRecipeIngredient(recipeIngredientId)
 
-        const recipeIngredientExists = await RecipeIngredient.exists({_id: recipeIngredientId})
-
-        if(!recipeIngredientExists){
-            const error = new Error('Recipe Ingredient Not Found')
-            error.status = 404
-            throw error
-        }
-
-        const deletedRecipeIngredient = await RecipeIngredient.findByIdAndDelete(recipeIngredientId, {new: true})
         res.status(202).send(deletedRecipeIngredient)
 
     } catch (error) {

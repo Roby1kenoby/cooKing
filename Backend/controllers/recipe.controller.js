@@ -1,5 +1,5 @@
 import Recipe from '../models/recipeSchema.js'
-
+import * as RecipeService from '../services/recipe.service.js'
 
 /* -------------- GET --------------*/
 
@@ -89,34 +89,7 @@ export const createNewRecipeHeader = async function(req, res){
             throw error
         }
 
-        const recipeExists = await Recipe.findOne({title: data.title})
-        if (recipeExists){
-            const error = new Error('Recipe with the same title already exists')
-            error.status = 409
-            throw error
-        }
-
-        const newRecipe = new Recipe({
-            userId: userId,
-            tagsIds: data.tagsIds,
-            title: data.title,
-            description: data.description,
-            portions: data.portions,
-            preparationTime: data.preparationTime,
-            recipeImageUrl: data.recipeImageUrl,
-            recipeVideoUrl: data.recipeVideoUrl,
-            privateRecipe: data.privateRecipe,
-            phases: data.phases,
-            recipeIngredients: data.recipeIngredients
-        })
-
-        const createdRecipe = await newRecipe.save()
-
-        if(!createdRecipe){
-            const error = new Error('Failed to create recipe')
-            error.status = 500
-            throw error
-        }
+        const createdRecipe = await RecipeService.createRecipeHeader(data, userId)
 
         res.status(201).send(createdRecipe)
 
@@ -125,6 +98,26 @@ export const createNewRecipeHeader = async function(req, res){
         res.status(error.status).send(error.message)
     }
 
+}
+
+export const saveRecipe = async function(req, res){
+    const userId = req.loggedUser._id
+    const data = req.body
+
+    try {
+        if (!userId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        const savedRecipe = await RecipeService.saveRecipe(data, userId)
+        res.status(201).send(savedRecipe)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
 /* -------------- PUT --------------*/
@@ -141,38 +134,8 @@ export const editRecipe = async function(req, res){
             throw error
         }
 
-        const recipeExists = await Recipe.exists({_id: recipeId})
-
-        if(!recipeExists){
-            const error = new Error('Recipe Not Found')
-            error.status = 404
-            throw error
-        }
-
-        const newRecipeAlreadyExists = await Recipe.exists({title: data.title})
-
-        if (newRecipeAlreadyExists) {
-            const error = new Error('Edited Ingredient Already Exists')
-            error.status = 409
-            throw error
-        }
-
-        const editedRecipe = {
-            userId: userId,
-            tagsIds: data.tagsIds,
-            title: data.title,
-            description: data.description,
-            portions: data.portions,
-            preparationTime: data.preparationTime,
-            recipeImageUrl: data.recipeImageUrl,
-            recipeVideoUrl: data.recipeVideoUrl,
-            privateRecipe: data.privateRecipe,
-            phases: data.phases,
-            recipeIngredients: data.recipeIngredients
-        }
-
-        const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, editedRecipe, {new: true})
-        await updatedRecipe.save()
+        const updatedRecipe = await RecipeService.updatedRecipe(data, recipeId, userId)
+        
         res.status(202).send(updatedRecipe)
 
     } catch (error) {
