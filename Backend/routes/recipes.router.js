@@ -21,6 +21,6 @@ router.post('/saveRecipe', recipeController.saveRecipe)
 
 router.put('/:id/editRecipe', recipeController.editRecipe)
 
-// router.delete('/:id/deletePrivateIngredient', recipeController.deleteRecipe)
+router.delete('/:id/deleteRecipe', recipeController.deleteRecipe)
 
 export default router

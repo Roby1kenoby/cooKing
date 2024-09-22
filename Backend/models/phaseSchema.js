@@ -9,7 +9,7 @@ const phaseSchema = new Schema(
             required: true
         },
         // a phase can use one or more RecipeIngredients
-        recipeIngredientsIds : [
+        phaseIngredients : [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'RecipeIngredient'

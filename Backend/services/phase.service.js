@@ -1,9 +1,10 @@
 import Phase from '../models/phaseSchema.js'
+import * as RecipeIngredientService from '../services/recipeIngredient.service.js'
 
-export const createPhase = async function(data, session=null){
+export const createPhaseHeader = async function(data, session=null){
     const newPhase = new Phase({
         recipeId: data.recipeId,
-        recipeIngredientsIds: data.recipeIngredientsIds,
+        phaseIngredients: data.phaseIngredients,
         phaseNumber: data.phaseNumber,
         description: data.description,
         phaseImageUrl: data.phaseImageUrl
@@ -22,6 +23,42 @@ export const createPhase = async function(data, session=null){
     return createdPhase
 }
 
+export const savePhase = async function(data, session=null){
+    const phaseHeader = {
+        recipeId: data.recipeId,
+        phaseNumber: data.phaseNumber,
+        description: data.description,
+        phaseImageUrl: data.phaseImageUrl,
+        phaseIngredients: []
+    }
+
+    const phaseIngredientsArray = data.phaseIngredients
+    const recipeId = data.recipeId
+    // saving the phase to get it's id
+    const createdPhase = await createPhaseHeader(phaseHeader, session)
+    const createdPhaseId = createdPhase._id
+    
+    const savedIngredients = []
+
+    for (let ingredient of phaseIngredientsArray){
+        const currentIngredient = {...ingredient, phaseId: createdPhaseId, recipeId: recipeId}
+        const createdPhaseIngredient = await RecipeIngredientService.createRecipeIngredient(currentIngredient, session)
+        savedIngredients.push(createdPhaseIngredient._id)
+    }
+
+    createdPhase.phaseIngredients = savedIngredients
+
+    if(!createdPhase){
+        const error = new Error('Failed to save phase')
+        error.status = 500
+        throw error
+    }
+
+    await createdPhase.save(session)
+
+    return createdPhase
+}
+
 export const editPhase = async function(data, phaseId, session=null){
 
     const phaseExists = await Phase.exists({_id: phaseId})
@@ -34,7 +71,7 @@ export const editPhase = async function(data, phaseId, session=null){
 
     const editedPhase = {
         recipeId: data.recipeId,
-        recipeIngredientsIds: data.recipeIngredientsIds,
+        phaseIngredients: data.phaseIngredients,
         phaseNumber: data.phaseNumber,
         description: data.description,
         phaseImageUrl: data.phaseImageUrl
@@ -74,4 +111,16 @@ export const deletePhase = async function(phaseId){
     }
 
     return deletedPhase
+}
+
+export const bulkDeletePhases = async function(recipeId, session=null){
+
+    const deletedPhases = await Phase.deleteMany({recipeId: recipeId})
+    if(!deletedPhases){
+        const error = new Error('Failed to delete phases via recipeId')
+        error.status = 500
+        throw error
+    }
+    
+    return deletedPhases
 }

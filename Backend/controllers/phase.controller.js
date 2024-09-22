@@ -16,7 +16,7 @@ export const createNewPhase = async function(req, res){
             throw error
         }
 
-        const createdPhase = await PhaseService.createPhase(data)
+        const createdPhase = await PhaseService.createPhaseHeader(data)
 
         res.status(201).send(createdPhase)
 

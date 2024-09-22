@@ -1,10 +1,12 @@
 import mongoose from 'mongoose'
 import Recipe from '../models/recipeSchema.js'
 import * as RecipeIngredientService from './recipeIngredient.service.js'
+import * as PhaseService from '../services/phase.service.js'
 
 export const createRecipeHeader = async function(data, userId, session=null){
 
     const recipeExists = await Recipe.findOne({title: data.title})
+    console.log(recipeExists)
     if (recipeExists){
         const error = new Error('Recipe with the same title already exists')
         error.status = 409
@@ -66,6 +68,9 @@ export const saveRecipe = async function(data, userId){
         // the recipe in memory, but if i do, i have to save again to commit the differences.
         const createdRecipeId = createdRecipe._id
         
+        /**
+         *      SAVING RECIPE INGREDIENTS
+         */
         const savedIngredients = []
         // saving ingredients and getting ids to append to recipe
         for (let ingredient of ingredientsArray){
@@ -75,10 +80,24 @@ export const saveRecipe = async function(data, userId){
         }
 
         createdRecipe.recipeIngredients = savedIngredients
-        // need to save again to commit the edit
+
+        /**
+         *      SAVING RECIPE PHASES
+         */
+
+        const savedPhases = []
+        
+        for (let phase of phasesArray){
+            const currentPhase = {...phase, recipeId:createdRecipeId}
+            const createdPhase = await PhaseService.savePhase(currentPhase, session)
+            savedPhases.push(createdPhase._id)
+        }
+
+        createdRecipe.phases = savedPhases
+
+        // need to save again to commit the edits
         await createdRecipe.save(session)
 
-        // TO DO - salvataggio delle fasi e relativi ingredienti
 
         await session.commitTransaction();
         session.endSession();
@@ -87,6 +106,11 @@ export const saveRecipe = async function(data, userId){
 
     } catch (error) {
         console.log(error)
+        // if any error is thrown, abort transaction
+        await session.abortTransaction();
+        session.endSession();
+        
+        throw error
     }
 }
 
@@ -137,23 +161,40 @@ export const editRecipe = async function(data, recipeId, userId, session=null){
     return updatedRecipe
 }
 
-export const deletePhase = async function(phaseId){
+export const deleteRecipe = async function(recipeId){
 
-    const phaseExists = await Phase.exists({_id: phaseId})
+    const recipeExists = await Recipe.exists({_id: recipeId})
 
-    if(!phaseExists){
-        const error = new Error('Phase Not Found')
+    if(!recipeExists){
+        const error = new Error('Recipe Not Found')
         error.status = 404
         throw error
     }
 
-    const deletedPhase = await Phase.findByIdAndDelete(phaseId, {new: true})
+    const session = await mongoose.startSession()
+    session.startTransaction()
+    
+    try {
+        await RecipeIngredientService.bulkDeleteRecipeIngredients(recipeId, session)
+        await PhaseService.bulkDeletePhases(recipeId, session)
+        const deletedRecipe = await Recipe.deleteOne({_id: recipeId})
 
-    if(!deletedPhase) {
-        const error = new Error('Failed to delete phase')
-        error.status = 500
+        if(!deletedRecipe){
+            const error = new Error('Failed to delete recipe via recipeId')
+            error.status = 500
+            throw error
+        }
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return deletedRecipe
+    } catch (error) {
+        console.log(error)
+        // if any error is thrown, abort transaction
+        await session.abortTransaction();
+        session.endSession();
+        
         throw error
     }
-
-    return deletedPhase
 }

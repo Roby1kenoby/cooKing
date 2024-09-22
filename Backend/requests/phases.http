@@ -7,7 +7,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 
 {
     "recipeId": "66eddb6dd83658245ea06df1",
-    "recipeIngredientsIds": [],
+    "phaseIngredients": [],
     "phaseNumber": "4",
     "description": "fase 4",
     "phaseImageUrl": "https://picsum.photos/200/300"
@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 
 {
     "recipeId": "66eddb6dd83658245ea06df1",
-    "recipeIngredientsIds": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539","66eddcb6a28dd3e83237a53c"],
+    "phaseIngredients": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539","66eddcb6a28dd3e83237a53c"],
     "phaseNumber": "4",
     "description": "fase 4 modificata",
     "phaseImageUrl": "https://picsum.photos/200/300"
@@ -33,7 +33,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjIxMDQsImV4cCI6MTcyNjg2NTcwNH0.24_2tZPGW258beMf9Txj99OTESDbD732V7DuriTkDdA
 
 {
-    "recipeIngredientsIds": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539"]
+    "phaseIngredients": ["66eddc88a28dd3e83237a536","66eddc9fa28dd3e83237a539"]
 }
 
 ### DELETE PHASE

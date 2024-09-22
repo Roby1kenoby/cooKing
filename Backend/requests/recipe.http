@@ -33,7 +33,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 ### SAVE RECIPE
 POST {{baseUrl}}/saveRecipe
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY5NDk3MTgsImV4cCI6MTcyNjk1MzMxOH0.ItiAHRd5gb1eahkB2NXR5965NKI5K5YWv6jeXQCOXto
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcwMzg5MDIsImV4cCI6MTcyNzA0MjUwMn0.fEFh5l0j07P4TrbSYPa7VjcF3iNxJoJ_jSvCeKLipW0
 
 {
     "userId": "66e9e8b66f379cea82c39785",
@@ -45,7 +45,50 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
     "recipeImageUrl": "https://picsum.photos/200/300",
     "recipeVideoUrl": "",
     "privateRecipe": false,
-    "phases": [],
+    "phases": [
+        {
+            "phaseIngredients": [
+                {
+                    "ingredientId": "66eb43ae558e722c226da775",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "100",
+                    "additionalInfos": "fave di stocazzo"
+                },
+                {
+                    "ingredientId": "66eb43ae558e722c226da77c",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "50",
+                    "additionalInfos": "non so cosa sia"
+                }
+            ],
+            "phaseNumber": "1",
+            "description": "fase 1",
+            "phaseImageUrl": "https://picsum.photos/200/300"
+        },
+        {
+            "phaseIngredients": [
+                {
+                    "ingredientId": "66eb43ae558e722c226da784",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "30",
+                    "additionalInfos": "bianchissimo"
+                },
+                {
+                    "ingredientId": "66eb43ae558e722c226da78c",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "20",
+                    "additionalInfos": "sniff"
+                }
+            ],
+            "phaseNumber": "2",
+            "description": "fase 2",
+            "phaseImageUrl": "https://picsum.photos/200/300"
+        }
+    ],
     "recipeIngredients": [
         {
             "ingredientId": "66eb43ae558e722c226da767",
@@ -75,6 +118,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 }
 
 ### DELETE RECIPE
-DELETE {{baseUrl}}/66ec726249030c3d2ccd1967/deletePrivateIngredient
+DELETE {{baseUrl}}/66f0865b1fb087d1337cf55f/deleteRecipe
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcwMzg5MDIsImV4cCI6MTcyNzA0MjUwMn0.fEFh5l0j07P4TrbSYPa7VjcF3iNxJoJ_jSvCeKLipW0

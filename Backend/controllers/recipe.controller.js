@@ -146,30 +146,30 @@ export const editRecipe = async function(req, res){
 
 /* -------------- DELETE --------------*/
 
-// export const deletePrivateIngredient = async function(req, res){
-//     const userId = req.loggedUser._id
-//     const privateIngredientId = req.params.id
+export const deleteRecipe = async function(req, res){
+    const userId = req.loggedUser._id
+    const recipeId = req.params.id
 
-//     try {
-//         if (!userId){
-//             const error = new Error('Unauthorized access lvl 1')
-//             error.status = 401
-//             throw error
-//         }
+    try {
+        if (!userId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
 
-//         const privateIngredientExists = await Ingredient.exists({_id: privateIngredientId})
+        const recipeExists = await Recipe.exists({_id: recipeId})
 
-//         if(!privateIngredientExists){
-//             const error = new Error('Ingredient Not Found')
-//             error.status = 404
-//             throw error
-//         }
+        if(!recipeExists){
+            const error = new Error('Recipe not found')
+            error.status = 404
+            throw error
+        }
 
-//         const deletedPrivateIngredient = await Ingredient.findByIdAndDelete(privateIngredientId, {new: true})
-//         res.status(202).send(deletedPrivateIngredient)
+        const deletedRecipe = RecipeService.deleteRecipe(recipeId)
+        res.status(202).send(deletedRecipe)
 
-//     } catch (error) {
-//         console.log(error)
-//         res.status(error.status).send(error.message)
-//     }
-// }
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
+}

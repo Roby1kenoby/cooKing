@@ -73,3 +73,15 @@ export const deleteRecipeIngredient = async function(recipeIngredientId){
 
         return deletedRecipeIngredient
 }
+
+export const bulkDeleteRecipeIngredients = async function(recipeId, session=null){
+
+    const deletedIngredients = await RecipeIngredient.deleteMany({recipeId: recipeId})
+    if(!deletedIngredients){
+        const error = new Error('Failed to delete recipe ingredients via recipeId')
+        error.status = 500
+        throw error
+    }
+
+    return deletedIngredients
+}
