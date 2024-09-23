@@ -1,11 +1,22 @@
 @baseUrl=http://localhost:5000/recipe
 
-### GET PUBLIC INGREDIENTS
-GET {{baseUrl}}/public?searchString=ac
+### GET PUBLIC RECIPES
+POST {{baseUrl}}/public
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjUzNDIsImV4cCI6MTcyNzEyODk0Mn0.ZJkBFbn-RvqVfrXNABbuRAyATVjYw16BZfZnDELKRCg
+Content-Type: application/json
+
+{
+    "searchString": "",
+    "tagsIds":[]
+}
+
+### GET SPECIFIC RECIPE
+GET {{baseUrl}}/66f19b734312ea187b1b2227
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjIzNzAsImV4cCI6MTcyNzEyNTk3MH0.HHf4vfRuLviiDXTVPndKVGfrV-nuWMv50hKdZUIMVdI
 
 ### GET ALL INGREDIENTS
 GET {{baseUrl}}?searchString=ac
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMDk5MjEsImV4cCI6MTcyNzExMzUyMX0.t7JM8RlI8Ja8m1ZjXm5atj2zqdKCVD2QXe-1w9dZ1AE
 
 ### GET PRIVATE INGREDIENTS
 GET {{baseUrl}}/private
@@ -14,7 +25,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 ### CREATE RECIPE HEADER
 POST {{baseUrl}}/createRecipeHeader
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjQwMDgsImV4cCI6MTcyNjg2NzYwOH0.wjU37itREVVmIKA2mCF6cibHynWBjTn933EEyQeLRCk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMTUzMjMsImV4cCI6MTcyNzExODkyM30.GxNIm3PcU-UuUcpkoKpTQfMuWnfSHbLXfjl5agvlq5Q
 
 {
     "userId": "66e9e8b66f379cea82c39785",
@@ -25,7 +36,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
     "preparationTime": "10",
     "recipeImageUrl": "https://picsum.photos/200/300",
     "recipeVideoUrl": "",
-    "privateRecipe": false,
+    "privateRecipe": true,
     "phases": [],
     "recipeIngredients": []
 }
@@ -33,7 +44,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 ### SAVE RECIPE
 POST {{baseUrl}}/saveRecipe
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcwMzg5MDIsImV4cCI6MTcyNzA0MjUwMn0.fEFh5l0j07P4TrbSYPa7VjcF3iNxJoJ_jSvCeKLipW0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMDk5MjEsImV4cCI6MTcyNzExMzUyMX0.t7JM8RlI8Ja8m1ZjXm5atj2zqdKCVD2QXe-1w9dZ1AE
 
 {
     "userId": "66e9e8b66f379cea82c39785",
@@ -108,13 +119,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5Z
 }
 
 ### UPDATE RECIPE
-PUT {{baseUrl}}/66eddb6dd83658245ea06df1/editRecipe
+PUT {{baseUrl}}/66f19b734312ea187b1b2227/editRecipe
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY4NjQwMDgsImV4cCI6MTcyNjg2NzYwOH0.wjU37itREVVmIKA2mCF6cibHynWBjTn933EEyQeLRCk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjIzNzAsImV4cCI6MTcyNzEyNTk3MH0.HHf4vfRuLviiDXTVPndKVGfrV-nuWMv50hKdZUIMVdI
 
 {
-    "phases": ["66eddbacd83658245ea06df4","66eddbb7d83658245ea06df7","66eddbbdd83658245ea06dfa"],
-    "recipeIngredients":["66ede1a1738fc3ce45bb9fd6"]
+    "tagsIds": ["66f1cc312fd6d849ac614cae", "66f1cc492fd6d849ac614caf"]
 }
 
 ### DELETE RECIPE

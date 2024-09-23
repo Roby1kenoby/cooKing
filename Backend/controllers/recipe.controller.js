@@ -57,26 +57,60 @@ import * as RecipeService from '../services/recipe.service.js'
 //     }
 // }
 
-// export const getPublicIngredients = async function(req, res){
-//     const searchString = req.query.searchString
-//     try {
-//         // if ther's a searchString, i filter the ingredient list.
-//         // i get only the ingredients that has no userId
-//         const ingredientsListQuery = Ingredient.find(
-//                 searchString ? 
-//                     {$and:[{name: {$regex: searchString ,$options: "i"}}, {userId: null}]}
-//                     : {userId: null})
-//             ingredientsListQuery.sort({name: 1})
-//         const ingredientsList = await ingredientsListQuery
-        
-//         res.send(ingredientsList)
+export const getSpecificRecipe = async function(req, res){
+    const userId = req.loggedUser._id
+    const recipeId = req.params.id
 
-//     } catch (error) {
-//         res.status(500).send('Ingredients not found')
-//     }
-// }
+    try {
+        if (!userId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+        // this function gets me the populated recipe
+        const foundRecipe = await RecipeService.getSpecificRecipe(recipeId)
+
+        res.status(200).send(foundRecipe)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
+}
+
+
 
 /* -------------- POST --------------*/
+
+export const getPublicRecipes = async function(req, res){
+    const data = req.body
+    
+    const searchParams = []
+    
+    // if ther's a searchString, i include it in my searchparams
+    data.searchString && searchParams.push({title: {$regex: data.searchString ,$options: "i"}})
+    
+    // if ther's some tags, i include them in the search, but only if i've got the same number of
+    // tags and they all match.
+    if(data.tagsIds && data.tagsIds.length > 0){
+        searchParams.push({tagsIds: {$all: data.tagsIds}})
+        searchParams.push({$expr: { $eq: [ { $size: "$tagsIds" }, data.tagsIds.length ] }})
+    }
+    // including only public recipes
+    searchParams.push({privateRecipe: false})
+    
+    try {
+        
+        const recipeListQuery = Recipe.find({$and: searchParams}).sort({title: 1})
+                    
+        const recipeList = await recipeListQuery
+        
+        res.send(recipeList)
+
+    } catch (error) {
+        res.status(500).send('Recipe not found')
+    }
+}
 
 export const createNewRecipeHeader = async function(req, res){
     const userId = req.loggedUser._id
@@ -126,6 +160,7 @@ export const editRecipe = async function(req, res){
     const userId = req.loggedUser._id
     const recipeId = req.params.id
     const data = req.body
+    console.log(data)
 
     try {
         if (!userId){
@@ -134,7 +169,7 @@ export const editRecipe = async function(req, res){
             throw error
         }
 
-        const updatedRecipe = await RecipeService.updatedRecipe(data, recipeId, userId)
+        const updatedRecipe = await RecipeService.updateRecipe(data, recipeId, userId)
         
         res.status(202).send(updatedRecipe)
 

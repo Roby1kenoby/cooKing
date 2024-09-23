@@ -25,5 +25,8 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 
 TODO: 
-- creare saveRecipe, funzione che usa le altre CRUD per salvare le cose in ordine come da schema Recipe Save Flow
-- crare deleteRecipe, funzione che usa le altre CRUD per eliminare la ricetta e gli elementi relazionati
+ - auth google
+ - rotte per estrarre le ricette
+ - gestione tag nella ricetta
+ - middleware cloudinary\multer e gestione immagini
+ - riverifica di tutte le rotte

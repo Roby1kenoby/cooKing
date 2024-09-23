@@ -38,5 +38,5 @@ const recipeIngredientSchema = new Schema(
     }
 )
 
-const RecipeIngredient = model('recipeIngredient', recipeIngredientSchema)
+const RecipeIngredient = model('RecipeIngredient', recipeIngredientSchema)
 export default RecipeIngredient

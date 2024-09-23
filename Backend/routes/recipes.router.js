@@ -4,9 +4,11 @@ import * as recipeController from '../controllers/recipe.controller.js'
 
 const router = express.Router()
 
-// router.get('/public', recipeController.getPublicRecipes)
+router.post('/public', recipeController.getPublicRecipes)
 
 router.use(authentication)
+
+router.get('/:id', recipeController.getSpecificRecipe)
 
 // router.get('/', recipeController.getAllRecipes)
 

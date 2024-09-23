@@ -114,7 +114,39 @@ export const saveRecipe = async function(data, userId){
     }
 }
 
-export const editRecipe = async function(data, recipeId, userId, session=null){
+export const getSpecificRecipe = async function(recipeId){
+    
+    const recipeQuery = Recipe.findById(recipeId)
+    .populate({
+        path: 'phases',
+        populate: {
+            path: 'phaseIngredients'
+        }
+    })
+    .populate({
+        path: 'recipeIngredients',
+        populate: {
+            path: 'ingredientId'
+        }
+    })
+    .populate({
+        path: 'tagsIds'
+    })
+
+    const recipe = await recipeQuery
+
+    if(!recipeQuery){
+        const error = new Error('Recipe not found')
+        error.status = 404
+        throw error
+    }
+
+    return recipe
+
+
+}
+
+export const updateRecipe = async function(data, recipeId, userId, session=null){
 
     const recipeExists = await Recipe.exists({_id: recipeId})
 
@@ -145,7 +177,7 @@ export const editRecipe = async function(data, recipeId, userId, session=null){
         phases: data.phases,
         recipeIngredients: data.recipeIngredients
     }
-
+    console.log(editedRecipe)
     const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, editedRecipe, {new: true})
     
     if(!updatedRecipe) {
