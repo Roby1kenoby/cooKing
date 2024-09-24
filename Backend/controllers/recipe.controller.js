@@ -68,7 +68,7 @@ export const getSpecificRecipe = async function(req, res){
             throw error
         }
         // this function gets me the populated recipe
-        const foundRecipe = await RecipeService.getSpecificRecipe(recipeId)
+        const foundRecipe = await RecipeService.getSpecificRecipe(recipeId, userId)
 
         res.status(200).send(foundRecipe)
 
@@ -98,6 +98,68 @@ export const getPublicRecipes = async function(req, res){
     }
     // including only public recipes
     searchParams.push({privateRecipe: false})
+    
+    try {
+        
+        const recipeListQuery = Recipe.find({$and: searchParams}).sort({title: 1})
+                    
+        const recipeList = await recipeListQuery
+        
+        res.send(recipeList)
+
+    } catch (error) {
+        res.status(500).send('Recipe not found')
+    }
+}
+
+export const getPrivateRecipes = async function(req, res){
+    const userId = req.loggedUser._id
+    const data = req.body
+    
+    const searchParams = []
+    
+    // if ther's a searchString, i include it in my searchparams
+    data.searchString && searchParams.push({title: {$regex: data.searchString ,$options: "i"}})
+    
+    // if ther's some tags, i include them in the search, but only if i've got the same number of
+    // tags and they all match.
+    if(data.tagsIds && data.tagsIds.length > 0){
+        searchParams.push({tagsIds: {$all: data.tagsIds}})
+        searchParams.push({$expr: { $eq: [ { $size: "$tagsIds" }, data.tagsIds.length ] }})
+    }
+    // including only private recipes of the specific user
+    searchParams.push({privateRecipe: true})
+    searchParams.push({userId: userId})
+    
+    try {
+        
+        const recipeListQuery = Recipe.find({$and: searchParams}).sort({title: 1})
+                    
+        const recipeList = await recipeListQuery
+        
+        res.send(recipeList)
+
+    } catch (error) {
+        res.status(500).send('Recipe not found')
+    }
+}
+
+export const getAllRecipes = async function(req, res){
+    const userId = req.loggedUser._id
+    const data = req.body
+    
+    const searchParams = []
+    
+    // if ther's a searchString, i include it in my searchparams
+    data.searchString && searchParams.push({title: {$regex: data.searchString ,$options: "i"}})
+    
+    // if ther's some tags, i include them in the search, but only if i've got the same number of
+    // tags and they all match.
+    if(data.tagsIds && data.tagsIds.length > 0){
+        searchParams.push({tagsIds: {$all: data.tagsIds}})
+        searchParams.push({$expr: { $eq: [ { $size: "$tagsIds" }, data.tagsIds.length ] }})
+    }
+    searchParams.push({$or: [{privateRecipe: false},{userId: userId}]})
     
     try {
         

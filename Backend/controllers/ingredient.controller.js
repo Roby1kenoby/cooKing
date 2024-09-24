@@ -89,7 +89,7 @@ export const createNewPrivateIngredient = async function(req, res){
             throw error
         }
 
-        const ingredientExists = await Ingredient.findOne({name: data.name})
+        const ingredientExists = await Ingredient.findOne({$or: [{$and: [{name: data.name},{userId: null}]},{$and: [{name: data.name},{userId: userId}]}]})
         if (ingredientExists){
             const error = new Error('Ingredient already exists')
             error.status = 409

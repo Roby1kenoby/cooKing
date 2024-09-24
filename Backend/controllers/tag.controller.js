@@ -88,7 +88,7 @@ export const createNewPrivateTag = async function(req, res){
             throw error
         }
 
-        const tagExists = await Tag.findOne({tagName: data.tagName})
+        const tagExists = await Tag.findOne({$or: [{$and: [{tagName: data.tagName},{userId: null}]},{$and: [{tagName: data.tagName},{userId: userId}]}]})
         if (tagExists){
             const error = new Error('Tag already exists')
             error.status = 409

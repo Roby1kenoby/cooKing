@@ -10,6 +10,27 @@ Content-Type: application/json
     "tagsIds":[]
 }
 
+### GET PRIVATE RECIPE
+POST {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxNzg3NzgsImV4cCI6MTcyNzE4MjM3OH0.79a0ClMceNyGAKpk2Deo7ZZuK7U4Y3ELQclQ02AA9wE
+Content-Type: application/json
+
+{
+    "searchString": "",
+    "tagsIds":[]
+}
+
+### GET ALL RECIPES
+POST {{baseUrl}}/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxNzg3NzgsImV4cCI6MTcyNzE4MjM3OH0.79a0ClMceNyGAKpk2Deo7ZZuK7U4Y3ELQclQ02AA9wE
+Content-Type: application/json
+
+{
+    "searchString": "2",
+    "tagsIds":[]
+}
+
+
 ### GET SPECIFIC RECIPE
 GET {{baseUrl}}/66f19b734312ea187b1b2227
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjIzNzAsImV4cCI6MTcyNzEyNTk3MH0.HHf4vfRuLviiDXTVPndKVGfrV-nuWMv50hKdZUIMVdI

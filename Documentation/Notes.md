@@ -1,11 +1,3 @@
-Gestione delle conversioni ? 
-Gestione Ids dentro recipe - no
-Rotte per ricerca con insieme di tag
-
-
-Categorie per ingredienti base (2 liv)
-
-
 Su esposizione delle quantità lato frontend, avere una funzione che in base alla quantità fa visualizzare in k, etti o gr, stessa cosa per i liquidi, e che in base alle preferenze dell'utente usi unità di misura regionali (metrico\imperiale ecc)
 
 
@@ -25,8 +17,6 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 
 TODO: 
- - auth google
- - rotte per estrarre le ricette
- - gestione tag nella ricetta
- - middleware cloudinary\multer e gestione immagini
+ - auth google (da testare)
+ - gestione immagini
  - riverifica di tutte le rotte

@@ -6,28 +6,131 @@ import Tag from '../models/tagSchema.js'
 import bcrypt from 'bcrypt'
 
 /* -------------- GET --------------*/
-export const getAllUsers = function(req,res){
-    console.log('ciao')
+export const getAllUsers = async function(req,res){
+    try {
+        const users = await User.find({})
+        if(!users){
+            const error = new Error('Cannot find users')
+            error.status = 404
+            throw error
+        }
+        res.status(200).send(users)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
-export const getSpecificUser = function(req,res){
-    console.log('ciao')
-    res.send()
+export const getSpecificUser = async function(req,res){
+    const userId = req.params.id
+    try {
+        const foundUser = await User.findById(userId).select("-password")
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        res.status(200).send(foundUser)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
-export const getSpecificUserRecipes = function(req,res){
-    console.log('ciao')
-    res.send()
+export const getSpecificUserRecipes = async function(req,res){
+    const userId = req.params.id
+
+    try {
+        const foundUser = await User.findById(userId).select("-password")
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        const userRecipes = await Recipe.find({$and: [{userId: userId},{privateRecipe:false}]})
+
+        if(!userRecipes){
+            const error = new Error('Cannot find user recipes')
+            error.status = 404
+            throw error
+        }
+
+        res.status(200).send(userRecipes)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
-export const getSpecificUserPrivateIngredients = function (req,res){
-    console.log('ciao')
-    res.send()
+export const getSpecificUserPrivateIngredients = async function(req,res){
+    const loggedUserId = req.loggedUser._id
+    const userId = req.params.id
+
+    try {
+        if (!loggedUserId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        const foundUser = await User.findById(userId)
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        const foundIngredients = await Ingredient.find({userId: userId})
+        if(!foundIngredients){
+            const error = new Error('Cannot find user ingredients')
+            error.status = 404
+            throw error
+        }
+
+        res.status(200).send(foundIngredients)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
-export const getSpecificUserPrivateTags = function(req,res){
-    console.log('ciao')
-    res.send()
+export const getSpecificUserPrivateTags = async function(req, res){
+    const loggedUserId = req.loggedUser._id
+    const userId = req.params.id
+
+    try {
+        if (!loggedUserId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        const foundUser = await User.findById(userId)
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        const foundTags = await Tag.find({userId: userId})
+        if(!foundTags){
+            const error = new Error('Cannot find user tags')
+            error.status = 404
+            throw error
+        }
+
+        res.status(200).send(foundTags)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
 /* -------------- POST --------------*/
@@ -77,9 +180,53 @@ export const createNewUser = async function(req,res){
 }
 
 /* -------------- PUT --------------*/
-export const editSpecificUser = function(req,res){
-    console.log('ciao')
-    res.send()
+export const editSpecificUser = async function(req,res){
+    const userId = req.params.id
+    const data = req.body
+    const loggedUserId = req.loggedUser._id
+
+    try {
+
+        if (!loggedUserId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        if (!userId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        const foundUser = await User.findById(userId)
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        const editUser = {
+            username: data.username,
+            avatarUrl: data.avatarUrl,
+            name: data.name,
+            surname: data.surname,
+            preferredMu: data.preferredMu,
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(userId, editUser, {new: true})
+        if(!updatedUser){
+            const error = new Error('Cannot update user')
+            error.status = 500
+            throw error
+        }
+        await updatedUser.save()
+        res.status(202).send(updatedUser)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }
 
 export const editSpecificUserAvatar = function(req,res){
@@ -88,7 +235,36 @@ export const editSpecificUserAvatar = function(req,res){
 }
 
 /* -------------- DELETE --------------*/
-export const deleteSpecificUser = function(req,res){
-    console.log('ciao')
-    res.send() 
+export const deleteSpecificUser = async function(req,res){
+    const userId = req.params.id
+    const loggedUserId = req.loggedUser._id
+
+    try {
+
+        if (!loggedUserId){
+            const error = new Error('Unauthorized access lvl 1')
+            error.status = 401
+            throw error
+        }
+
+        const foundUser = await User.findById(userId)
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
+        const deletedUser = await User.findByIdAndDelete(userId, {new: true})
+        if(!deletedUser){
+            const error = new Error('Cannot delete user')
+            error.status = 500
+            throw error
+        }
+        
+        res.status(202).send(deletedUser)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
 }

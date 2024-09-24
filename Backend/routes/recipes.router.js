@@ -10,9 +10,9 @@ router.use(authentication)
 
 router.get('/:id', recipeController.getSpecificRecipe)
 
-// router.get('/', recipeController.getAllRecipes)
+router.post('/', recipeController.getAllRecipes)
 
-// router.get('/private', recipeController.getPrivateRecipes)
+router.post('/private', recipeController.getPrivateRecipes)
 
 // this route saves the recipe header in the db
 router.post('/createRecipeHeader', recipeController.createNewRecipeHeader)

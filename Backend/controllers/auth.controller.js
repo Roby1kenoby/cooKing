@@ -60,3 +60,8 @@ export const getLoggedUserInfos = function(req, res) {
     return res.send(req.loggedUser);
 }
 
+export const callbackGoogle = (req,res) => {
+	const token = req.user
+	res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`)
+}
+

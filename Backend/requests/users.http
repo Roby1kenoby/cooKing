@@ -1,15 +1,53 @@
 @baseUrl=http://localhost:5000/users
 
+### GET ALL USER
+GET {{baseUrl}}/
+
+### GET SPECIFIC USER
+GET {{baseUrl}}/66e9e8b66f379cea82c39785
+
+### GET USER RECIPES
+GET {{baseUrl}}/66e9e8b66f379cea82c39785/recipes
+
+
+### GET USER INGREDIENTS
+GET {{baseUrl}}/66e9e8b66f379cea82c39785/ingredients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcyMDkwOTgsImV4cCI6MTcyNzIxMjY5OH0.KbXki8kyX43MoIScPnx8l4NKpPiNuHJr2EfR_nfK2ZU
+Content-Type: application/json
+
+### GET USER TAGS
+GET {{baseUrl}}/66e9e8b66f379cea82c39785/tags
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcyMDkwOTgsImV4cCI6MTcyNzIxMjY5OH0.KbXki8kyX43MoIScPnx8l4NKpPiNuHJr2EfR_nfK2ZU
+Content-Type: application/json
+
 ### CREATE NEW USER
 POST {{baseUrl}}/createUser
 Content-Type: application/json
 
 {
-    "email": "asd2@gmail.com",
-    "password": "asd2",
+    "email": "asd3@gmail.com",
+    "password": "asd3",
+    "username": "asd3Username",
+    "avatarUrl": "https://picsum.photos/200/300",
+    "name": "asd3Name",
+    "surname": "asd3Surname",
+    "preferredMu": "metric"
+}
+
+### EDIT USER
+PUT {{baseUrl}}/66e9e8b66f379cea82c39785/editUser
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcyMDkwOTgsImV4cCI6MTcyNzIxMjY5OH0.KbXki8kyX43MoIScPnx8l4NKpPiNuHJr2EfR_nfK2ZU
+
+{
     "username": "asd2Username",
     "avatarUrl": "https://picsum.photos/200/300",
-    "name": "asd2Name",
+    "name": "asd2Name modificato",
     "surname": "asd2Surname",
     "preferredMu": "metric"
 }
+
+### DELETE USER
+DELETE {{baseUrl}}/66f328c27dd1dfb193719afc/deleteUser
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcyMDkwOTgsImV4cCI6MTcyNzIxMjY5OH0.KbXki8kyX43MoIScPnx8l4NKpPiNuHJr2EfR_nfK2ZU

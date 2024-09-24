@@ -1,6 +1,8 @@
 import express from 'express'
 import 'dotenv/config'
 import mongoDbConnection from './configs/db.js'
+import passport from 'passport'
+import googleStrategy from './configs/passport.config.js'
 
 // router import
 import userRouter from './routes/users.rotuer.js'
@@ -23,6 +25,7 @@ server.listen(port, () => {
 // connecting to mongoDb.
 mongoDbConnection()
 
+passport.use('google', googleStrategy)
 // routes
 
 server.use('/users', userRouter)

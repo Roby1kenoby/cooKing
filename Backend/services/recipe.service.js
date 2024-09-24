@@ -114,7 +114,7 @@ export const saveRecipe = async function(data, userId){
     }
 }
 
-export const getSpecificRecipe = async function(recipeId){
+export const getSpecificRecipe = async function(recipeId, userId){
     
     const recipeQuery = Recipe.findById(recipeId)
     .populate({
@@ -134,6 +134,12 @@ export const getSpecificRecipe = async function(recipeId){
     })
 
     const recipe = await recipeQuery
+
+    if(recipe.privateRecipe && recipe.userId != userId){
+        const error = new Error('Private recipe')
+        error.status = 404
+        throw error
+    }
 
     if(!recipeQuery){
         const error = new Error('Recipe not found')

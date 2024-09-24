@@ -1,5 +1,6 @@
 import express from 'express'
 import * as userController from '../controllers/user.controller.js'
+import authentication from '../middlewares/authentication.js'
 
 const router = express.Router()
 
@@ -9,11 +10,13 @@ router.get('/:id', userController.getSpecificUser)
 
 router.get('/:id/recipes', userController.getSpecificUserRecipes)
 
+router.post('/createUser', userController.createNewUser)
+
+router.use(authentication)
+
 router.get('/:id/ingredients', userController.getSpecificUserPrivateIngredients)
 
 router.get('/:id/tags', userController.getSpecificUserPrivateTags)
-
-router.post('/createUser', userController.createNewUser)
 
 router.put('/:id/editUser', userController.editSpecificUser)
 

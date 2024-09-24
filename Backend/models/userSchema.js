@@ -27,6 +27,9 @@ const userSchema = new Schema(
         },
         preferredMu :{
             type: String
+        },
+        googleId :{
+            type: String
         }
     },
     {
