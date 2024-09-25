@@ -18,5 +18,9 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 TODO: 
  - auth google (da testare)
- - gestione immagini
+ - gestione immagini (da testare e implementare nelle rotte)
  - riverifica di tutte le rotte
+
+ Sticky side
+ https://dev.to/clairecodes/how-to-make-a-sticky-sidebar-with-two-lines-of-css-2ki7
+ 
