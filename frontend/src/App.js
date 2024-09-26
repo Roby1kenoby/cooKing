@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import GuestRoutes from './routesProtection/GuestRoutes';
+import Login from './views/login/Login'
+import Home from './views/home/Home'
+import Recipe from './views/recipe/Recipe'
+import Profile from './views/profile/Profile'
+import ProtectedRoutes from './routesProtection/ProtectedRoutes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<GuestRoutes/>}>
+          <Route path='/login' element={<Login />} />
+        </Route>
+        <Route element={<ProtectedRoutes/>}>
+          <Route path='/' element={<Home />}/>
+          <Route path='/recipe/:recipeId' element={<Recipe />}/>
+          <Route path='/profile/:profileId' element={<Profile />}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
