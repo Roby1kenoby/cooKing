@@ -3,7 +3,7 @@ import 'dotenv/config'
 import mongoDbConnection from './configs/db.js'
 import passport from 'passport'
 import googleStrategy from './configs/passport.config.js'
-
+import cors from 'cors'
 // router import
 import userRouter from './routes/users.rotuer.js'
 import authRouter from './routes/auth.router.js'
@@ -15,6 +15,7 @@ import recipeRouter from './routes/recipes.router.js'
 
 const server = express()
 server.use(express.json())
+server.use(cors())
 
 const port = process.env.PORT || 5000
 
