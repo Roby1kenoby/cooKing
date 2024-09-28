@@ -16,7 +16,8 @@ const googleStrategy = new GoogleStrategy(
             const newUser = new User({
                 email: email,
                 name: name,
-                surname: surname
+                surname: surname,
+                googleId: googleId
             })
             foundUser = await newUser.save()
         }

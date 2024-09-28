@@ -6,7 +6,7 @@ export const loginUser = async function(req, res) {
     const data = req.body
     try {
         // searching for the user
-        const foundUser = await User.findOne({email: data.email})
+        const foundUser = await User.findOne({email: data.email}).select('+password')
         if(!foundUser){
             const error = new Error('Unauthorized access lvl 1')
             error.status = 400
@@ -61,7 +61,9 @@ export const getLoggedUserInfos = function(req, res) {
 }
 
 export const callbackGoogle = (req,res) => {
+    console.log(req.user)
 	const token = req.user
+    console.log(`sto facendo il redirect a ${process.env.FRONTEND_URL}/login?token=${token}`)
 	res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`)
 }
 

@@ -25,7 +25,7 @@ export const getAllUsers = async function(req,res){
 export const getSpecificUser = async function(req,res){
     const userId = req.params.id
     try {
-        const foundUser = await User.findById(userId).select("-password")
+        const foundUser = await User.findById(userId)
         if(!foundUser){
             const error = new Error('Cannot find user')
             error.status = 404
@@ -44,7 +44,7 @@ export const getSpecificUserRecipes = async function(req,res){
     const userId = req.params.id
 
     try {
-        const foundUser = await User.findById(userId).select("-password")
+        const foundUser = await User.findById(userId)
         if(!foundUser){
             const error = new Error('Cannot find user')
             error.status = 404
@@ -135,12 +135,16 @@ export const getSpecificUserPrivateTags = async function(req, res){
 
 /* -------------- POST --------------*/
 export const createNewUser = async function(req,res){
-    const data = req.body
-    const avatarPath = 
-        // req.file.path ? req.file.path : 
-        'https://picsum.photos/200/300' 
-    
     try {
+        const data = req.body
+        const avatarPath =  req.file ? req.file.path : 'https://picsum.photos/200/300' 
+
+        if(!data.email || !data.password){
+            const error = new Error('Missing data from form')
+            error.status = 400
+            throw error
+        }
+
         // search for already existing user
         const userExists = await User.exists({email: data.email})
         
@@ -155,7 +159,7 @@ export const createNewUser = async function(req,res){
         const newUser = new User({
             email: data.email,
             password: await bcrypt.hash(data.password, 10),
-            username: data.username,
+            userName: data.userName,
             avatarUrl: avatarPath,
             name: data.name,
             surname: data.surname,
@@ -207,7 +211,7 @@ export const editSpecificUser = async function(req,res){
         }
 
         const editUser = {
-            username: data.username,
+            userName: data.userName,
             avatarUrl: data.avatarUrl,
             name: data.name,
             surname: data.surname,

@@ -1,6 +1,7 @@
 import express from 'express'
 import * as userController from '../controllers/user.controller.js'
 import authentication from '../middlewares/authentication.js'
+import cloudinary from '../middlewares/cloudinary.js'
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router.get('/:id', userController.getSpecificUser)
 
 router.get('/:id/recipes', userController.getSpecificUserRecipes)
 
-router.post('/createUser', userController.createNewUser)
+router.post('/createUser', cloudinary.single('avatar'), userController.createNewUser)
 
 router.use(authentication)
 

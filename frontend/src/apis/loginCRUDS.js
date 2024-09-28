@@ -21,3 +21,8 @@ export const Login = async (loginData) => {
         console.log(error.message)
     }
 }
+
+export const LoginWithGoogle = async function() {
+    //redirect alla rotta in cui faccio il login con google, che davanti ha passport 
+    window.location.href=`${URI}/login-google`
+}
