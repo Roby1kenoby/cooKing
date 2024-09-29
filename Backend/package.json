@@ -15,6 +15,7 @@
     "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.7.4",
     "nodemon": "^3.1.4"
   },
   "name": "backend",

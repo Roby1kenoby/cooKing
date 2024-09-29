@@ -36,10 +36,12 @@ const googleStrategy = new GoogleStrategy(
                     error.status = 400
                     throw error
                 }
-                res.send({
+                const resp = {
                     jwtToken: token,
                     userData: foundUser
-                })
+                }
+                
+                return cb(null, resp)
             }
         )
     }

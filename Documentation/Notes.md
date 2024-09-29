@@ -16,10 +16,12 @@ nel db devo avere una struttura così:
 Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare i link.
 
 
-TODO: 
- - auth google (da testare)
- - gestione immagini (da testare e implementare nelle rotte)
- - riverifica di tutte le rotte
+PROBLEMI: 
+ - auth google (si pianta all'ultimo step)
+ - devo fare loading per ogni cosa che ha una fetch???
+ - problema con il reindirizzamento su cambio dell'url del profilo per colpa di guestRoute
+ 
+ 
 
  Sticky side
  https://dev.to/clairecodes/how-to-make-a-sticky-sidebar-with-two-lines-of-css-2ki7

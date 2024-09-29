@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoutes() {
     const {token} = useContext(LoginContext)
+    console.log('sono in protected routes')
     
     return ( 
         token ? <Outlet/> : <Navigate to='/login'/>

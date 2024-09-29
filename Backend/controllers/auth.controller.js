@@ -60,8 +60,8 @@ export const getLoggedUserInfos = function(req, res) {
 }
 
 export const callbackGoogle = (req,res) => {
-    console.log(req.user)
-	const token = req.user
+    console.log(req.user.jwtToken)
+	const token = req.user.jwtToken
     console.log(`sto facendo il redirect a ${process.env.FRONTEND_URL}/login?token=${token}`)
 	res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`)
 }

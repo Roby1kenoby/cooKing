@@ -27,3 +27,17 @@ export const createUser = async function(userData, avatar){
         return 
     }
 }
+
+export const getUserData = async function(userId){
+    try {
+        const userData = await fetch(`${URI}/${userId}`)
+        if(!userData){
+            throw new Error('Impossibile trovare l\'utente indicato')
+        }    
+
+        return userData
+    } catch (error) {
+        return error
+    }
+    
+}
