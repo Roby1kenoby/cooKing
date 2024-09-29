@@ -54,7 +54,6 @@ export const loginUser = async function(req, res) {
     }
 }
 
-
 export const getLoggedUserInfos = function(req, res) {
     // non serve se ci pensa già la funzione di login?
     return res.send(req.loggedUser);

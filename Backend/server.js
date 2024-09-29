@@ -12,10 +12,12 @@ import tagRouter from './routes/tags.router.js'
 import phaseRouter from './routes/phases.rotuer.js'
 import recipeIngredientRouter from './routes/recipeIngredients.router.js'
 import recipeRouter from './routes/recipes.router.js'
+import morgan from 'morgan'
 
 const server = express()
 server.use(express.json())
 server.use(cors())
+server.use(morgan('dev'))
 
 const port = process.env.PORT || 5000
 

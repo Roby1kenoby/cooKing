@@ -24,7 +24,7 @@ const googleStrategy = new GoogleStrategy(
 
         jwt.sign(
             {
-                userId: foundUser
+                userId: foundUser._id
             },
             process.env.JWT_SECRET,
             {
@@ -36,14 +36,9 @@ const googleStrategy = new GoogleStrategy(
                     error.status = 400
                     throw error
                 }
-                
-                // need to convert the foundUser to a simpler object to remove the password
-                const userObject = foundUser.toObject();
-                delete userObject.password;
-
                 res.send({
                     jwtToken: token,
-                    userData: userObject
+                    userData: foundUser
                 })
             }
         )

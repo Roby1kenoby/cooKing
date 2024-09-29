@@ -22,6 +22,20 @@ export const Login = async (loginData) => {
     }
 }
 
+export const Me = async function(token){
+    try {
+        const request = await fetch(URI + '/me',{
+            headers:{
+                Authorization: 'Bearer ' + token
+            }
+        })
+        const loggedUserData = await request.json()
+        return loggedUserData
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const LoginWithGoogle = async function() {
     //redirect alla rotta in cui faccio il login con google, che davanti ha passport 
     window.location.href=`${URI}/login-google`

@@ -8,3 +8,7 @@ Content-Type: application/json
     "email": "asd2@gmail.com",
     "password": "asd2"
 }
+
+###
+GET {{baseUrl}}/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3Mjc2MjUyODIsImV4cCI6MTcyNzYyODg4Mn0.2AndXerAt8rdALweCswIp9Y3OfUkJ8g4BUSS3isRGdE

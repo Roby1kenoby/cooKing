@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-// import { Me } from "../api/LoginCRUDs.js";
+import { Me } from "../apis/loginCRUDS";
 export const LoginContext = createContext()
 
 export function LoginContextProvider({ children }) {
@@ -28,26 +28,25 @@ export function LoginContextProvider({ children }) {
         
     }
     
+    const getAuthorData = async function(token){
+        if(!token) return
 
-    // const getAuthorData = async function(token){
-    //     if(!token) return
-
-    //     try {
-    //         const authorData = await Me(token)
+        try {
+            const authorData = await Me(token)
             
-    //         if(!authorData) throw Error('Token non valido')
+            if(!authorData) throw Error('Token non valido')
+            console.log(authorData)
+            setLoggedUser(authorData)
+            localStorage.setItem("token", token)    
 
-    //         setLoggedUser(authorData)
-    //         localStorage.setItem("token", token)    
+        } catch (error) {
+            console.log(error)
+            setToken('')
+            localStorage.clear()
+        } 
+    }
 
-    //     } catch (error) {
-    //         console.log(error)
-    //         setToken('')
-    //         localStorage.clear()
-    //     }
-    // }
-
-    // useEffect(() => {getAuthorData(token)}, [token])
+    useEffect(() => {getAuthorData(token)}, [token])
     useEffect(manageToken, [])
 
 
