@@ -5,13 +5,19 @@ import { Navigate } from "react-router-dom";
 
 function GuestRoutes() {
     const {token, loggedUser} = useContext(LoginContext)
-    console.log('sono in guest routes')
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('userId');
+    
+    const redirectUrl = userId ? `/profile/${userId}` : `/profile/${loggedUser?._id}`
+    
+
+    
     if (token && !loggedUser) {
         return <div>Loading...</div>;
     }
 
     return ( 
-        !token ? <Outlet/> : <Navigate to={`/profile/${loggedUser._id}`}/>
+        !token ? <Outlet/> : <Navigate to={redirectUrl}/>
     );
 }
 

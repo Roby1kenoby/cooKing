@@ -41,3 +41,44 @@ export const getUserData = async function(userId){
     }
     
 }
+
+export const getUserRecipes = async function(token, userId){
+    try {
+        const resp = await fetch(`${URI}/${userId}/recipes`,{
+            headers: {
+                Authorization: 'Bearer ' + token,
+                "Content-type": 'application/json'
+            }
+        })
+
+        if(!resp){
+            throw new Error('Impossibile recuperare le ricette dell\'utente')
+        }
+
+        const data = resp.json()
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+export const getUserPublicRecipes = async function(token, userId){
+    try {
+        const resp = await fetch(`${URI}/${userId}/publicRecipes`,{
+            headers: {
+                Authorization: 'Bearer ' + token,
+                "Content-type": 'application/json'
+            }
+        })
+        
+        if(!resp){
+            throw new Error('Impossibile recuperare le ricette dell\'utente')
+        }
+
+        const data = resp.json()
+        return data
+        
+    } catch (error) {
+        return error
+    }
+}

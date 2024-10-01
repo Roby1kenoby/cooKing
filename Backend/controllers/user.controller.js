@@ -51,6 +51,33 @@ export const getSpecificUserRecipes = async function(req,res){
             throw error
         }
 
+        const userRecipes = await Recipe.find({userId: userId})
+
+        if(!userRecipes){
+            const error = new Error('Cannot find user recipes')
+            error.status = 404
+            throw error
+        }
+
+        res.status(200).send(userRecipes)
+
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error.message)
+    }
+}
+
+export const getSpecificUserPublicRecipes = async function(req,res){
+    const userId = req.params.id
+
+    try {
+        const foundUser = await User.findById(userId)
+        if(!foundUser){
+            const error = new Error('Cannot find user')
+            error.status = 404
+            throw error
+        }
+
         const userRecipes = await Recipe.find({$and: [{userId: userId},{privateRecipe:false}]})
 
         if(!userRecipes){

@@ -8,6 +8,11 @@ GET {{baseUrl}}/66e9e8b66f379cea82c39785
 
 ### GET USER RECIPES
 GET {{baseUrl}}/66e9e8b66f379cea82c39785/recipes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3Mjc4MTcyNzAsImV4cCI6MTcyNzgyMDg3MH0.0zy5UmEKVsxdNBsGZ0lhWKZEsKUxOsYnvP9N5_SVxP4
+Content-Type: application/json
+### GET USER PUBLIC RECIPES
+GET {{baseUrl}}/66e9e8b66f379cea82c39785/publicRecipes
+
 
 
 ### GET USER INGREDIENTS

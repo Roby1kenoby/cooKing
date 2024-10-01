@@ -5,9 +5,9 @@ import Pagination from 'react-bootstrap/Pagination';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserData } from '../../apis/userCRUDS';
 import { LoginContext } from '../../contexts/LoginContextProvider';
+import RecipePreviewContainer from '../../components/Recipe/RecipePreviewContainer';
 
 function Profile() {
-    console.log('sono in profile')
     const params = useParams()
     const userId = params.profileId
     const navigate = useNavigate()
@@ -18,7 +18,6 @@ function Profile() {
     
     const fetchUserData = async function(){
         try {
-            console.log(userId)
             const resp = await getUserData(userId)
             if(!resp){
                 console.log('resp non ancora presente)')
@@ -62,71 +61,7 @@ function Profile() {
             <Row>
                 <Col>
                     <h1>Ricette</h1>
-                    <Card>
-                        <CardHeader className='d-flex justify-content-between'>
-                            <p>Nome Ricetta</p>
-                            <p>Autore</p>
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col sm="12" md="4">Immagine</Col>
-                                <Col sm="12" md="4">Descrizione</Col>
-                                <Col sm="12" md="4">Tags</Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardHeader className='d-flex justify-content-between'>
-                            <p>Nome Ricetta</p>
-                            <p>Autore</p>
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col sm="12" md="4">Immagine</Col>
-                                <Col sm="12" md="4">Descrizione</Col>
-                                <Col sm="12" md="4">Tags</Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardHeader className='d-flex justify-content-between'>
-                            <p>Nome Ricetta</p>
-                            <p>Autore</p>
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col sm="12" md="4">Immagine</Col>
-                                <Col sm="12" md="4">Descrizione</Col>
-                                <Col sm="12" md="4">Tags</Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardHeader className='d-flex justify-content-between'>
-                            <p>Nome Ricetta</p>
-                            <p>Autore</p>
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col sm="12" md="4">Immagine</Col>
-                                <Col sm="12" md="4">Descrizione</Col>
-                                <Col sm="12" md="4">Tags</Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardHeader className='d-flex justify-content-between'>
-                            <p>Nome Ricetta</p>
-                            <p>Autore</p>
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col sm="12" md="4">Immagine</Col>
-                                <Col sm="12" md="4">Descrizione</Col>
-                                <Col sm="12" md="4">Tags</Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
+                    <RecipePreviewContainer userId={userData._id}/>
                 </Col>
             </Row>
             <Row>

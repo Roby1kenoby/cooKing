@@ -9,11 +9,13 @@ router.get('/', userController.getAllUsers)
 
 router.get('/:id', userController.getSpecificUser)
 
-router.get('/:id/recipes', userController.getSpecificUserRecipes)
+router.get('/:id/publicRecipes', userController.getSpecificUserPublicRecipes)
 
 router.post('/createUser', cloudinary.single('avatar'), userController.createNewUser)
 
 router.use(authentication)
+
+router.get('/:id/recipes', userController.getSpecificUserRecipes)
 
 router.get('/:id/ingredients', userController.getSpecificUserPrivateIngredients)
 

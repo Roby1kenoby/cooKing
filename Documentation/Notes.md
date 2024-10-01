@@ -16,12 +16,17 @@ nel db devo avere una struttura così:
 Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare i link.
 
 
+Prosismi step
+1) Visualizzazione Ricetta
+2) Inserimento Ricetta
+3) Modifica Ricetta
+
 PROBLEMI: 
- - auth google (si pianta all'ultimo step)
- - devo fare loading per ogni cosa che ha una fetch???
- - problema con il reindirizzamento su cambio dell'url del profilo per colpa di guestRoute
  
- 
+- devo fare loading per ogni cosa che ha una fetch??? (ricorda il ?.nomeParametro)
+- Per modifica dei dati, fare componenti specifici per edit e specifici per visualizzazione, e attivarli in base alle esigenze. 
+
+
 
  Sticky side
  https://dev.to/clairecodes/how-to-make-a-sticky-sidebar-with-two-lines-of-css-2ki7
