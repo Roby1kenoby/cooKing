@@ -1,4 +1,4 @@
-@baseUrl=http://localhost:5000/recipe
+@baseUrl=http://localhost:5000/recipes
 
 ### GET PUBLIC RECIPES
 POST {{baseUrl}}/public
@@ -33,7 +33,8 @@ Content-Type: application/json
 
 ### GET SPECIFIC RECIPE
 GET {{baseUrl}}/66f19b734312ea187b1b2227
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjIzNzAsImV4cCI6MTcyNzEyNTk3MH0.HHf4vfRuLviiDXTVPndKVGfrV-nuWMv50hKdZUIMVdI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjgyOTAzMjMsImV4cCI6MTcyODI5MzkyM30.JFXmUfJEKBWx5xVQsiJnaJj3OfnburXY2j4ZYjLS_ws
+
 
 ### GET ALL INGREDIENTS
 GET {{baseUrl}}?searchString=ac

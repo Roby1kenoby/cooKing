@@ -1,0 +1,4 @@
+.carousel, .carousel.item {
+    border: 1px solid black;
+    min-height: min-content;
+}

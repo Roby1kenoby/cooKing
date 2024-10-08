@@ -37,4 +37,4 @@ server.use('/ingredients', ingredientRouter)
 server.use('/tags', tagRouter)
 server.use('/phases', phaseRouter) // todo
 server.use('/recipeIngredients', recipeIngredientRouter)
-server.use('/recipe', recipeRouter)
+server.use('/recipes', recipeRouter)
