@@ -1,4 +1,4 @@
-import { Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import './Recipe.css'
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContextProvider';
@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getRecipeData } from '../../apis/recipeCRUDS';
 import IngredientBox from '../../components/Ingredient/IngredientBox';
 import PhaseBox from '../../components/Phase/PhaseBox';
+import TagBox from '../../components/Tag/TagBox';
 
 function Recipe() {
     const [recipeData, setRecipeData] = useState()
@@ -42,6 +43,7 @@ function Recipe() {
             setSolidIngredients(solidArray)
             setLiquidIngredients(liquidArray)
             setPhases(data.phases)
+            setTags(data.tagsIds)
             
         } catch (error) {
             return error
@@ -59,15 +61,20 @@ function Recipe() {
     return ( 
         <Container>
             <Row>
-                <div className='image container' style={headerStyle}>
+                <Col className='image container' style={headerStyle}>
                     <h1>{recipeData?.title}</h1>
-                </div>
+                </Col>
                 <hr />
             </Row>
             
             <Row>
                 <h2>Descrizione</h2>
-                <p>{recipeData?.description}</p>
+                <Col>
+                    <p>{recipeData?.description}</p>
+                </Col>
+                <Col sm={12} md={4}>
+                    <TagBox tags={tags}/>
+                </Col>
                 <hr />
             </Row>
 

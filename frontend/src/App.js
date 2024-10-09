@@ -6,6 +6,7 @@ import Home from './views/home/Home'
 import Recipe from './views/recipe/Recipe'
 import Profile from './views/profile/Profile'
 import ProtectedRoutes from './routesProtection/ProtectedRoutes';
+import NewRecipe from './components/Recipe/NewRecipe';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route element={<ProtectedRoutes/>}>
           <Route path='/' element={<Home />}/>
           <Route path='/recipe/:recipeId' element={<Recipe />}/>
+          <Route path='/recipe/newRecipe' element={<NewRecipe />}/>
           <Route path='/profile/:profileId' element={<Profile />}/>
         </Route>
       </Routes>

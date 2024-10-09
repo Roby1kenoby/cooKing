@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import './Profile.css'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap'
 import Pagination from 'react-bootstrap/Pagination';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getUserData } from '../../apis/userCRUDS';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import RecipePreviewContainer from '../../components/Recipe/RecipePreviewContainer';
@@ -11,15 +11,15 @@ function Profile() {
     const params = useParams()
     const userId = params.profileId
     const navigate = useNavigate()
-    
-    const {token, loggedUser} = useContext(LoginContext)
+
+    const { token, loggedUser } = useContext(LoginContext)
 
     const [userData, setUserData] = useState()
-    
-    const fetchUserData = async function(){
+
+    const fetchUserData = async function () {
         try {
             const resp = await getUserData(userId)
-            if(!resp){
+            if (!resp) {
                 console.log('resp non ancora presente)')
             }
             const userData = await resp.json()
@@ -27,14 +27,14 @@ function Profile() {
         } catch (error) {
             return error
         }
-        
-    }
-        
-    useEffect(() => {fetchUserData()}, [userId])
 
-    if(!userData){
+    }
+
+    useEffect(() => { fetchUserData() }, [userId])
+
+    if (!userData) {
         return <p>Loading...</p>
-    } 
+    }
 
     return (
         <Container>
@@ -45,6 +45,11 @@ function Profile() {
                 <Col sm="12" md="6">
                     <h1>{`${userData.surname} ${userData.name} `}</h1>
                 </Col>
+                <Button
+                    as={Link}
+                    to={'/recipe/newRecipe'}>
+                    Create Recipe
+                </Button>
             </Row>
             <hr />
             <Row>
@@ -61,7 +66,7 @@ function Profile() {
             <Row>
                 <Col>
                     <h1>Ricette</h1>
-                    <RecipePreviewContainer userId={userData._id}/>
+                    <RecipePreviewContainer userId={userData._id} />
                 </Col>
             </Row>
             <Row>

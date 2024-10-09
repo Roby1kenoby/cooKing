@@ -1,18 +1,23 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import IngredientBox from "../Ingredient/IngredientBox";
 
-function Phase({phase}) {
-    return ( 
+function Phase({ phase }) {
+    return (
         <Container>
-            <div>
-                <img src={phase.phaseImageUrl} alt="" />
-            </div>
-            <div>
-                <IngredientBox ingredients={phase.phaseIngredients}/>
-            </div>
-            <div>
-                {phase.description}
-            </div>
+            <Row>
+                <Col sm={12} md={4}>
+                    <img src={phase.phaseImageUrl} alt="" />
+                </Col>
+                <Col sm={12} md={4}>
+                    <IngredientBox ingredients={phase.phaseIngredients} />
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={12} md={4}>
+                    {phase.description}
+                </Col>
+            </Row>
+
         </Container>
     );
 }

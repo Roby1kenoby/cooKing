@@ -45,13 +45,17 @@ export const getSpecificUserRecipes = async function(req,res){
 
     try {
         const foundUser = await User.findById(userId)
+            
         if(!foundUser){
             const error = new Error('Cannot find user')
             error.status = 404
             throw error
         }
 
-        const userRecipes = await Recipe.find({userId: userId})
+        const userRecipes = await Recipe.find({userId: userId})            
+        .populate({
+            path: 'tagsIds'
+        })
 
         if(!userRecipes){
             const error = new Error('Cannot find user recipes')

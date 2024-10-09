@@ -17,9 +17,9 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 
 Prosismi step
-1) Visualizzazione Ricetta
-2) Inserimento Ricetta
-3) Modifica Ricetta
+1) Inserimento Ricetta
+    a. Finire box inserimento ingredienti globali (con altro componente, per riusarlo negli ingredienti della singola fase)
+2) Modifica Ricetta
 
 PROBLEMI: 
  

@@ -1,6 +1,7 @@
 import { Card, CardBody, CardHeader, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import './RecipePreview.css'
+import TagBox from '../Tag/TagBox';
 
 function RecipePreview({recipe}) {
     return (
@@ -12,7 +13,7 @@ function RecipePreview({recipe}) {
                 <Row>
                     <Col sm="12" md="4">{recipe.recipeImageUrl}</Col>
                     <Col sm="12" md="4">{recipe.description}</Col>
-                    <Col sm="12" md="4">{recipe.tagsIds}</Col>
+                    <Col sm="12" md="4"><TagBox tags={recipe.tagsIds}/></Col>
                 </Row>
             </CardBody>
         </Card>
