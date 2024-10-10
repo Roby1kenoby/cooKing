@@ -1,0 +1,38 @@
+{
+    "unitSystem": {
+        "metric": {
+            "solid": [
+                {
+                    "name": "mg",
+                    "conversionRate": 0.1
+                },
+                {
+                    "name": "g",
+                    "conversionRate": 1
+                },
+                {
+                    "name": "hg",
+                    "conversionRate": 100
+                },
+                {
+                    "name": "kg",
+                    "conversionRate": 1000
+                }
+            ],
+            "liquid": [
+                {
+                    "name": "ml",
+                    "conversionRate": 1
+                },
+                {
+                    "name": "dl",
+                    "conversionRate": 10
+                },
+                {
+                    "name": "l",
+                    "conversionRate": 1000
+                }
+            ]
+        }
+    }
+}

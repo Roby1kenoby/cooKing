@@ -1,22 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import AddIngredient from "../Ingredient/AddIngredient";
+import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 
 function NewRecipe() {
-    const initialFormData = {
-        tagsIds: [],
-        title: '',
-        description: '',
-        portions: 1,
-        preparationTime: '',
-        recipeImageUrl: '',
-        recipeVideoUrl: '',
-        privateRecipe: false,
-        phases: [],
-        recipeIngredients:[]
-    }
-
-    const [formData, setFormData] = useState(initialFormData)
+    const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
+    console.log(newRecipe)
+    
+    const [formData, setFormData] = useState(newRecipe)
     const [image, setImage] = useState()
     const [ingredients, setIngredients] = useState([])
     const [tags, setTags] = useState([])
@@ -30,8 +21,10 @@ function NewRecipe() {
         setImage(event.target.files[0])
     }
 
-    const saveRecipe = async function() {
-        console.log('ciao')
+    const saveRecipe = async function(event) {
+        event.preventDefault()
+        setNewRecipe(formData)
+        console.log(newRecipe)
     }
 
     return ( 

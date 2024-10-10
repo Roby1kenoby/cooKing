@@ -8,7 +8,7 @@ import LoginOauth from '../../components/Login/LoginOauth';
 
 function Login() {
     const [switchForm, setSwitchForm] = useState(false)
-    console.log('sono in login')
+    
     return (
         <Container className='d-flex flex-column align-items-center'>
             <div>
