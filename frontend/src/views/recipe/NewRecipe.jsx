@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import AddIngredient from "../Ingredient/AddIngredient";
+import AddIngredient from "../../components/Ingredient/AddIngredient";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
+import AddTag from "../../components/Tag/AddTag";
 
 function NewRecipe() {
     const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
-    console.log(newRecipe)
     
     const [formData, setFormData] = useState(newRecipe)
     const [image, setImage] = useState()
-    const [ingredients, setIngredients] = useState([])
-    const [tags, setTags] = useState([])
 
     const handleFormChange = function(event){
         const target = event.target
@@ -91,9 +89,15 @@ function NewRecipe() {
                     required />
             </Form.Group>
             <Form.Group>
+                <Form.Label>Tags</Form.Label>
+                <div>
+                    <AddTag />
+                </div>
+            </Form.Group>
+            <Form.Group>
                 <Form.Label>Ingredienti</Form.Label>
                 <div>
-                    <AddIngredient ingredients={ingredients} setIngredients={setIngredients}/>
+                    <AddIngredient />
                 </div>
             </Form.Group>
             {/* inserire box per i tag (ricerca + selezione), ingredienti e fasi */}

@@ -2,7 +2,7 @@ import {Schema, model} from 'mongoose'
 
 const tagSchema = new Schema(
     {
-        tagName: {
+        name: {
             type: String,
             minLength: 4,
             maxLength: 20,

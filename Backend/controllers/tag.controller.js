@@ -16,10 +16,10 @@ export const getAllTags = async function(req, res){
         // if ther's a searchString, i filter the Tag list (including private one).
         const tagsListQuery = Tag.find(
                 searchString ? 
-                    {$and:[{tagName: {$regex: searchString ,$options: "i"}}, {$or:[{userId: userId}, {userId: null}]}]}
+                    {$and:[{name: {$regex: searchString ,$options: "i"}}, {$or:[{userId: userId}, {userId: null}]}]}
                     : {$or: [{userId: userId}, {userId: null}]})
 
-            tagsListQuery.sort({tagName: 1})
+            tagsListQuery.sort({name: 1})
             const TagsList = await tagsListQuery
         res.send(TagsList)
 
@@ -45,7 +45,7 @@ export const getPrivateTags = async function(req, res){
         // i get only the Tags that has userId = userId of logged user
         const tagsList = await Tag.find(
                 searchString ? 
-                    {$and:[{tagName: {$regex: searchString ,$options: "i"}}, {userId: userId}]}
+                    {$and:[{name: {$regex: searchString ,$options: "i"}}, {userId: userId}]}
                     : {userId: userId})
         
         res.send(tagsList)
@@ -63,9 +63,9 @@ export const getPublicTags = async function(req, res){
         // i get only the Tags that has no userId
         const tagsListQuery = Tag.find(
                 searchString ? 
-                    {$and:[{tagName: {$regex: searchString ,$options: "i"}}, {userId: null}]}
+                    {$and:[{name: {$regex: searchString ,$options: "i"}}, {userId: null}]}
                     : {userId: null})
-                tagsListQuery.sort({tagName: 1})
+                tagsListQuery.sort({name: 1})
         const TagsList = await tagsListQuery
         
         res.send(TagsList)
@@ -88,7 +88,7 @@ export const createNewPrivateTag = async function(req, res){
             throw error
         }
 
-        const tagExists = await Tag.findOne({$or: [{$and: [{tagName: data.tagName},{userId: null}]},{$and: [{tagName: data.tagName},{userId: userId}]}]})
+        const tagExists = await Tag.findOne({$or: [{$and: [{name: data.name},{userId: null}]},{$and: [{name: data.name},{userId: userId}]}]})
         if (tagExists){
             const error = new Error('Tag already exists')
             error.status = 409
@@ -96,7 +96,7 @@ export const createNewPrivateTag = async function(req, res){
         }
 
         const newPrivateTag = new Tag({
-            tagName: data.tagName,
+            name: data.name,
             userId: userId
         })
 
@@ -139,7 +139,7 @@ export const editPrivateTag = async function(req, res){
             throw error
         }
 
-        const newPrivateTagAlreadyExists = await Tag.exists({tagName: data.tagName})
+        const newPrivateTagAlreadyExists = await Tag.exists({name: data.name})
 
         if (newPrivateTagAlreadyExists) {
             const error = new Error('Edited Tag Already Exists')
@@ -148,7 +148,7 @@ export const editPrivateTag = async function(req, res){
         }
 
         const editedPrivateTag = {
-            tagName: data.tagName,
+            name: data.name,
             userId: userId
         }
 

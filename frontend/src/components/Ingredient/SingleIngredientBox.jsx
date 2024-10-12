@@ -1,20 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import units from '../../data/measurementUnits.json'
-import {v4 as uuidv4} from 'uuid';
 
-function SingleIngredientBox({ ingredient, ingredients, setIngredients }) {
-    const { newRecipe, setNewRecipe } = useContext(NewRecipeContext)
+function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngredients }) {
+    const { addIngredient, editIngredient, deleteIngredient } = useContext(NewRecipeContext)
 
     const um = ingredient.measurementCategory === "Solid"
         ? units.unitSystem['metric']['solid']
         : units.unitSystem['metric']['liquid']
 
-    const [id] = useState(uuidv4())
+    
     
     const initialFormData = {
-        id: id,
+        tempId: ingredient.tempId,
         ingredientId: ingredient._id,
         measurementUnit: '',
         phaseId: null,
@@ -26,28 +25,25 @@ function SingleIngredientBox({ ingredient, ingredients, setIngredients }) {
     const [disable, setDisable] = useState(false)
     const [editMode, setEditMode] = useState(false)
 
+    useEffect(() => {
+        console.log('edit mode è ora:', editMode);
+    }, [editMode]);
+
+
     const handleFormChange = function (event) {
         const target = event.target
         setFormData({ ...formData, [target.name]: target.value })
     }
 
     const saveIngredient = function () {
-        // NECESSARIO CAPIRE COME GESTIRE UNA MODIFICA DELL'INGREDIENTE
-        // NON POSSO SALVARE DIRETTAMENTE. NECESSARIO ANCHE FARE CONTROLLO DUPLICATI PRIMA DI SALVARE
-        // save new element
-        if(!newRecipe.recipeIngredients.includes(formData)){
-            setNewRecipe({...newRecipe, recipeIngredients: [...newRecipe.recipeIngredients, formData]})
+        if(editMode){
+            console.log('sono in edit mode, cambio ingrediente ' + formData)
+            editIngredient(formData) 
+            setEditMode(!editMode)
         }
-        
-        if(newRecipe.recipeIngredients.find(i => 
-            // id already in ingredientsArray
-            i.id === id
-        )){
-            console.log(id)
-            setNewRecipe({...newRecipe, recipeIngredients: [...newRecipe.recipeIngredients.filter(i => 
-                i.id !== id 
-            ), formData]
-        })
+        else{
+            console.log('sono in add ingredient, aggiungo ingrediente' + formData)
+            addIngredient(formData)
         }
         setDisable(!disable)
     }
@@ -57,9 +53,9 @@ function SingleIngredientBox({ ingredient, ingredients, setIngredients }) {
         setEditMode(!editMode)
     }
 
-    const deleteIngredient = function(){
-        const tempIngArray = newRecipe.recipeIngredients.filter(i => i.id !== id)
-        setNewRecipe({...newRecipe, recipeIngredients: tempIngArray})
+    const removeIngredient = function(){
+        deleteIngredient(formData)
+        setSelectedIngredients(prevSelIng => ([...prevSelIng.filter(i => i.tempId != ingredient.tempId)]))
     }   
 
     return (
@@ -103,14 +99,14 @@ function SingleIngredientBox({ ingredient, ingredients, setIngredients }) {
                         />
                     </Form.Group>
                     <div className="col-sm-12 col-md-1 d-flex flex-column">
-                        {!disable && <Button variant="primary" onClick={() => saveIngredient()}>
+                        {!disable && <Button variant="primary" onClick={saveIngredient}>
                             Salva
                         </Button>}
-                        {disable && <Button variant="primary" onClick={() => toggleMode()}>
+                        {disable && <Button variant="primary" onClick={toggleMode}>
                             Modifica
                         </Button>}
                         {
-                            disable && <Button variant="danger" onClick={() => deleteIngredient()}>
+                            disable && <Button variant="danger" onClick={removeIngredient}>
                                 Elimina
                             </Button>
                         }

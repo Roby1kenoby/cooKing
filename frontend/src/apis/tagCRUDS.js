@@ -1,6 +1,6 @@
-const URI = `${process.env.REACT_APP_API_URL}/ingredients`
+const URI = `${process.env.REACT_APP_API_URL}/tags`
 
-export const getAllIngredients = async function(token, searchString = null){
+export const getAllTags = async function(token, searchString = null){
     try {
         
         const qryString = searchString ? `/?searchString=${searchString}` : ''
@@ -13,7 +13,7 @@ export const getAllIngredients = async function(token, searchString = null){
         })
 
         if(!resp){
-            throw new Error('Impossibile recuperare gli ingredienti')
+            throw new Error('Impossibile recuperare i tag')
         }
 
         const data = await resp.json()

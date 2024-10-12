@@ -3,30 +3,24 @@ import { useContext, useEffect, useState } from "react";
 import SingleIngredientBox from "./SingleIngredientBox";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 
-function AddIngredient({ ingredients, setIngredients }) {
-    // rimuovere il contesto, non serve qua, se non per il log
-    const { newRecipe, setNewRecipe } = useContext(NewRecipeContext)
-    const arrayAggiornato = function () {
-        console.log(ingredients)
-    }
+function AddIngredient() {
+    const [selectedIngredients, setSelectedIngredients] = useState([])
+    // const {newRecipe} = useContext(NewRecipeContext)
 
-    // console log per vedere la ricetta aggiornata con gli ingredienti, rimuvoere
-    useEffect(()=>{
-        console.log(newRecipe)
-    },[newRecipe])
-    
-
-    useEffect(arrayAggiornato, [ingredients])
+    // useEffect(() => {
+    //     console.log(newRecipe)
+    //     console.log(selectedIngredients)
+    // }, [newRecipe])
 
     return (
         <>
-            <SearchDropdown optionsArray={ingredients} setOptionsArray={setIngredients}></SearchDropdown>
-            {ingredients.map((ing, idx) => 
+            <SearchDropdown optionsArray={selectedIngredients} setOptionsArray={setSelectedIngredients} type='ingredients'></SearchDropdown>
+            {selectedIngredients.map((ing) => 
                 <SingleIngredientBox 
-                    key={idx} 
-                    ingredient={ing} 
-                    ingredients={ingredients} 
-                    setIngredients={setIngredients}
+                    key={ing.tempId} 
+                    ingredient={ing}
+                    selectedIngredients={selectedIngredients} 
+                    setSelectedIngredients={setSelectedIngredients}
                 />
             )}
         </>

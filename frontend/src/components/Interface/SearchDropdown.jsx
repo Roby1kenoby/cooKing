@@ -2,19 +2,26 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Dropdown, DropdownButton, FormControl, Spinner } from 'react-bootstrap';
 import _ from 'lodash'; 
 import { getAllIngredients } from '../../apis/ingredientCRUDS';
+import { getAllTags } from '../../apis/tagCRUDS'
 import { LoginContext } from '../../contexts/LoginContextProvider';
+import {v4 as uuidv4} from 'uuid';
 
-function SearchDropdown({optionsArray, setOptionsArray}) {
+function SearchDropdown({optionsArray, setOptionsArray, type}) {
     const [searchTerm, setSearchTerm] = useState('');      // Search string
     const [options, setOptions] = useState([]);            // array for options returned by API call
     const [loading, setLoading] = useState(false);         
     const {token} = useContext(LoginContext)
 
-    // API call to get things TODO parametric
     const fetchOptions = async (query) => {
         try {
             setLoading(true);
-            const response = await getAllIngredients(token, query);
+            let response = {}
+            if (type === 'ingredients'){
+                response = await getAllIngredients(token, query)
+            }
+            else {
+                response = await getAllTags(token, query)
+            }
             setOptions(response); 
             setLoading(false);
         } catch (error) {
@@ -41,7 +48,19 @@ function SearchDropdown({optionsArray, setOptionsArray}) {
 
     // upon selecting an option, it get pushed into the state array
     const handleSelect = (option) => {
-        setOptionsArray([...optionsArray, option])
+        // if tag, i have to check for duplicates here.
+        if(type === 'tags'){
+            const alreadySelected = optionsArray.some(o => o._id === option._id)
+            if(!alreadySelected){
+                setOptionsArray([... optionsArray, {...option, tempId: uuidv4()}])
+            }
+        }
+        else{
+            setOptionsArray([... optionsArray, {...option, tempId: uuidv4()}])
+        }
+
+
+        // setOptionsArray([...optionsArray, {...option, tempId: uuidv4()}])
         setSearchTerm('');  // Reset search bar
         setOptions([]);     // Reset options list
     };
@@ -49,7 +68,7 @@ function SearchDropdown({optionsArray, setOptionsArray}) {
     return (
         <DropdownButton
             id="dropdown-basic-button"
-            title="Cerca ingredienti"
+            title={`Cerca ${type==='ingredients' ? 'ingredienti' : 'tag'}`}
         >
             <Dropdown.Item as="div">
                 <FormControl
@@ -71,12 +90,12 @@ function SearchDropdown({optionsArray, setOptionsArray}) {
                             No options found
                         </Dropdown.Item>
                     ) : (
-                        options?.map(ing => (
+                        options?.map(opt => (
                             <Dropdown.Item
-                                key={ing._id}
-                                onClick={() => handleSelect(ing)}
+                                key={opt._id}
+                                onClick={() => handleSelect(opt)}
                             >
-                                {ing.name}
+                                {opt.name}
                             </Dropdown.Item>
                         ))
                     )}

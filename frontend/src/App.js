@@ -6,7 +6,7 @@ import Home from './views/home/Home'
 import Recipe from './views/recipe/Recipe'
 import Profile from './views/profile/Profile'
 import ProtectedRoutes from './routesProtection/ProtectedRoutes';
-import NewRecipe from './components/Recipe/NewRecipe';
+import NewRecipe from './views/recipe/NewRecipe';
 import { NewRecipeContextProvider } from './contexts/NewRecipeContextProvider';
 
 function App() {
