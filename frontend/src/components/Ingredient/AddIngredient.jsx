@@ -22,7 +22,12 @@ function AddIngredient({ ingredients, setIngredients }) {
         <>
             <SearchDropdown optionsArray={ingredients} setOptionsArray={setIngredients}></SearchDropdown>
             {ingredients.map((ing, idx) => 
-                <SingleIngredientBox key={idx} ingredient={ing}/>
+                <SingleIngredientBox 
+                    key={idx} 
+                    ingredient={ing} 
+                    ingredients={ingredients} 
+                    setIngredients={setIngredients}
+                />
             )}
         </>
     );

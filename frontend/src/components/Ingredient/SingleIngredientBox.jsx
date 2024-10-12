@@ -2,15 +2,19 @@ import { useContext, useState } from "react";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import units from '../../data/measurementUnits.json'
-function SingleIngredientBox({ ingredient }) {
+import {v4 as uuidv4} from 'uuid';
 
+function SingleIngredientBox({ ingredient, ingredients, setIngredients }) {
     const { newRecipe, setNewRecipe } = useContext(NewRecipeContext)
 
     const um = ingredient.measurementCategory === "Solid"
         ? units.unitSystem['metric']['solid']
         : units.unitSystem['metric']['liquid']
 
+    const [id] = useState(uuidv4())
+    
     const initialFormData = {
+        id: id,
         ingredientId: ingredient._id,
         measurementUnit: '',
         phaseId: null,
@@ -20,6 +24,7 @@ function SingleIngredientBox({ ingredient }) {
 
     const [formData, setFormData] = useState(initialFormData)
     const [disable, setDisable] = useState(false)
+    const [editMode, setEditMode] = useState(false)
 
     const handleFormChange = function (event) {
         const target = event.target
@@ -29,9 +34,33 @@ function SingleIngredientBox({ ingredient }) {
     const saveIngredient = function () {
         // NECESSARIO CAPIRE COME GESTIRE UNA MODIFICA DELL'INGREDIENTE
         // NON POSSO SALVARE DIRETTAMENTE. NECESSARIO ANCHE FARE CONTROLLO DUPLICATI PRIMA DI SALVARE
-        setNewRecipe({...newRecipe, recipeIngredients: [...newRecipe.recipeIngredients, formData]})
+        // save new element
+        if(!newRecipe.recipeIngredients.includes(formData)){
+            setNewRecipe({...newRecipe, recipeIngredients: [...newRecipe.recipeIngredients, formData]})
+        }
+        
+        if(newRecipe.recipeIngredients.find(i => 
+            // id already in ingredientsArray
+            i.id === id
+        )){
+            console.log(id)
+            setNewRecipe({...newRecipe, recipeIngredients: [...newRecipe.recipeIngredients.filter(i => 
+                i.id !== id 
+            ), formData]
+        })
+        }
         setDisable(!disable)
     }
+
+    const toggleMode = function(){
+        setDisable(!disable)
+        setEditMode(!editMode)
+    }
+
+    const deleteIngredient = function(){
+        const tempIngArray = newRecipe.recipeIngredients.filter(i => i.id !== id)
+        setNewRecipe({...newRecipe, recipeIngredients: tempIngArray})
+    }   
 
     return (
         <Container>
@@ -73,10 +102,18 @@ function SingleIngredientBox({ ingredient }) {
                             disabled={disable}
                         />
                     </Form.Group>
-                    <div className="col-sm-12 col-md-1">
-                        <Button variant="primary" onClick={() => saveIngredient()}>
+                    <div className="col-sm-12 col-md-1 d-flex flex-column">
+                        {!disable && <Button variant="primary" onClick={() => saveIngredient()}>
                             Salva
-                        </Button>
+                        </Button>}
+                        {disable && <Button variant="primary" onClick={() => toggleMode()}>
+                            Modifica
+                        </Button>}
+                        {
+                            disable && <Button variant="danger" onClick={() => deleteIngredient()}>
+                                Elimina
+                            </Button>
+                        }
                     </div>
                 </Col>
             </Row>
