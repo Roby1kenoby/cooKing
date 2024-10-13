@@ -6,11 +6,11 @@ import TagBoxEdit from './TagBoxEdit';
 
 function AddTag() {
     const [selectedTags, setSelectedTags] = useState([])
-    const {newRecipe} = useContext(NewRecipeContext)
+    // const {newRecipe} = useContext(NewRecipeContext)
 
-    useEffect(()=>{
-        console.log(newRecipe)
-    },[newRecipe])
+    // useEffect(()=>{
+    //     console.log(newRecipe)
+    // },[newRecipe])
 
     return ( 
         <>

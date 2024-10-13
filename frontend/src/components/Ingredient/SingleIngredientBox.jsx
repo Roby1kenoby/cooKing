@@ -59,7 +59,6 @@ function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngre
     }   
 
     return (
-        <Container>
             <Row  className="d-flex align-items-center">
                 <Col sm={12} md={3}>
                     {ingredient.name}
@@ -113,8 +112,6 @@ function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngre
                     </div>
                 </Col>
             </Row>
-
-        </Container>
     );
 }
 

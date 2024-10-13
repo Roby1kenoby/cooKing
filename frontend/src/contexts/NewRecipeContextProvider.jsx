@@ -84,9 +84,11 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     const editPhase = function (phase) {
+        console.log('pahse in context')
+        console.log(phase)
         setNewRecipe(prevRecipe => ({
             ...prevRecipe,
-            recipeIngredients: prevRecipe.phases.map(p =>
+            phases: prevRecipe.phases.map(p =>
                 p.tempId === phase.tempId ?
                     phase :
                     p

@@ -3,6 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import AddIngredient from "../../components/Ingredient/AddIngredient";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 import AddTag from "../../components/Tag/AddTag";
+import AddPhase from "../../components/Phase/AddPhase";
 
 function NewRecipe() {
     const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
@@ -100,8 +101,13 @@ function NewRecipe() {
                     <AddIngredient />
                 </div>
             </Form.Group>
-            {/* inserire box per i tag (ricerca + selezione), ingredienti e fasi */}
-            <div className="loginButtonGroup">
+            <Form.Group>
+                <Form.Label>Fasi</Form.Label>
+                <div>
+                    <AddPhase />
+                </div>
+            </Form.Group>
+            <div>
                 <Button variant="primary" type='submit'>
                     Salva Ricetta
                 </Button>
