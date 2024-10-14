@@ -1,4 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { LoginContext } from "./LoginContextProvider";
+import { saveRecipe } from "../apis/recipeCRUDS";
 export const NewRecipeContext = createContext()
 
 export function NewRecipeContextProvider({ children }) {
@@ -18,6 +20,29 @@ export function NewRecipeContextProvider({ children }) {
 
     const [newRecipe, setNewRecipe] = useState(newRecipeData)
     const [phaseImages, setPhaseImages] = useState({})
+    const {token, loggedUser} = useContext(LoginContext)
+
+    const saveRecipeHeader = function(header){
+        setNewRecipe(prevRecipe => {
+            return {...prevRecipe,
+                userId: loggedUser._id,
+                title: header.title,
+                description: header.description,
+                portions: header.portions,
+                preparationTime: header.preparationTime,
+                recipeVideoUrl: header.recipeVideoUrl,
+                privateRecipe: header.privateRecipe === "on" ? true : false
+            }
+        })
+        // Qui la newRecipe protrebbe non essere ancora aggiornata
+        postRecipe()
+    }
+
+    const postRecipe = async function(){
+        const savedRecipe = await saveRecipe(token, newRecipe)
+        console.log('saved recipe')
+        console.log(savedRecipe)
+    }
 
     const addIngredient = function (ingredient) {
         setNewRecipe(prevRecipe => (
@@ -158,7 +183,7 @@ export function NewRecipeContextProvider({ children }) {
 
     // props for the childrens
     const value = {
-        newRecipe, setNewRecipe,
+        newRecipe, setNewRecipe, saveRecipeHeader,
         addIngredient, editIngredient, deleteIngredient, addPhaseIngredient, deletePhaseIngredient,
         addTag, editTag, deleteTag,
         addPhase, editPhase, deletePhase, handlePhaseImageChange

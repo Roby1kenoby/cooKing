@@ -16,5 +16,29 @@ export const getRecipeData = async function(token, recipeId){
     } catch (error) {
         return error
     }
-    
+}
+
+export const saveRecipe = async function(token, recipeData){
+    console.log('sono in saveRecipe Crud')
+    console.log('dati ricetta')
+    console.log(recipeData)
+    try {
+        console.log("token", token)
+        console.log(recipeData)
+        const savedRecipe = await fetch(`${URI}/saveRecipe`,{
+            headers:{
+                Authorization: `Bearer ${token}`,
+                "Content-type": 'application/json',
+            },
+            method: "POST",
+            body: JSON.stringify(recipeData)
+        })
+        if(!savedRecipe){
+            throw new Error('Impossibile salvare la ricetta')
+        }    
+
+        return savedRecipe
+    } catch (error) {
+        return error
+    }
 }

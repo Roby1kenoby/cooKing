@@ -25,7 +25,7 @@ const recipeSchema = new Schema(
             type: Number
         },
         preparationTime: {
-            type: Number
+            type: String
         },
         recipeImageUrl: {
             type: String
