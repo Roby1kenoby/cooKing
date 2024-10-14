@@ -20,6 +20,7 @@ function SingleIngredientBox({ ingredient, phaseId}) {
     }
 
     const saveIngredient = function () {
+        // debugger
         phaseId ? addPhaseIngredient(formData) : editIngredient(formData)
         if(editMode){
             setEditMode(!editMode)

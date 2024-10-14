@@ -36,7 +36,7 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
             setEditMode(!editMode)
         }
         else{
-            addPhase(formData)
+            editPhase(formData)
             setPhaseSaved(true)
         }
         setDisable(!disable)

@@ -104,13 +104,14 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     const addPhaseIngredient = function(ingredient){
+        // debugger
         // find the saved phase in newRecipe
-        const phase = newRecipe.phases.find(p => p.tempId = ingredient.tempPhaseId)
+        const phase = newRecipe.phases.find(p => p.tempId === ingredient.tempPhaseId)
         // find if ingredient is already present in the phase
         const foundIngredient = phase.phaseIngredients.find(i => i.tempId === ingredient.tempId)
         // creating edited phase, if the ingredient already exists i update it, otherwise i add it
         const editedPhase = foundIngredient ? 
-            {...phase, phaseIngredients: phase.phaseIngredients.map(i => i.tempId = ingredient.tempId ?
+            {...phase, phaseIngredients: phase.phaseIngredients.map(i => i.tempId === ingredient.tempId ?
                                                                         ingredient :
                                                                         i
             )} : 
@@ -128,7 +129,7 @@ export function NewRecipeContextProvider({ children }) {
 
     const deletePhaseIngredient = function(ingredient){
         // find the saved phase in newRecipe
-        const phase = newRecipe.phases.find(p => p.tempId = ingredient.tempPhaseId)
+        const phase = newRecipe.phases.find(p => p.tempId === ingredient.tempPhaseId)
         console.log(phase)
         const editedPhase = {...phase, phaseIngredients: [phase.phaseIngredients.find(i => i.tempId !== ingredient.tempId)]}
         console.log(editedPhase)
