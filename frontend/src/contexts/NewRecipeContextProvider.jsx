@@ -48,12 +48,9 @@ export function NewRecipeContextProvider({ children }) {
         ))
     }
 
-    const addTag = function (tag) {
-        setNewRecipe(prevRecipe => (
-            prevRecipe.recipeIngredients.some(t => t._id === tag._id) ?
-                prevRecipe :
-                { ...prevRecipe, tagsIds: [...prevRecipe.tagsIds, tag] }
-        ))
+    const addTags = function (tags) {
+        console.log('sono in add tags')
+        setNewRecipe(prevRecipe => ({...prevRecipe, tagsIds:tags}))
     }
 
     const editTag = function (tag) {
@@ -159,7 +156,7 @@ export function NewRecipeContextProvider({ children }) {
     const value = {
         newRecipe, setNewRecipe,
         addIngredient, editIngredient, deleteIngredient, addPhaseIngredient, deletePhaseIngredient,
-        addTag, editTag, deleteTag,
+        addTags, editTag, deleteTag,
         addPhase, editPhase, deletePhase, handlePhaseImageChange
     }
 

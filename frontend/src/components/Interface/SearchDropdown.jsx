@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Dropdown, DropdownButton, FormControl, Spinner } from 'react-bootstrap';
+import { FormControl, ListGroup, Spinner } from 'react-bootstrap';
 import _ from 'lodash'; 
 import { getAllIngredients } from '../../apis/ingredientCRUDS';
 import { getAllTags } from '../../apis/tagCRUDS'
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import {v4 as uuidv4} from 'uuid';
 
-function SearchDropdown({optionsArray, setOptionsArray, type}) {
+function SearchDropdown({optionsArray, setOptionsArray, type, disabled, unique=false}) {
     const [searchTerm, setSearchTerm] = useState('');      // Search string
     const [options, setOptions] = useState([]);            // array for options returned by API call
     const [loading, setLoading] = useState(false);         
@@ -56,7 +56,8 @@ function SearchDropdown({optionsArray, setOptionsArray, type}) {
             }
         }
         else{
-            setOptionsArray([... optionsArray, {...option, tempId: uuidv4()}])
+            // if unique is true, i want only one element in the selected options array
+            unique ? setOptionsArray([{option, tempId: uuidv4()}]) :setOptionsArray([... optionsArray, {...option, tempId: uuidv4()}])
         }
 
 
@@ -66,42 +67,38 @@ function SearchDropdown({optionsArray, setOptionsArray, type}) {
     };
 
     return (
-        <DropdownButton
-            id="dropdown-basic-button"
-            title={`Cerca ${type==='ingredients' ? 'ingredienti' : 'tag'}`}
-        >
-            <Dropdown.Item as="div">
-                <FormControl
-                    autoFocus
-                    placeholder="Comincia a scrivere!"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-            </Dropdown.Item>
-
-            {loading ? (
-                <Dropdown.Item as="div" className="text-center">
+        <div style={{ position: 'relative', width: '100%' }}>
+            <FormControl
+                autoFocus
+                placeholder={`Cerca ${type === 'ingredients' ? 'ingredienti' : 'tag'}`}
+                value={searchTerm}
+                onChange={handleSearchChange}
+                disabled={disabled}
+            />
+            {loading && (
+                <div className="text-center mt-2">
                     <Spinner animation="border" size="sm" />
-                </Dropdown.Item>
-            ) : (
-                <>
-                    {options?.length === 0 && searchTerm.length >= 2 ? (
-                        <Dropdown.Item as="div" disabled>
-                            No options found
-                        </Dropdown.Item>
-                    ) : (
-                        options?.map(opt => (
-                            <Dropdown.Item
-                                key={opt._id}
-                                onClick={() => handleSelect(opt)}
-                            >
-                                {opt.name}
-                            </Dropdown.Item>
-                        ))
-                    )}
-                </>
+                </div>
             )}
-        </DropdownButton>
+            {options?.length > 0 && (
+                <ListGroup style={{ position: 'absolute', zIndex: 1000, width: '100%', maxHeight: '200px', overflowY: 'auto' }}>
+                    {options.map((opt) => (
+                        <ListGroup.Item
+                            key={opt._id}
+                            action
+                            onClick={() => handleSelect(opt)}
+                        >
+                            {opt.name}
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            )}
+            {searchTerm.length >= 2 && options?.length === 0 && !loading && (
+                <div className="text-center mt-2">
+                    <small>Nessuna opzione trovata</small>
+                </div>
+            )}
+        </div>
     );
 }
 

@@ -1,95 +1,49 @@
-import { useContext, useEffect, useState } from "react";
-import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import units from '../../data/measurementUnits.json'
+import { Button, Form, Row } from "react-bootstrap";
 
-function SingleIngredientBox({ ingredient, phaseId}) {
-    const { addIngredient, editIngredient, deleteIngredient, addPhaseIngredient, deletePhaseIngredient } = useContext(NewRecipeContext)
-
-    const um = ingredient.tempMeasurementCategory === "Solid"
-        ? units.unitSystem['metric']['solid']
-        : units.unitSystem['metric']['liquid']
-
-    const [formData, setFormData] = useState(ingredient)
-    const [disable, setDisable] = useState(false)
-    const [editMode, setEditMode] = useState(false)
-
-    const handleFormChange = function (event) {
-        const target = event.target
-        setFormData({ ...formData, [target.name]: target.value })
+function SingleIngredientBox({ ingredient, setEditIngredient }) {
+    // questo componente visualizza un form per singolo elemento che gli viene passato 
+    // dal componente padre. Il form sarà abilitato se non è ancora stato salvato niente 
+    // nell'array degli ingredienti salvati
+    
+    const editIngredient = function(){
+        setEditIngredient(ingredient)
     }
-
-    const saveIngredient = function () {
-        phaseId ? addPhaseIngredient(formData) : editIngredient(formData)
-        if(editMode){
-            setEditMode(!editMode)
-        }
-        setDisable(!disable)
-    }
-
-    const toggleMode = function(){
-        setDisable(!disable)
-        setEditMode(!editMode)
-    }
-
-    const removeIngredient = function(){
-        phaseId ? deletePhaseIngredient(formData) : deleteIngredient(formData)
-    }   
 
     return (
-            <Row  className="d-flex align-items-center">
-                <Col sm={12} md={3}>
-                    {ingredient.tempName}
-                </Col>
-                <Col sm={12} md={9} className="d-flex align-items-center">
-                    <Form.Group sm={12} md={2}>
-                        <Form.Label>Quantità</Form.Label>
-                        <Form.Control type="numeric"
-                            name="quantity"
-                            value={formData.quantity}
-                            onChange={handleFormChange}
-                            required
-                            disabled={disable}
-                        />
-                    </Form.Group>
-                    <Form.Group sm={12} md={2}>
-                        <Form.Label>Um</Form.Label>
-                        <Form.Select
-                            name="measurementUnit"
-                            value={formData.measurementUnit}
-                            onChange={handleFormChange}
-                            required
-                            disabled={disable}
-                        >
-                            {um.map(opt =>
-                                <option key={opt.name} value={opt.name}>{opt.name}</option>
-                            )}
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group sm={12} md={7}>
-                        <Form.Label>Informazioni aggiuntive</Form.Label>
-                        <Form.Control type="text"
-                            name="additionalInfos"
-                            value={formData.additionalInfos}
-                            onChange={handleFormChange}
-                            disabled={disable}
-                        />
-                    </Form.Group>
-                    <div className="col-sm-12 col-md-1 d-flex flex-column">
-                        {!disable && <Button variant="primary" onClick={saveIngredient}>
-                            Salva
-                        </Button>}
-                        {disable && <Button variant="primary" onClick={toggleMode}>
-                            Modifica
-                        </Button>}
-                        {
-                            disable && <Button variant="danger" onClick={removeIngredient}>
-                                Elimina
-                            </Button>
-                        }
-                    </div>
-                </Col>
-            </Row>
+        <Row>
+            <h3>{ingredient.name}</h3>
+            <Form.Group>
+                <Form.Label>Qta</Form.Label>
+                <Form.Control type="numeric"
+                    name="quantity"
+                    value={ingredient.quantity}
+                    readOnly
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Um</Form.Label>
+                <Form.Control 
+                    type="text"
+                    name="measurementUnit"
+                    value={ingredient.measurementUnit}
+                    readOnly
+                >
+                </Form.Control>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Altre informazioni</Form.Label>
+                <Form.Control type="text"
+                    name="additionalInfos"
+                    value={ingredient.additionalInfos}
+                    readOnly
+                />
+            </Form.Group>
+            <div>
+                {<Button onClick={editIngredient}>
+                    Modifica
+                </Button>}
+            </div>
+        </Row>
     );
 }
 

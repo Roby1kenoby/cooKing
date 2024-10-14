@@ -4,11 +4,15 @@ import { Badge } from "react-bootstrap";
 
 
 
-function TagBoxEdit({tag}) {
-    const { deleteTag } = useContext(NewRecipeContext)
-
+function TagBoxEdit({tag, setSelectedTags, disabled}) {
+    
     const removeTag = function(){
-        deleteTag(tag)
+        if(!disabled){
+            setSelectedTags(prevSelTags => {
+                const newSelTags = prevSelTags.filter(t => t.tempId !== tag.tempId)
+                return newSelTags
+            })
+        }
     }
 
     return ( 
