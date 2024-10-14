@@ -3,32 +3,16 @@ import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import units from '../../data/measurementUnits.json'
 
-function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngredients }) {
-    const { addIngredient, editIngredient, deleteIngredient } = useContext(NewRecipeContext)
+function SingleIngredientBox({ ingredient, phaseId}) {
+    const { addIngredient, editIngredient, deleteIngredient, addPhaseIngredient, deletePhaseIngredient } = useContext(NewRecipeContext)
 
-    const um = ingredient.measurementCategory === "Solid"
+    const um = ingredient.tempMeasurementCategory === "Solid"
         ? units.unitSystem['metric']['solid']
         : units.unitSystem['metric']['liquid']
 
-    
-    
-    const initialFormData = {
-        tempId: ingredient.tempId,
-        ingredientId: ingredient._id,
-        measurementUnit: '',
-        phaseId: null,
-        quantity: 0,
-        additionalInfos: ''
-    }
-
-    const [formData, setFormData] = useState(initialFormData)
+    const [formData, setFormData] = useState(ingredient)
     const [disable, setDisable] = useState(false)
     const [editMode, setEditMode] = useState(false)
-
-    useEffect(() => {
-        console.log('edit mode è ora:', editMode);
-    }, [editMode]);
-
 
     const handleFormChange = function (event) {
         const target = event.target
@@ -36,14 +20,9 @@ function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngre
     }
 
     const saveIngredient = function () {
+        phaseId ? addPhaseIngredient(formData) : editIngredient(formData)
         if(editMode){
-            console.log('sono in edit mode, cambio ingrediente ' + formData)
-            editIngredient(formData) 
             setEditMode(!editMode)
-        }
-        else{
-            console.log('sono in add ingredient, aggiungo ingrediente' + formData)
-            addIngredient(formData)
         }
         setDisable(!disable)
     }
@@ -54,14 +33,13 @@ function SingleIngredientBox({ ingredient, selectedIngredients, setSelectedIngre
     }
 
     const removeIngredient = function(){
-        deleteIngredient(formData)
-        setSelectedIngredients(prevSelIng => ([...prevSelIng.filter(i => i.tempId != ingredient.tempId)]))
+        phaseId ? deletePhaseIngredient(formData) : deleteIngredient(formData)
     }   
 
     return (
             <Row  className="d-flex align-items-center">
                 <Col sm={12} md={3}>
-                    {ingredient.name}
+                    {ingredient.tempName}
                 </Col>
                 <Col sm={12} md={9} className="d-flex align-items-center">
                     <Form.Group sm={12} md={2}>

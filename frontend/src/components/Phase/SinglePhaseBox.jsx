@@ -1,39 +1,43 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
+import AddIngredient from "../Ingredient/AddIngredient";
 
-function SinglePhaseBox({ phaseId, addedPhases, setAddedPhases }) {
+function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
     
-    const initialFormData = {
-        "tempId": phaseId,
-        "phaseIngredients": [],
-        "phaseNumber": addedPhases.findIndex(p => p === phaseId) + 1,
-        "description": "",
-        "phaseImageUrl": ""
-    }
+    // const initialFormData = {
+    //     "tempId": phaseId,
+    //     "phaseIngredients": [],
+    //     "phaseNumber": addedPhases.findIndex(p => p === phaseId) + 1,
+    //     "description": "",
+    //     "phaseImageUrl": ""
+    // }
 
-    const [formData, setFormData] = useState(initialFormData)
+    const [formData, setFormData] = useState(phase)
     const [disable, setDisable] = useState(false)
     const [editMode, setEditMode] = useState(false)
+    const [phaseSaved, setPhaseSaved] = useState(false)
     const [phaseImage, setPhaseImage] = useState()
-    const { newRecipe, addPhase, editPhase, deletePhase } = useContext(NewRecipeContext)
+    const { newRecipe, addPhase, editPhase, deletePhase, handlePhaseImageChange } = useContext(NewRecipeContext)
 
     const handleFormChange = function (event) {
         const target = event.target
         setFormData({ ...formData, [target.name]: target.value })
     }
 
-    const handlePhaseImageChange = (event) => {
-        setPhaseImage(event.target.files[0])
+    const updatePhaseImage = (event) => {
+        handlePhaseImageChange(phase.tempId, event.target.files[0])
     }
 
     const savePhase = function () {
-        if (editMode) {
+        // debugger
+        if(editMode){
             editPhase(formData)
             setEditMode(!editMode)
         }
-        else {
+        else{
             addPhase(formData)
+            setPhaseSaved(true)
         }
         setDisable(!disable)
     }
@@ -45,26 +49,19 @@ function SinglePhaseBox({ phaseId, addedPhases, setAddedPhases }) {
 
     const removePhase = function () {
         deletePhase(formData)
-        console.log('ho cancellato la fase da newRecipe')
-        setAddedPhases(prevAddedPhases => {
-            const updatedPhases = [...prevAddedPhases.filter(p => p !== phaseId)]
-            console.log('ho cancellato id da addedPhases')
-            return updatedPhases
-        })
-        console.log(formData)
+        console.log(phase.tempId)
+        setAddedPhases(prevAddPhase => (prevAddPhase.filter(p => p !== phase.tempId)))
     }
-
+    
+    // need this function to update phase number if one is removed from the array
     const updatePhaseNumber = function () {
-        console.log('entro in update pn post aggiornamento addedPhases')
-        const newPn = addedPhases.findIndex(p => p === phaseId) + 1
-        console.log('questo è il nuovo pn', newPn)
-        console.log('per ', phaseId)
+        const newPn = newRecipe.phases.findIndex(p => p.tempId === phase.tempId) + 1
         setFormData({...formData, phaseNumber: newPn })
         editPhase({ ...formData, phaseNumber: newPn })
     }
 
     useEffect(() => {
-        if (addedPhases.length > 0) {
+        if (newRecipe.phases.length > 0) {
             updatePhaseNumber();
         }
     }, [addedPhases])
@@ -96,9 +93,13 @@ function SinglePhaseBox({ phaseId, addedPhases, setAddedPhases }) {
                     <Form.Label>Immagine</Form.Label>
                     <Form.Control type="file"
                         name="phaseImage"
-                        onChange={handlePhaseImageChange}
+                        onChange={updatePhaseImage}
                     />
                 </Form.Group>
+                {phaseSaved && <Form.Group>
+                    <Form.Label>Ingredienti della fase</Form.Label>
+                    <AddIngredient phaseId={phase.tempId}/>
+                </Form.Group>}
             </Col>
             <Col sm={12} md={2}>
                 {!disable && <Button variant="primary" onClick={savePhase}>

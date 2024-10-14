@@ -34,7 +34,7 @@ function NewRecipe() {
                 <Form.Control type="text"
                     name="title"
                     placeholder="Titolo della ricetta"
-                    value={formData.title}
+                    value={formData?.title}
                     onChange={handleFormChange}
                     required
                 />

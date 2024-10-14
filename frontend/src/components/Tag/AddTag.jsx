@@ -6,21 +6,26 @@ import TagBoxEdit from './TagBoxEdit';
 
 function AddTag() {
     const [selectedTags, setSelectedTags] = useState([])
-    // const {newRecipe} = useContext(NewRecipeContext)
+    const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
 
     // useEffect(()=>{
     //     console.log(newRecipe)
     // },[newRecipe])
 
+    // when a new tag is selected\removed, i directly update the recipe in the context
+    const updateRecipe = function(){
+        setNewRecipe(prevRecipe => ({...prevRecipe, tagsIds: selectedTags}))
+    }
+
+    useEffect(updateRecipe, [selectedTags])
+
     return ( 
         <>
             <SearchDropdown optionsArray={selectedTags} setOptionsArray={setSelectedTags} type='tags'></SearchDropdown>
-            {selectedTags.map((tag) => 
+            {newRecipe.tagsIds.map((tag) => 
                 <TagBoxEdit
                     key={tag._id}
                     tag={tag}
-                    selectedTags={selectedTags}
-                    setSelectedTags={setSelectedTags}
                 />
             )}
         </>
