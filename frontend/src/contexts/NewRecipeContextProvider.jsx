@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { LoginContext } from "./LoginContextProvider";
 import { saveRecipe } from "../apis/recipeCRUDS";
+import * as utility from '../utilityes/ImageCloudStorage.js'
 export const NewRecipeContext = createContext()
 
 export function NewRecipeContextProvider({ children }) {
@@ -20,11 +21,12 @@ export function NewRecipeContextProvider({ children }) {
 
     const [newRecipe, setNewRecipe] = useState(newRecipeData)
     const [phaseImages, setPhaseImages] = useState({})
-    const {token, loggedUser} = useContext(LoginContext)
+    const { token, loggedUser } = useContext(LoginContext)
 
-    const saveRecipeHeader = function(header){
-        setNewRecipe(prevRecipe => {
-            return {...prevRecipe,
+    const saveRecipeHeader = function (header) {
+        setNewRecipe(async (prevRecipe) => {
+            const updatedRecipe = {
+                ...prevRecipe,
                 userId: loggedUser._id,
                 title: header.title,
                 description: header.description,
@@ -33,15 +35,50 @@ export function NewRecipeContextProvider({ children }) {
                 recipeVideoUrl: header.recipeVideoUrl,
                 privateRecipe: header.privateRecipe === "on" ? true : false
             }
+
+            const urlObj = await saveCloudinaryImages()
+            const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
+            postRecipe(updatedRecipe2)
+            return updatedRecipe
+
         })
-        // Qui la newRecipe protrebbe non essere ancora aggiornata
-        postRecipe()
+        
     }
 
-    const postRecipe = async function(){
-        const savedRecipe = await saveRecipe(token, newRecipe)
-        console.log('saved recipe')
+    // const testUpdateNewRecipe = async function(){
+    //     const urlObj = await saveCloudinaryImages()
+    //     const updatedRecipe = updateRecipeImageUrls(urlObj, recipeData)
+    //     console.log(updatedRecipe)
+    // }
+
+    const postRecipe = async function (updatedRecipe) {
+
+        const savedRecipe = await saveRecipe(token, updatedRecipe)
         console.log(savedRecipe)
+        return savedRecipe
+    }
+
+    const saveCloudinaryImages = async function(){
+        const urlObj = await utility.saveImagesToCloud(token, phaseImages)
+        console.log(urlObj)
+        return(urlObj)
+    }
+
+    const updateRecipeImageUrls = function(urlObj, recipeData){
+        let updatedRecipe = {...recipeData}
+        
+        Object.entries(urlObj).forEach(([phaseId, url]) => {
+            phaseId === 'recipeImage' ?
+            updatedRecipe = {...updatedRecipe, recipeImageUrl: url} :
+            updatedRecipe = {...updatedRecipe,
+                phases: newRecipe.phases.map(p => 
+                    p.tempId === phaseId ?
+                    {...p, phaseImageUrl: url} :
+                    p
+                )
+            }
+        })
+        return updatedRecipe
     }
 
     const addIngredient = function (ingredient) {
@@ -62,8 +99,8 @@ export function NewRecipeContextProvider({ children }) {
                 i.tempId === ingredient.tempId ?
                     ingredient :
                     i
-                )
-            }
+            )
+        }
         ))
     }
 
@@ -88,8 +125,8 @@ export function NewRecipeContextProvider({ children }) {
                 t._id === tag._id ?
                     tag :
                     t
-                )
-            }
+            )
+        }
         ))
     }
 
@@ -117,8 +154,8 @@ export function NewRecipeContextProvider({ children }) {
                 p.tempId === phase.tempId ?
                     phase :
                     p
-                )
-            }
+            )
+        }
         ))
     }
 
@@ -128,43 +165,49 @@ export function NewRecipeContextProvider({ children }) {
         ))
     }
 
-    const addPhaseIngredient = function(ingredient){
+    const addPhaseIngredient = function (ingredient) {
         // debugger
         // find the saved phase in newRecipe
         const phase = newRecipe.phases.find(p => p.tempId === ingredient.tempPhaseId)
         // find if ingredient is already present in the phase
         const foundIngredient = phase.phaseIngredients.find(i => i.tempId === ingredient.tempId)
         // creating edited phase, if the ingredient already exists i update it, otherwise i add it
-        const editedPhase = foundIngredient ? 
-            {...phase, phaseIngredients: phase.phaseIngredients.map(i => i.tempId === ingredient.tempId ?
-                                                                        ingredient :
-                                                                        i
-            )} : 
-            {...phase, phaseIngredients: [...phase.phaseIngredients, ingredient]}
-        
+        const editedPhase = foundIngredient ?
+            {
+                ...phase, phaseIngredients: phase.phaseIngredients.map(i => i.tempId === ingredient.tempId ?
+                    ingredient :
+                    i
+                )
+            } :
+            { ...phase, phaseIngredients: [...phase.phaseIngredients, ingredient] }
+
         // setting the new phase inside newRecipe
         setNewRecipe(prevRecipe => {
-            const editedRecipe = {...prevRecipe, phases: [...prevRecipe.phases.map(p => 
-                                                            p.tempId === ingredient.tempPhaseId ?
-                                                            editedPhase :
-                                                            p)]}
+            const editedRecipe = {
+                ...prevRecipe, phases: [...prevRecipe.phases.map(p =>
+                    p.tempId === ingredient.tempPhaseId ?
+                        editedPhase :
+                        p)]
+            }
             return editedRecipe
         })
     }
 
-    const deletePhaseIngredient = function(ingredient){
+    const deletePhaseIngredient = function (ingredient) {
         // find the saved phase in newRecipe
         const phase = newRecipe.phases.find(p => p.tempId === ingredient.tempPhaseId)
         console.log(phase)
-        const editedPhase = {...phase, phaseIngredients: [phase.phaseIngredients.find(i => i.tempId !== ingredient.tempId)]}
+        const editedPhase = { ...phase, phaseIngredients: [phase.phaseIngredients.find(i => i.tempId !== ingredient.tempId)] }
         console.log(editedPhase)
         setNewRecipe(prevRecipe => {
-            const editedRecipe = {...prevRecipe, phases: [...prevRecipe.phases.map(p => 
-                                                            p.tempId === ingredient.tempPhaseId ?
-                                                            editedPhase :
-                                                            p
-                                                            )]}
-                                                            console.log(editedRecipe)
+            const editedRecipe = {
+                ...prevRecipe, phases: [...prevRecipe.phases.map(p =>
+                    p.tempId === ingredient.tempPhaseId ?
+                        editedPhase :
+                        p
+                )]
+            }
+            console.log(editedRecipe)
             return editedRecipe
         })
     }
@@ -172,7 +215,7 @@ export function NewRecipeContextProvider({ children }) {
     const handlePhaseImageChange = (tempId, file) => {
         setPhaseImages(prevImages => ({
             ...prevImages,
-            [tempId]: file  // Salva l'immagine associata alla fase in base al suo tempId
+            [tempId]: file  // Save the image associated to it's tempId
         }));
         console.log(phaseImages)
     };

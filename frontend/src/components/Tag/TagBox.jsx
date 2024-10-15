@@ -5,7 +5,7 @@ function TagBox({tags}) {
     return ( 
         <Container>
             {tags.map(tag => 
-                <div key={tag._id}>{tag.tagName}</div>
+                <div key={tag._id}>{tag.name}</div>
             )}
         </Container>
     );

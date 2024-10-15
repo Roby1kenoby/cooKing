@@ -17,24 +17,10 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 
 Prosismi step
-1) Inserimento Ricetta
-    a. Finire box inserimento ingredienti globali (con altro componente, per riusarlo negli ingredienti della singola fase)
-2) Modifica Ricetta
-
-Usare direttamente newRecipe per il rendering.
-Quando viene aggiunto un igrediente dal searchBox, inserirlo direttamente nella newRecipe, o nella 
-fase della newRecipe.
-I renderBox poi renderizzano un box per elemento inserito in newRecipe e fine.
-Per le fasi, quando click su pulsante, salvare direttamente la fase nel newRecipe con uuid temp,
-così anche per quelle renderizzo solo quello e basta.
-
-PROBLEMI: 
- 
-- devo fare loading per ogni cosa che ha una fetch??? (ricorda il ?.nomeParametro)
-- Per modifica dei dati, fare componenti specifici per edit e specifici per visualizzazione, e attivarli in base alle esigenze. 
+1) Modifica Ricetta
+2) Css
 
 
-
- Sticky side
+Sticky side
  https://dev.to/clairecodes/how-to-make-a-sticky-sidebar-with-two-lines-of-css-2ki7
  

@@ -17,7 +17,6 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
     const [disable, setDisable] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [phaseSaved, setPhaseSaved] = useState(false)
-    const [phaseImage, setPhaseImage] = useState()
     const { newRecipe, addPhase, editPhase, deletePhase, handlePhaseImageChange } = useContext(NewRecipeContext)
 
     const handleFormChange = function (event) {

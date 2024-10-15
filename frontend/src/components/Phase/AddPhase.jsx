@@ -12,7 +12,6 @@ function AddPhase() {
 
     const newPhase = function(){
         const tempId = uuidv4()
-        console.log('ho creato tempiid', tempId)
         setAddedPhases([...addedPhases, tempId])
     }
     
@@ -34,7 +33,7 @@ function AddPhase() {
 
     useEffect(updateRecipe, [addedPhases])
 
-    useEffect(() => {console.log(newRecipe); console.log(addedPhases)},[newRecipe])
+    // useEffect(() => {console.log(newRecipe); console.log(addedPhases)},[newRecipe])
 
     return ( 
         <>
@@ -43,7 +42,7 @@ function AddPhase() {
             </Button>
             <Row>
                 <Col>
-                    {newRecipe.phases.map((p,i) => <SinglePhaseBox 
+                    {newRecipe.phases?.map((p,i) => <SinglePhaseBox 
                                             key={p.tempId} 
                                             phase={p}
                                             addedPhases={addedPhases}

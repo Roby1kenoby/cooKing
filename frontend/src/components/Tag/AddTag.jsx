@@ -22,7 +22,7 @@ function AddTag() {
     return ( 
         <>
             <SearchDropdown optionsArray={selectedTags} setOptionsArray={setSelectedTags} type='tags'></SearchDropdown>
-            {newRecipe.tagsIds.map((tag) => 
+            {newRecipe.tagsIds?.map((tag) => 
                 <TagBoxEdit
                     key={tag._id}
                     tag={tag}

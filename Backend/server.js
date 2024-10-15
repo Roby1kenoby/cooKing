@@ -12,6 +12,8 @@ import tagRouter from './routes/tags.router.js'
 import phaseRouter from './routes/phases.rotuer.js'
 import recipeIngredientRouter from './routes/recipeIngredients.router.js'
 import recipeRouter from './routes/recipes.router.js'
+import utilityRouter from './routes/utility.rotuer.js'
+
 import morgan from 'morgan'
 
 const server = express()
@@ -35,6 +37,7 @@ server.use('/users', userRouter)
 server.use('/login', authRouter)
 server.use('/ingredients', ingredientRouter)
 server.use('/tags', tagRouter)
-server.use('/phases', phaseRouter) // todo
+server.use('/phases', phaseRouter)
 server.use('/recipeIngredients', recipeIngredientRouter)
 server.use('/recipes', recipeRouter)
+server.use('/utility', utilityRouter)

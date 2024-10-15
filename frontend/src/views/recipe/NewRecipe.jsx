@@ -6,7 +6,7 @@ import AddTag from "../../components/Tag/AddTag";
 import AddPhase from "../../components/Phase/AddPhase";
 
 function NewRecipe() {
-    const { newRecipe, setNewRecipe, saveRecipeHeader } = useContext(NewRecipeContext)
+    const { newRecipe, setNewRecipe, saveRecipeHeader, handlePhaseImageChange } = useContext(NewRecipeContext)
 
     const [formData, setFormData] = useState(newRecipe)
     const [image, setImage] = useState()
@@ -17,7 +17,7 @@ function NewRecipe() {
     }
 
     const handleImageChange = (event) => {
-        setImage(event.target.files[0])
+        handlePhaseImageChange("recipeImage", event.target.files[0])
     }
 
     const saveRecipe = async function (event) {
