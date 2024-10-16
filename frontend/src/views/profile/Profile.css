@@ -1,0 +1,50 @@
+.avatarContainer{
+    
+    overflow: hidden;
+}
+
+.avatarContainer{
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 150px; /* Imposta una larghezza fissa per l'avatar */
+    height: 150px; /* Imposta un'altezza fissa per l'avatar */
+    border-radius: 50%; /* Rende il contenitore circolare */
+    overflow: hidden; /* Nasconde eventuali parti dell'immagine fuori dal cerchio */
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100%; /* L'immagine si adatta al contenitore */
+    height: 100%; /* Mantiene l'altezza al 100% */
+    object-fit: cover; /* Assicura che l'immagine riempia il contenitore senza distorsioni */
+    border-radius: 50%; /* Assicura che l'immagine sia circolare */
+}
+
+.userData{
+    margin-top: 1em !important;
+}
+
+.tagSearch{
+    width: 100%;
+}
+
+.tagSearch *{
+    width: 100%;
+}
+
+.ingredientSearch{
+    width: 100%;
+}
+
+.ingredientSearch *{
+    width: 100%;
+}
+
+.recipeContainer h1{
+    text-align: center;
+}
+
+.recipeContainer .recipeSearch{
+    width: 100%;
+}

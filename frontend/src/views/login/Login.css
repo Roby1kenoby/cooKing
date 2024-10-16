@@ -1,0 +1,16 @@
+.logoContainer img{
+    width: 40%;
+    margin: auto;
+    display: block   
+}
+
+.logoContainer p{
+    text-align: center;
+    font-size: large;
+    margin: 0;
+
+}
+
+.switchForm{
+    padding: 1em;
+}

@@ -1,0 +1,18 @@
+.loginOauth button {
+    width:100%;
+    padding: 0.3em;
+}
+.loginOauth svg{
+    align-self: center;
+    margin: 0.3em 1em 0.3em 1em;
+}
+
+.insideOauthButton{
+    display: flex;
+    align-items: center;
+}
+
+.loginOauth p {
+    margin: 0.3em 1em 0.3em 0em;
+
+}

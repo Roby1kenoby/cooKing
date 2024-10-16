@@ -3,7 +3,7 @@ import { LoginContext } from "../../contexts/LoginContextProvider";
 import { getUserPublicRecipes, getUserRecipes } from "../../apis/userCRUDS";
 import RecipePreview from './RecipePreview.jsx'
 
-function RecipePreviewContainer({userId}) {
+function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
     // if context user = userId, get all recipes, otherwise only the public ones
     const {token, loggedUser} = useContext(LoginContext)
     const [recipes, setRecipes] = useState([])

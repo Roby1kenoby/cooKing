@@ -55,7 +55,10 @@ function Recipe() {
     useEffect(() => {fetchRecipeData()},[])
 
     const headerStyle = {
-        backgroundImage: `url(${recipeData?.recipeImageUrl})`
+        backgroundImage: `url(${recipeData?.recipeImageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height:'300px'
     }
 
     return ( 

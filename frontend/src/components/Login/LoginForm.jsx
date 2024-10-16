@@ -43,39 +43,43 @@ function LoginForm() {
     }
 
     return (
-        <Container>
-            <h1>Effettua il login</h1>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type='email'
-                        name='email'
-                        placeholder='Email'
-                        value={formData.email}
-                        onChange={handleFormChange}
-                        required />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        value={formData.password}
-                        onChange={handleFormChange}
-                        required />
-                </Form.Group>
-                <Button variant='primary' onClick={login}>
-                    Login
-                </Button>
-            </Form>
+        <>
+            <Container>
+                <hr></hr>
+                <h1 className='loginTitle'>Effettua il login</h1>
+                <Form className='form-border'>
+                    <Form.Group>
+                        {/* <Form.Label>Email</Form.Label> */}
+                        <Form.Control
+                            type='email'
+                            name='email'
+                            placeholder='Email'
+                            value={formData.email}
+                            onChange={handleFormChange}
+                            required 
+                            className='text-form-field'/>
+                    </Form.Group>
+                    <Form.Group>
+                        {/* <Form.Label>Password</Form.Label> */}
+                        <Form.Control
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={formData.password}
+                            onChange={handleFormChange}
+                            required 
+                            className='text-form-field'/>
+                    </Form.Group>
+                    <Button className='btn-primary loginButton' onClick={login}>
+                        Login
+                    </Button>
+                </Form>
+            </Container>
             {show &&
                 <Alert variant='danger' onClose={() => setShow(false)} dismissible>
                     Informazioni errate, inserire email e password corrette!
                 </Alert>}
-        </Container>
-
+        </>
     );
 }
 

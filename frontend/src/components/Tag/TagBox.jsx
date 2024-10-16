@@ -1,12 +1,27 @@
-import { Container } from "react-bootstrap";
+import { Badge, Container } from "react-bootstrap";
+import './TagBox.css'
+function TagBox({ tags, setTags, canEdit = false }) {
 
-function TagBox({tags}) {
-    console.log(tags)
-    return ( 
+    const removeTag = function (tagId) {
+        console.log(tags)
+        console.log(tagId)
+        canEdit && setTags([...tags.filter(t => t._id !== tagId)])
+    }
+
+
+    return (
         <Container>
-            {tags.map(tag => 
-                <div key={tag._id}>{tag.name}</div>
-            )}
+            <div className="searchContainer">
+                {tags?.map(tag =>
+                    <Badge pill bg="success"
+                        key={tag._id}
+                        onClick={() => removeTag(tag._id)}
+                        className="tag"
+                    >
+                        {tag.name}
+                    </Badge>
+                )}
+            </div>
         </Container>
     );
 }
