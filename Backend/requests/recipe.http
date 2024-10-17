@@ -22,12 +22,11 @@ Content-Type: application/json
 
 ### GET ALL RECIPES
 POST {{baseUrl}}/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxNzg3NzgsImV4cCI6MTcyNzE4MjM3OH0.79a0ClMceNyGAKpk2Deo7ZZuK7U4Y3ELQclQ02AA9wE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjkxODU5OTQsImV4cCI6MTcyOTE4OTU5NH0.M149Ghx7qDrxOVGAgga0VejhZPQoglwCVpBl_udGttM
 Content-Type: application/json
 
 {
-    "searchString": "2",
-    "tagsIds":[]
+    "ingredients":["66eb43ae558e722c226da767"]
 }
 
 

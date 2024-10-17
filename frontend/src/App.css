@@ -52,11 +52,13 @@
 .searchContainer .ingredient {
   background-color: var(--accentColor) !important;
   color: white !important;
+  cursor: pointer;
 }
 
 .searchContainer .tag {
   background-color: var(--textColor) !important;
   color: white !important;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {

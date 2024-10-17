@@ -18,7 +18,7 @@ export function NewRecipeContextProvider({ children }) {
         phases: [],
         recipeIngredients: []
     }
-
+    
     const [newRecipe, setNewRecipe] = useState(newRecipeData)
     const [phaseImages, setPhaseImages] = useState({})
     const { token, loggedUser } = useContext(LoginContext)
@@ -33,7 +33,10 @@ export function NewRecipeContextProvider({ children }) {
                 portions: header.portions,
                 preparationTime: header.preparationTime,
                 recipeVideoUrl: header.recipeVideoUrl,
-                privateRecipe: header.privateRecipe === "on" ? true : false
+                privateRecipe: header.privateRecipe === "on" ? true : false,
+                phases:[],
+                recipeIngredients: [],
+                tagsIds: []
             }
 
             const urlObj = await saveCloudinaryImages()

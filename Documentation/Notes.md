@@ -17,8 +17,9 @@ Se ricetta privata, chiedere all'utente di renderla pubblica, prima di generare 
 
 
 Prosismi step
-1) Modifica Ricetta
-2) Css
+1) Css
+2) modifica
+3) ricerca
 
 
 Decidere i colori principali (bg, text, accent, secondario)
