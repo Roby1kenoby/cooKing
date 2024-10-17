@@ -34,9 +34,9 @@ export function NewRecipeContextProvider({ children }) {
                 preparationTime: header.preparationTime,
                 recipeVideoUrl: header.recipeVideoUrl,
                 privateRecipe: header.privateRecipe === "on" ? true : false,
-                phases:[],
-                recipeIngredients: [],
-                tagsIds: []
+                phases: prevRecipe.phases ? prevRecipe.phases : [],
+                recipeIngredients: prevRecipe.recipeIngredients ? prevRecipe.recipeIngredients : [],
+                tagsIds: prevRecipe.tagsIds ? prevRecipe.tagsIds : []
             }
 
             const urlObj = await saveCloudinaryImages()

@@ -3,11 +3,17 @@
   --bgColor: #e9c46a;
   --accentColor: #2a9d8f;
   --textColor: #264653;
+  --ligthBgColor: #e0e9da;
 }
 
 
 .App {
   text-align: center;
+}
+
+.bg-light {
+  background-color: var(--ligthBgColor) !important;
+  color: white !important;
 }
 
 .btn-primary{

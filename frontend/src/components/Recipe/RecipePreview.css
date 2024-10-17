@@ -1,0 +1,125 @@
+/* .cardRecipe{
+    margin: 1em 0em;
+} */
+
+.cardRecipe {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1em 0em;
+}
+
+/*hovering effect*/
+.cardRecipe:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    z-index: 10; 
+}
+
+.cardRecipe:hover .bg-accent {
+    background-color: #ffcc00;
+}
+
+.cardRecipe a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cardRecipe a:hover {
+    text-decoration: underline;
+    color: #ff9900; /* Cambia colore durante l'hover */
+}
+
+
+/* INNER CARDS STYLING */
+
+
+.cardRecipe {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    height: 300px;
+}
+
+/* Recipe body layout */
+.recipeBody {
+    display: flex;
+    align-items: center; /* Allinea tutto verticalmente al centro */
+    padding: 15px;
+    width: 100%;
+}
+
+.recipeBody .row {
+    width: 100%;
+}
+
+/* Image column */
+/*.imageCol {
+    flex: 0 0 25%; /* Assegna il 25% della larghezza alla colonna dell'immagine 
+}*/
+
+.recipeImage {
+    width: 100%; /* Immagine adattata alla larghezza della colonna */
+    height: auto;
+    border-radius: 8px; /* Arrotonda i bordi dell'immagine */
+    object-fit: cover; /* Assicura che l'immagine copra l'intero contenitore mantenendo il rapporto d'aspetto */
+    max-height: 150px; /* Limita l'altezza massima dell'immagine */
+}
+
+/* Title and description column */
+.contentCol {
+    flex: 0 0 50%; /* Assegna il 50% della larghezza alla colonna centrale */
+    flex-grow: 2;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Allinea il contenuto verticalmente */
+}
+
+.recipeTitle a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.recipeDescription {
+    font-size: 0.9rem;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Mostra solo 2 righe */
+    -webkit-box-orient: vertical;
+    white-space: normal; /* Permette di andare a capo */
+}
+
+/* TagBox column */
+.tagCol {
+    flex: 0 0 25%; /* Assegna il 25% della larghezza alla colonna dei tag */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Allinea i tag a destra */
+}
+
+/* @media (max-width: 768px) {
+    .recipeBody {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .imageCol, .contentCol, .tagCol {
+        flex: 100%;
+        text-align: left;
+    }
+
+    .tagCol {
+        justify-content: flex-start;
+        margin-top: 10px;
+    } 
+}*/

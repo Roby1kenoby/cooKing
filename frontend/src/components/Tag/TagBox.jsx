@@ -11,7 +11,7 @@ function TagBox({ tags, setTags, canEdit = false }) {
 
     return (
         <Container>
-            <div className="searchContainer">
+            <div className="badgeContainer">
                 {tags?.map(tag =>
                     <Badge pill bg="success"
                         key={tag._id}

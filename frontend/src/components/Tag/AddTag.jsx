@@ -8,9 +8,9 @@ function AddTag() {
     const [selectedTags, setSelectedTags] = useState([])
     const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
 
-    // useEffect(()=>{
-    //     console.log(newRecipe)
-    // },[newRecipe])
+    useEffect(()=>{
+        console.log(newRecipe)
+    },[newRecipe])
 
     // when a new tag is selected\removed, i directly update the recipe in the context
     const updateRecipe = function(){

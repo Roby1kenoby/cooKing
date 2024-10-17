@@ -46,6 +46,7 @@ function NewRecipe() {
                         placeholder="Breve descrizione della ricetta"
                         value={formData.description}
                         onChange={handleFormChange}
+                        maxLength={150}
                         required />
                 </Form.Group>
                 <Form.Group>
