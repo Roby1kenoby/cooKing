@@ -16,7 +16,7 @@ function SearchBar({ optionsArray, setOptionsArray, type }) {
         try {
             setLoading(true);
             let response = {}
-            if (type === 'ingredients') {
+            if (type === 'ingredientsIn') {
                 response = await getAllIngredients(token, query)
             }
             else {
@@ -65,11 +65,21 @@ function SearchBar({ optionsArray, setOptionsArray, type }) {
         setOptions([]);     // Reset options list
     };
 
+    const searchPlaceHolder = () => {
+        switch (type) {
+            case "tagsIn": return 'Inserisci un tag!'
+            case "tagsSearch": return 'Ricerca per tag!'
+            case "ingredientsIn": return 'Inserisci un ingrediente!'
+            case "ingredientsSearch": return 'Ricerca un ingrediente!'
+            default: return ''
+        }
+    }
+
     return (
         <>
             <FormControl
                 autoFocus
-                placeholder={`Cerca per ${type==="tags" ? "tag" : "ingrdiente"  }!`}
+                placeholder={searchPlaceHolder()}
                 value={searchTerm}
                 onChange={handleSearchChange}
                 className='text-form-field'

@@ -3,19 +3,16 @@ import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
 import { Badge } from "react-bootstrap";
 
 
-function TagBoxEdit({tag}) {
-    const {newRecipe, deleteTag } = useContext(NewRecipeContext)
-    useEffect(() => {
-        'rimuovo un tag'
-        console.log(newRecipe)
-    }, [newRecipe])
+function TagBoxEdit({tag, setSelectedTags}) {
+    const { deleteTag } = useContext(NewRecipeContext)
     
     const removeTag = function(){
+        setSelectedTags(prevSelTags => [...prevSelTags.filter(t => t._id !== tag._id)])
         deleteTag(tag)
     }
 
     return ( 
-        <Badge bg="success"
+        <Badge bg="success" className="singleBadge"
             onClick={removeTag}>
             {tag.name}
         </Badge>

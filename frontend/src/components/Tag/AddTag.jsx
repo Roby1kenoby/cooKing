@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
 import './AddTag.css'
 import { NewRecipeContext } from '../../contexts/NewRecipeContextProvider';
-import SearchDropdown from '../Interface/SearchDropdown';
+import SearchBar from '../Interface/SearchBar';
 import TagBoxEdit from './TagBoxEdit';
 
 function AddTag() {
     const [selectedTags, setSelectedTags] = useState([])
     const {newRecipe, setNewRecipe} = useContext(NewRecipeContext)
 
-    useEffect(()=>{
-        console.log(newRecipe)
-    },[newRecipe])
+    // useEffect(()=>{
+    //     console.log(newRecipe)
+    // },[newRecipe])
 
     // when a new tag is selected\removed, i directly update the recipe in the context
     const updateRecipe = function(){
@@ -20,15 +20,22 @@ function AddTag() {
     useEffect(updateRecipe, [selectedTags])
 
     return ( 
-        <>
-            <SearchDropdown optionsArray={selectedTags} setOptionsArray={setSelectedTags} type='tags'></SearchDropdown>
-            {newRecipe.tagsIds?.map((tag) => 
-                <TagBoxEdit
-                    key={tag._id}
-                    tag={tag}
-                />
-            )}
-        </>
+        <div>
+            
+            <SearchBar optionsArray={selectedTags} setOptionsArray={setSelectedTags} type='tagsIn'></SearchBar>
+            <div className='d-flex p-0'>
+                {selectedTags.length > 0 && <p className='d-inline align-self-center m-0'>Tag selezionati:</p>}
+                <div className='badgeContainer pb-0 pt-0'>
+                    {newRecipe.tagsIds?.map((tag) => 
+                        <TagBoxEdit
+                            key={tag._id}
+                            tag={tag}
+                            setSelectedTags={setSelectedTags}
+                        />
+                    )}
+                </div>
+            </div>
+        </div>
     );
 }
 

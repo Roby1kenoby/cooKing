@@ -1,0 +1,10 @@
+.newRecipeForm .col, 
+.newRecipeForm .col-md-12, 
+.newRecipeForm .row{
+    padding: 0 !important;
+}
+
+.newRecipeForm .form-label{
+    width: 100%;
+    text-align: center !important;
+}

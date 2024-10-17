@@ -26,6 +26,16 @@
   color: var(--textColor) !important;
 }
 
+.btn-save{
+  background-color: var(--accentColor) !important;
+  color: white !important;
+}
+
+.btn-edit{
+  background-color: var(--bgColor) !important;
+  color: var(--textColor) !important;
+}
+
 .btn-big{
   font-size: x-large !important;
   font-weight: bolder;
@@ -38,6 +48,7 @@
 }
 
 .form-border {
+  margin-top: 1em;
   padding: 1em;
   border: 0.1em solid var(--accentColor) !important;
   border-radius: 0.5em;

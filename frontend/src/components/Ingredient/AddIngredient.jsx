@@ -2,14 +2,15 @@ import SearchDropdown from "../Interface/SearchDropdown";
 import { useContext, useEffect, useState } from "react";
 import SingleIngredientBox from "./SingleIngredientBox";
 import { NewRecipeContext } from "../../contexts/NewRecipeContextProvider";
+import SearchBar from "../Interface/SearchBar";
 
 function AddIngredient({ phaseId = null }) {
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const { newRecipe, setNewRecipe } = useContext(NewRecipeContext)
 
     // useEffect(() => {
-    //     console.log(newRecipe)
-    // }, [newRecipe])
+    //     console.log(selectedIngredients)
+    // }, [selectedIngredients])
 
     const updateRecipe = function () {
         const ingredients = selectedIngredients.map(i => {
@@ -56,18 +57,21 @@ function AddIngredient({ phaseId = null }) {
     useEffect(updateRecipe, [selectedIngredients])
     
     return (
-        <>
-            <SearchDropdown optionsArray={selectedIngredients} setOptionsArray={setSelectedIngredients} type='ingredients'></SearchDropdown>
-            {(phaseId ? 
-                newRecipe.phases.find(p => p.tempId === phaseId).phaseIngredients : 
-                newRecipe.recipeIngredients)
-                ?.map((ing) =>
-                <SingleIngredientBox
-                    key={ing.tempId}
-                    ingredient={ing}
-                    phaseId={phaseId}
-                />
-            )}
+        <>  
+            <SearchBar optionsArray={selectedIngredients} setOptionsArray={setSelectedIngredients} type='ingredientsIn' />
+            <div className="p-0 d-flex flex-wrap row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+                {(phaseId ? 
+                    newRecipe.phases.find(p => p.tempId === phaseId).phaseIngredients : 
+                    newRecipe.recipeIngredients)
+                    ?.map((ing) =>
+                    <SingleIngredientBox
+                        key={ing.tempId}
+                        ingredient={ing}
+                        phaseId={phaseId}
+                        setSelectedIngredients={setSelectedIngredients}
+                    />
+                )}
+            </div>
         </>
     );
 }

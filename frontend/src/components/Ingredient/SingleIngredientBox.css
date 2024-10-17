@@ -1,0 +1,12 @@
+.singleIngredientCard input{
+    width: 100%;
+}
+
+.newRecipeButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.newRecipeButtons button{
+    margin: 0 1em;
+}
