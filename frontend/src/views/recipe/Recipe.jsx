@@ -54,47 +54,6 @@ function Recipe() {
 
     useEffect(() => { fetchRecipeData() }, [])
 
-
-    // return ( 
-    //     <Container>
-    //         <Row>
-    //             <Col className='image container' style={headerStyle}>
-    //                 <h1>{recipeData?.title}</h1>
-    //             </Col>
-    //             <hr />
-    //         </Row>
-
-    //         <Row>
-    //             <h2>Descrizione</h2>
-    //             <Col>
-    //                 <p>{recipeData?.description}</p>
-    //             </Col>
-    //             <Col sm={12} md={4}>
-    //                 <TagBox tags={tags}/>
-    //             </Col>
-    //             <hr />
-    //         </Row>
-
-    //         <Row>
-    //             <h2>Ingredienti</h2>
-    //             <p>Liquidi</p>
-    //             <div className='liquidIngredients'>
-    //                 <IngredientBox ingredients={liquidIngredients}></IngredientBox>
-    //             </div>
-    //             <p>Solidi</p>
-    //             <div className='solidIngredients'>
-    //                 <IngredientBox ingredients={solidIngredients}></IngredientBox>
-    //             </div>
-    //         </Row>
-    //         <hr />
-    //         <Row>
-    //             <h2>Fasi</h2>
-    //             <PhaseBox phasesArray={phases}/>
-    //         </Row>
-
-    //     </Container>
-    // );
-
     const headerStyle = {
         backgroundImage: `url(${recipeData?.recipeImageUrl})`
     }
@@ -117,7 +76,7 @@ function Recipe() {
                     <TagBox tags={tags} />
                 </Col>
             </Row>
-            <hr></hr>
+            <hr className='separator'></hr>
             <Row className='mt-4 ingContainer'>
                 <Col md={6} >
                     <h3 className='title'>Ingredienti Liquidi</h3>
@@ -128,8 +87,9 @@ function Recipe() {
                     <IngredientBox ingredients={solidIngredients}></IngredientBox>
                 </Col>
             </Row>
+            <hr className='separator'></hr>
             <Row className='mt-4'>
-                <h2>Fasi</h2>
+                <h2 className='title'>Fasi</h2>
                 <Col>
                     <Carousel indicators={false} controls={true} interval={null}>
                         {phases.map((phase, index) => (

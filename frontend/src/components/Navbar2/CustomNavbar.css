@@ -1,0 +1,12 @@
+/* Esempio di stile per la navbar */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 8vh;
+}
+
+.navbar-brand img {
+    border-radius: 50%; /* Per rendere il logo rotondo */
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}

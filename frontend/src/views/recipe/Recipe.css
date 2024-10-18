@@ -13,9 +13,8 @@
 .recipe-header {
     background-size: cover;
     background-position: center;
-    width: 100%;
     padding-top: 56.25%; /* Questo mantiene un rapporto di aspetto 16:9 */
-    border-radius: 10px; /* Aggiunge bordi arrotondati */
+    border-radius: 1em; /* Aggiunge bordi arrotondati */
     overflow: hidden; /* Per evitare che il titolo o l'immagine escano dai bordi */
     position: relative;
 }
@@ -50,7 +49,7 @@ h3 {
     margin: 0;
 }
 
-.ingContainer{
+/* .ingContainer{
     border: 1px solid black;
     border-radius: 0.5em;
-}
+} */

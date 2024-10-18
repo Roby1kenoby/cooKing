@@ -5,7 +5,7 @@ import './Login.css'
 import { Container } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import LoginOauth from '../../components/Login/LoginOauth';
-import testImage from '../../assets/single-logo.png';
+import logo from '../../assets/single-logo.png';
 
 function Login() {
     const [switchForm, setSwitchForm] = useState(false)
@@ -13,7 +13,7 @@ function Login() {
     return (
         <Container className='d-flex flex-column align-items-center'>
             <div className='logoContainer'>
-                <img src={testImage} className='img-fluid'/>
+                <img src={logo} className='img-fluid'/>
                 <hr></hr>
                 <p>Che si cucina oggi?</p>
             </div>

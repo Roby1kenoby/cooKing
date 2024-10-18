@@ -17,11 +17,16 @@ input[type="checkbox"]{
   clip-path: circle(50%);
   accent-color: var(--accentColor);
   appearance: none;
-  background: var(--mainColor);
+  background: var(--bgColor);
 }
 
 input[type="checkbox"]:checked{
   appearance: auto;
+}
+
+.separator{
+  border:none;
+  border-top: 5px solid grey;
 }
 
 .bg-light {

@@ -1,0 +1,48 @@
+.phase-container {
+    display: flex;
+    flex-direction: column; /* Orientamento verticale */
+    padding: 20px;
+    border: 1px solid #ddd; /* Bordo per separare visivamente le fasi */
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Colore di sfondo leggero */
+    margin-bottom: 20px; /* Spazio tra le fasi nel carousel */
+}
+
+.phase-ingredients-col {
+    flex: 1; /* Permette alla colonna di occupare lo spazio */
+}
+
+.phase-image-col {
+    flex: 1; /* Permette alla colonna di occupare lo spazio */
+}
+
+.phase-image-col img {
+    width: 100%; /* L'immagine si adatta alla dimensione della colonna */
+    height: auto; /* Mantiene le proporzioni */
+    border-radius: 10px; /* Aggiungi angoli arrotondati per un aspetto più carino */
+    object-fit: cover; /* Assicura che l'immagine mantenga le proporzioni */
+}
+
+.phase-description-col {
+    flex: 1; /* Permette alla colonna di occupare lo spazio */
+}
+
+.phase-description-col h5 {
+    margin-bottom: 10px; /* Margine per il titolo delle istruzioni */
+}
+
+.phase-description-col p {
+    margin: 0; /* Rimuove il margine predefinito */
+}
+
+/* Responsività per schermi più piccoli */
+@media (max-width: 768px) {
+    .phase-container {
+        flex-direction: column; /* Cambia in verticale su schermi piccoli */
+    }
+
+    .phase-image-col,
+    .phase-ingredients-col {
+        max-width: 100%; /* Ogni sezione occuperà il 100% della larghezza */
+    }
+}

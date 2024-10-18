@@ -3,7 +3,7 @@ import './PhaseBox.css'
 import Phase from './Phase';
 
 function PhaseBox({ phasesArray }) {
-    console.log(phasesArray)
+    
     return (
         <Carousel
             controls={true}

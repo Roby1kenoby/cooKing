@@ -196,7 +196,7 @@ function NewRecipe() {
                         </Form.Group>
                     </Col>
                 </Row>
-
+                <hr className="separator"></hr>
                 
                 <Row>
                     <Col md={6}>
@@ -224,8 +224,8 @@ function NewRecipe() {
                         </Form.Group>
                     </Col>
                 </Row>
+                <hr className="separator"></hr>
 
-                {/* Sezioni per Tags, Ingredienti e Fasi */}
                 <Row>
                     <Col md={12}>
                         <Form.Group>
@@ -236,7 +236,7 @@ function NewRecipe() {
                         </Form.Group>
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr className="separator"></hr>
                 <Row>
                     <Col md={12}>
                         <Form.Group>
@@ -247,7 +247,7 @@ function NewRecipe() {
                         </Form.Group>
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr className="separator"></hr>
                 <Row>
                     <Col md={12}>
                         <Form.Group>
