@@ -36,8 +36,8 @@ function AddPhase() {
     // useEffect(() => {console.log(newRecipe); console.log(addedPhases)},[newRecipe])
 
     return ( 
-        <>
-            <Button onClick={newPhase}>
+        <div className='d-flex flex-column justify-content-center'>
+            <Button className="mb-1" onClick={newPhase}>
                 Aggiungi Fase
             </Button>
             <Row>
@@ -50,7 +50,7 @@ function AddPhase() {
                                             /> )}
                 </Col>
             </Row>
-        </>
+        </div>
     );
 }
 

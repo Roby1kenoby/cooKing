@@ -78,7 +78,6 @@ function SearchBar({ optionsArray, setOptionsArray, type }) {
     return (
         <>
             <FormControl
-                autoFocus
                 placeholder={searchPlaceHolder()}
                 value={searchTerm}
                 onChange={handleSearchChange}

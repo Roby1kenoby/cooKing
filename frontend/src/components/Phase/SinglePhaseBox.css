@@ -1,0 +1,11 @@
+.newPhaseButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.newPhaseButtons button{
+    width: min-content;
+    margin: 0.5em 0.5em;
+}

@@ -251,8 +251,8 @@ function NewRecipe() {
                 <Row>
                     <Col md={12}>
                         <Form.Group>
-                            <Form.Label>Fasi</Form.Label>
-                            <div>
+                            <Form.Label className="p-0">Fasi</Form.Label>
+                            <div className="p-0">
                                 <AddPhase />
                             </div>
                         </Form.Group>
