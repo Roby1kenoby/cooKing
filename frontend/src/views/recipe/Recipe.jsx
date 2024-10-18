@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap'
+import { Carousel, Col, Container, Row } from 'react-bootstrap'
 import './Recipe.css'
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContextProvider';
@@ -16,14 +16,14 @@ function Recipe() {
     const [tags, setTags] = useState([])
     const [phases, setPhases] = useState([])
 
-    const {token} = useContext(LoginContext)
+    const { token } = useContext(LoginContext)
     const params = useParams()
     const recipeId = params.recipeId
 
-    const fetchRecipeData = async function(){
+    const fetchRecipeData = async function () {
         try {
             const resp = await getRecipeData(token, recipeId)
-            if(!resp){
+            if (!resp) {
                 console.log('resp non ricevuta)')
             }
             const data = await resp.json()
@@ -35,7 +35,7 @@ function Recipe() {
             const liquidArray = []
 
             data.recipeIngredients.map(ingredient => {
-                ingredient.ingredientId.measurementCategory === 'Solid' 
+                ingredient.ingredientId.measurementCategory === 'Solid'
                     ? solidArray.push(ingredient)
                     : liquidArray.push(ingredient)
             })
@@ -44,60 +44,102 @@ function Recipe() {
             setLiquidIngredients(liquidArray)
             setPhases(data.phases)
             setTags(data.tagsIds)
-            
+
         } catch (error) {
             return error
         }
     }
 
-    
 
-    useEffect(() => {fetchRecipeData()},[])
+
+    useEffect(() => { fetchRecipeData() }, [])
+
+
+    // return ( 
+    //     <Container>
+    //         <Row>
+    //             <Col className='image container' style={headerStyle}>
+    //                 <h1>{recipeData?.title}</h1>
+    //             </Col>
+    //             <hr />
+    //         </Row>
+
+    //         <Row>
+    //             <h2>Descrizione</h2>
+    //             <Col>
+    //                 <p>{recipeData?.description}</p>
+    //             </Col>
+    //             <Col sm={12} md={4}>
+    //                 <TagBox tags={tags}/>
+    //             </Col>
+    //             <hr />
+    //         </Row>
+
+    //         <Row>
+    //             <h2>Ingredienti</h2>
+    //             <p>Liquidi</p>
+    //             <div className='liquidIngredients'>
+    //                 <IngredientBox ingredients={liquidIngredients}></IngredientBox>
+    //             </div>
+    //             <p>Solidi</p>
+    //             <div className='solidIngredients'>
+    //                 <IngredientBox ingredients={solidIngredients}></IngredientBox>
+    //             </div>
+    //         </Row>
+    //         <hr />
+    //         <Row>
+    //             <h2>Fasi</h2>
+    //             <PhaseBox phasesArray={phases}/>
+    //         </Row>
+
+    //     </Container>
+    // );
 
     const headerStyle = {
-        backgroundImage: `url(${recipeData?.recipeImageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height:'300px'
+        backgroundImage: `url(${recipeData?.recipeImageUrl})`
     }
 
-    return ( 
-        <Container>
+    return (
+        <Container className='mainContainer'>
             <Row>
-                <Col className='image container' style={headerStyle}>
-                    <h1>{recipeData?.title}</h1>
+                <Col className='recipe-header' style={headerStyle} >
+                    <div className='recipe-title'>
+                        <h1>{recipeData?.title}</h1>
+                    </div>
                 </Col>
-                <hr />
             </Row>
-            
-            <Row>
-                <h2>Descrizione</h2>
+            <Row className='mt-4'>
                 <Col>
-                    <p>{recipeData?.description}</p>
+                    <h2>Descrizione</h2>
+                    <p className='recipeDescription'>{recipeData?.description}</p>
                 </Col>
                 <Col sm={12} md={4}>
-                    <TagBox tags={tags}/>
+                    <TagBox tags={tags} />
                 </Col>
-                <hr />
             </Row>
-
-            <Row>
-                <h2>Ingredienti</h2>
-                <p>Liquidi</p>
-                <div className='liquidIngredients'>
+            <hr></hr>
+            <Row className='mt-4 ingContainer'>
+                <Col md={6} >
+                    <h3 className='title'>Ingredienti Liquidi</h3>
                     <IngredientBox ingredients={liquidIngredients}></IngredientBox>
-                </div>
-                <p>Solidi</p>
-                <div className='solidIngredients'>
+                </Col>
+                <Col md={6} >
+                    <h3 className='title'>Ingredienti Solidi</h3>
                     <IngredientBox ingredients={solidIngredients}></IngredientBox>
-                </div>
+                </Col>
             </Row>
-            <hr />
-            <Row>
+            <Row className='mt-4'>
                 <h2>Fasi</h2>
-                <PhaseBox phasesArray={phases}/>
+                <Col>
+                    <Carousel indicators={false} controls={true} interval={null}>
+                        {phases.map((phase, index) => (
+                            <Carousel.Item key={index}>
+                                <PhaseBox phasesArray={[phase]} />
+                            </Carousel.Item>
+                        ))}
+                    </Carousel>
+                </Col>
             </Row>
-
         </Container>
     );
 }

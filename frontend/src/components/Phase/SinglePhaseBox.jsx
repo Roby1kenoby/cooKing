@@ -133,6 +133,7 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
                                 onChange={handleFormChange}
                                 required
                                 disabled={disable}
+                                className="text-form-field"
                             />
                         </Form.Group>
                         <Form.Group>
@@ -141,6 +142,7 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
                                 type="file"
                                 name="phaseImage"
                                 onChange={updatePhaseImage}
+                                className="text-form-field"
                             />
                         </Form.Group>
                         {phaseSaved && (

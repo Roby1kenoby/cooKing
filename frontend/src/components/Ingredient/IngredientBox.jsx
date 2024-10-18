@@ -4,19 +4,25 @@ import './IngredientBox.css'
 function IngredientBox({ ingredients }) {
     return (
         <>
-            <Row className='row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4'>
-                {ingredients.map((i) =>
-                    <Col key={i._id}>
-                        <div className='d-flex align-baseline'>
-                            <input type='checkbox' />
-                            <span>{i.quantity} {i.measurementUnit} {i.ingredientId.name}</span>
+            <Row className='d-flex flex-column'>
+                {ingredients?.map((i) =>
+                    <Col key={i._id} className='w-100'>
+                        <div className='d-flex align-baseline flex-wrap ingredientContainer'>
+                            <Col sm={2} md={1} className='d-flex align-items-center'><input type='checkbox' className='ingredientCheckbox' /></Col>
+                            <Col  sm={10} md={11} className='d-flex align-baseline flex-wrap ingredientContainer'>
+                                <span className='ingredientQuantity'>{i.quantity}</span>
+                                <span className='ingredientMu'>{i.measurementUnit}</span>
+                                <span className='ingredientName'>{i.ingredientId.name?.toUpperCase()}</span>
+                                <span className='ingredientInfos'>{i.additionalInfos ? `(${i.additionalInfos})` : ''}</span>
+                            </Col>
                         </div>
-                        <p>{i.additionalInfos}</p>
+                        <hr/>
                     </Col>
                 )}
             </Row>
         </>
     );
+    
 }
 
 export default IngredientBox;

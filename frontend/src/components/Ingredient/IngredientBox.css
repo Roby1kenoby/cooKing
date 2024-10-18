@@ -1,0 +1,35 @@
+.ingredientContainer span{
+    display: flex;
+    align-items: center;
+}
+
+.ingredientCheckbox{
+    min-width: min-content;
+    margin: 0 0.3em;
+}
+
+.ingredientName{
+    font-weight: bolder;
+    padding: 0 0.5em;
+    font-size: larger;
+}
+
+.ingredientInfos{
+    font-style: italic;
+}
+
+.ingredientQuantity{
+
+}
+
+.ingredientQuantity,
+.ingredientUm {
+    font-weight: bolder;
+    font-size: larger;
+    
+}
+
+.ingredientInfos{
+    font-size: larger;
+}
+

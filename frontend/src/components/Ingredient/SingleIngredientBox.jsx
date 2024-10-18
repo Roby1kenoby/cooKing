@@ -112,6 +112,7 @@ function SingleIngredientBox({ ingredient, phaseId, setSelectedIngredients }) {
                             required
                             disabled={disable}
                             placeholder="Quantità"
+                            className="text-form-field"
                         />
                     </Form.Group>
                     <Form.Group controlId="measurementUnit">
@@ -121,6 +122,7 @@ function SingleIngredientBox({ ingredient, phaseId, setSelectedIngredients }) {
                             onChange={handleFormChange}
                             required
                             disabled={disable}
+                            className="text-form-field"
                         >
                             {um.map(opt => (
                                 <option key={opt.name} value={opt.name}>{opt.name}</option>
@@ -135,6 +137,7 @@ function SingleIngredientBox({ ingredient, phaseId, setSelectedIngredients }) {
                             onChange={handleFormChange}
                             disabled={disable}
                             placeholder="Dettagli"
+                            className="text-form-field"
                         />
                     </Form.Group>
 

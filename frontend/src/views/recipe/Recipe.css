@@ -8,3 +8,49 @@
     width: 100%;
     text-align: center !important;
 }
+
+/* Sezione immagine di copertina e titolo */
+.recipe-header {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    padding-top: 56.25%; /* Questo mantiene un rapporto di aspetto 16:9 */
+    border-radius: 10px; /* Aggiunge bordi arrotondati */
+    overflow: hidden; /* Per evitare che il titolo o l'immagine escano dai bordi */
+    position: relative;
+}
+
+.recipe-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semitrasparente */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px; /* Bordi arrotondati */
+}
+
+/* Margini superiori per separare le sezioni */
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+/* Sezione ingredienti */
+.recipe-ingredients {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Stile per i titoli degli ingredienti */
+h3 {
+    margin-bottom: 15px;
+}
+
+.recipeDescription{
+    margin: 0;
+}
+
+.ingContainer{
+    border: 1px solid black;
+    border-radius: 0.5em;
+}
