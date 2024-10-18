@@ -1,0 +1,12 @@
+.privateRecipeCheckbox{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.privateRecipeCheckbox input{
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0;
+}
+

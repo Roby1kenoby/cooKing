@@ -7,8 +7,9 @@ import Recipe from './views/recipe/Recipe'
 import Profile from './views/profile/Profile'
 import ProtectedRoutes from './routesProtection/ProtectedRoutes';
 import NewRecipe from './views/recipe/NewRecipe';
+import EditRecipe from './views/recipe/EditRecipe';
 import { NewRecipeContextProvider } from './contexts/NewRecipeContextProvider';
-import CustomNavbar from './components/Navbar2/CustomNavbar';
+import CustomNavbar from './components/Navbar/CustomNavbar';
 import { useContext } from 'react';
 import { LoginContext } from './contexts/LoginContextProvider';
 import CustomFooter from './components/Footer/CustomFooter';
@@ -32,6 +33,11 @@ function App() {
                   <NewRecipe />
                 </NewRecipeContextProvider>    
                 }/>
+              <Route path='/recipe/editRecipe/:recipeId' element={
+                <NewRecipeContextProvider>
+                <EditRecipe />
+              </NewRecipeContextProvider>    
+              }/>
             <Route path='/profile/:profileId' element={<Profile />}/>
           </Route>
         </Routes>

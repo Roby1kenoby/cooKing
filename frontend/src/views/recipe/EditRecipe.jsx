@@ -9,7 +9,7 @@ import './NewRecipe.css'
 import { LoginContext } from "../../contexts/LoginContextProvider";
 import CustomModal from "../../components/Modal/CustomModal";
 
-function NewRecipe() {
+function EditRecipe() {
     const navigate = useNavigate()
     const { newRecipe, setNewRecipe, saveRecipeHeader, handlePhaseImageChange } = useContext(NewRecipeContext)
 
@@ -227,4 +227,4 @@ function NewRecipe() {
 
 }
 
-export default NewRecipe;
+export default EditRecipe

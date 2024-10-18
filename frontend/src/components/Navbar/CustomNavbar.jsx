@@ -10,8 +10,7 @@ function CustomNavbar() {
     const nav = useNavigate()
     const handleLogout = function () {
         localStorage.clear()
-        nav({ to: '/login' })
-
+        nav('/login')
     }
 
     return (

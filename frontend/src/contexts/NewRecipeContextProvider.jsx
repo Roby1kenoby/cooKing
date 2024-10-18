@@ -1,10 +1,34 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { LoginContext } from "./LoginContextProvider";
 import { saveRecipe } from "../apis/recipeCRUDS";
+import { useParams } from 'react-router-dom'
+import { getRecipeData } from '../apis/recipeCRUDS';
 import * as utility from '../utilityes/ImageCloudStorage.js'
 export const NewRecipeContext = createContext()
 
 export function NewRecipeContextProvider({ children }) {
+    const { token, loggedUser } = useContext(LoginContext)
+
+    // if ther's an id in the url
+    const params = useParams()
+    const recipeId = params.recipeId
+
+    // function to fetch recipe data from id
+    const fetchRecipeData = async function () {
+        try {
+            const resp = await getRecipeData(token, recipeId)
+            if (!resp) {
+                console.log('resp non ricevuta)')
+            }
+            const data = await resp.json()
+            setNewRecipe(data);
+            console.log(data)
+
+        } catch (error) {
+            return error
+        }
+    }
+
     const newRecipeData = {
         userId: '',
         tagsIds: [],
@@ -18,10 +42,19 @@ export function NewRecipeContextProvider({ children }) {
         phases: [],
         recipeIngredients: []
     }
+
+    useEffect(() => {
+        recipeId ? fetchRecipeData() : setNewRecipe(newRecipeData)
+    }, [recipeId])
+
+
+    
     
     const [newRecipe, setNewRecipe] = useState(newRecipeData)
     const [phaseImages, setPhaseImages] = useState({})
-    const { token, loggedUser } = useContext(LoginContext)
+    
+
+
 
     const saveRecipeHeader = function (header) {
         setNewRecipe(async (prevRecipe) => {
