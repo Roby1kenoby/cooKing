@@ -33,13 +33,8 @@ function AddTag() {
 
     useEffect(updateRecipe, [selectedTags])
 
-    // useEffect(()=>{
-    //     console.log(selectedTags)
-    // })
-
     return ( 
         <div>
-            
             <SearchBar optionsArray={selectedTags} setOptionsArray={setSelectedTags} type='tagsIn'></SearchBar>
             <div className='d-flex p-0'>
                 {selectedTags?.length > 0 && <p className='d-inline align-self-center m-0'>Tag selezionati:</p>}

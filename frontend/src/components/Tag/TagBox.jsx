@@ -3,14 +3,12 @@ import './TagBox.css'
 function TagBox({ tags, setTags, canEdit = false }) {
 
     const removeTag = function (tagId) {
-        console.log(tags)
-        console.log(tagId)
         canEdit && setTags([...tags.filter(t => t._id !== tagId)])
     }
 
 
     return (
-        <Container>
+        <Container className="mt-2">
             <div className="badgeContainer">
                 {tags?.map(tag =>
                     <Badge pill bg="success"

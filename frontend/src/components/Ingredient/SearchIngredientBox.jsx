@@ -8,8 +8,8 @@ function SearchIngredientBox({ingredients, setIngredients, canEdit}) {
 
 
     return (
-        <Container>
-            <div className="searchContainer">
+        <Container className="mt-2">
+            <div className="badgeContainer">
                 {ingredients?.map(ing =>
                     <Badge pill 
                         key={ing._id}

@@ -29,15 +29,15 @@
     width: 100%;
 }
 
-.tagSearch *{
-    width: 100%;
+
+.badgeContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 8px;
 }
 
 .ingredientSearch{
-    width: 100%;
-}
-
-.ingredientSearch *{
     width: 100%;
 }
 
