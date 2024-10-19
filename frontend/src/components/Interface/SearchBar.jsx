@@ -16,12 +16,23 @@ function SearchBar({ optionsArray, setOptionsArray, type }) {
         try {
             setLoading(true);
             let response = {}
-            if (type === 'ingredientsIn') {
-                response = await getAllIngredients(token, query)
+            
+            switch (type) {
+                case "tagsIn":
+                case "tagsSearch": response = await getAllTags(token, query)
+                break;
+                case "ingredientsIn": 
+                case "ingredientsSearch": response = await getAllIngredients(token, query)
+                break;
+                default: return ''
             }
-            else {
-                response = await getAllTags(token, query)
-            }
+            
+            // if (type === 'ingredientsIn') {
+            //     response = await getAllIngredients(token, query)
+            // }
+            // else {
+            //     response = await getAllTags(token, query)
+            // }
             setOptions(response);
             setLoading(false);
         } catch (error) {

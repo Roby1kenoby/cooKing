@@ -32,7 +32,7 @@ function Profile() {
     }
 
     useEffect(() => { fetchUserData() }, [userId])
-  
+
 
     if (!userData) {
         return <p>Loading...</p>

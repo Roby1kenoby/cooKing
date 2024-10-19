@@ -15,13 +15,40 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
             loadedRecipes = await getUserRecipes(token, userId) 
         } else{
             loadedRecipes = await getUserPublicRecipes(token, userId)
-        }  
+        } 
 
+        // filtering for tags
+        if (tags.length > 0) {
+            loadedRecipes = loadedRecipes.filter(recipe => 
+                tags.every(tagInArray => recipe.tagsIds?.some(
+                    tagInRecipe => tagInRecipe._id === tagInArray._id))  
+            );
+        }
+
+        // filtering for ingredients
+        if (ingredients.length > 0){
+            loadedRecipes = loadedRecipes.filter(recipe =>
+                ingredients.every(ingInArray => recipe?.recipeIngredients?.some(
+                    ingInRecipe => ingInRecipe?.ingredientId._id === ingInArray._id
+                ))
+            )
+        }
+
+        // filtering fo title
+        if (searchValue){
+            loadedRecipes = loadedRecipes.filter(recipe => 
+                recipe.title.toLowerCase().includes(searchValue.toLowerCase()))
+        }
+    
+        // filtra loadedRecipe per ingredientId
         setRecipes(loadedRecipes)
     }
 
-    useEffect(() => {loadRecipes()}, [refreshRecipes])
-    
+    useEffect(() => {loadRecipes()}, [refreshRecipes, tags, ingredients, searchValue])
+    useEffect(()=>{
+        console.log(ingredients)
+        console.log(recipes)
+    }, [recipes])
     // console.log(recipes)
     return (    
         <>
@@ -31,6 +58,7 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
                         refreshRecipes={refreshRecipes}
                         setRefreshRecipes={setRefreshRecipes}/>)
             }
+            {recipes.length === 0 && <p>Nessuna ricetta trovata</p>}
         </>
     );
 }

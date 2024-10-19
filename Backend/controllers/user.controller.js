@@ -56,6 +56,12 @@ export const getSpecificUserRecipes = async function(req,res){
         .populate({
             path: 'tagsIds'
         })
+        .populate({
+            path: 'recipeIngredients',
+            populate: {
+                path: 'ingredientId'
+            }
+        })
 
         if(!userRecipes){
             const error = new Error('Cannot find user recipes')
