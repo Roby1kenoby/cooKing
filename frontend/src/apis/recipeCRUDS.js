@@ -42,3 +42,22 @@ export const saveRecipe = async function(token, recipeData){
         return error
     }
 }
+
+export const deleteRecipe = async function(token, recipeId){
+    try {
+        const deletedRecipe = await fetch(`${URI}/${recipeId}/deleteRecipe`,{
+            headers:{
+                Authorization: `Bearer ${token}`,
+                "Content-type": 'application/json'
+            },
+            method:'DELETE'
+        })
+        if(!deletedRecipe){
+            throw new Error('Impossibile trovare la ricetta desiderata')
+        }
+
+        return deletedRecipe
+    } catch (error) {
+        return error
+    }
+}

@@ -139,11 +139,11 @@ export const getSpecificRecipe = async function(recipeId, userId){
 
     const recipe = await recipeQuery
 
-    if(recipe.privateRecipe && recipe.userId != userId){
-        const error = new Error('Private recipe')
-        error.status = 404
-        throw error
-    }
+    // if(recipe.privateRecipe && recipe.userId !== userId){
+    //     const error = new Error('Private recipe')
+    //     error.status = 404
+    //     throw error
+    // }
 
     if(!recipeQuery){
         const error = new Error('Recipe not found')
@@ -219,7 +219,7 @@ export const deleteRecipe = async function(recipeId){
     try {
         await RecipeIngredientService.bulkDeleteRecipeIngredients(recipeId, session)
         await PhaseService.bulkDeletePhases(recipeId, session)
-        const deletedRecipe = await Recipe.deleteOne({_id: recipeId})
+        const deletedRecipe = await Recipe.deleteOne({_id: recipeId}, {new: true})
 
         if(!deletedRecipe){
             const error = new Error('Failed to delete recipe via recipeId')

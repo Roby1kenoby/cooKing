@@ -3,62 +3,9 @@ import * as RecipeService from '../services/recipe.service.js'
 
 /* -------------- GET --------------*/
 
-// export const getAllIngredients = async function(req, res){
-//     const searchString = req.query.searchString
-//     const userId = req.loggedUser._id
-    
-//     try {
-
-//         if (!userId){
-//             const error = new Error('Unauthorized access lvl 1')
-//             error.status = 401
-//             throw error
-//         }
-//         // if ther's a searchString, i filter the ingredient list (including private one).
-//         const ingredientsListQuery = Ingredient.find(
-//                 searchString ? 
-//                     {$and:[{name: {$regex: searchString ,$options: "i"}}, {$or:[{userId: userId}, {userId: null}]}]}
-//                     : {$or: [{userId: userId}, {userId: null}]})
-
-//             ingredientsListQuery.sort({name: 1})
-//             const ingredientsList = await ingredientsListQuery
-//         res.send(ingredientsList)
-
-//     } catch (error) {
-//         console.log(error)
-//         res.status(error.status).send(error.message)
-//     }
-
-// }
-
-// export const getPrivateIngredients = async function(req, res){
-//     const searchString = req.query.searchString
-//     const userId = req.loggedUser._id
-
-//     try {
-
-//         if (!userId){
-//             const error = new Error('Unauthorized access lvl 1')
-//             error.status = 401
-//             throw error
-//         }
-//         // if ther's a searchString, i filter the ingredient list.
-//         // i get only the ingredients that has userId = userId of logged user
-//         const ingredientsList = await Ingredient.find(
-//                 searchString ? 
-//                     {$and:[{name: {$regex: searchString ,$options: "i"}}, {userId: userId}]}
-//                     : {userId: userId})
-        
-//         res.send(ingredientsList)
-
-//     } catch (error) {
-//         console.log(error)
-//         res.status(error.status).send(error.message)
-//     }
-// }
-
 export const getSpecificRecipe = async function(req, res){
     const userId = req.loggedUser._id
+    console.log('userId', userId)
     const recipeId = req.params.id
 
     try {

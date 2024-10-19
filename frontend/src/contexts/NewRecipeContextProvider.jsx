@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { LoginContext } from "./LoginContextProvider";
-import { saveRecipe } from "../apis/recipeCRUDS";
+import { saveRecipe, deleteRecipe } from "../apis/recipeCRUDS";
 import { useParams } from 'react-router-dom'
 import { getRecipeData } from '../apis/recipeCRUDS';
 import * as utility from '../utilityes/ImageCloudStorage.js'
@@ -92,52 +92,65 @@ export function NewRecipeContextProvider({ children }) {
         }
     }, [])
 
-    // useEffect(()=>{
-    //     console.log('newRecipe cambiato in ', newRecipe)
-    //     console.log('dataReady cambiato in', dataReady)
-    // }, [dataReady])
-
-
-
 
     const [phaseImages, setPhaseImages] = useState({})
 
 
 
 
-    const commitRecipe = function (header) {
-        setNewRecipe(async (prevRecipe) => {
-            const updatedRecipe = {
-                ...prevRecipe,
-                userId: loggedUser._id,
-                title: header.title,
-                description: header.description,
-                portions: header.portions,
-                preparationTime: header.preparationTime,
-                recipeVideoUrl: header.recipeVideoUrl,
-                privateRecipe: header.privateRecipe === "on" ? true : false,
-                phases: prevRecipe.phases ? prevRecipe.phases : [],
-                recipeIngredients: prevRecipe.recipeIngredients ? prevRecipe.recipeIngredients : [],
-                tagsIds: prevRecipe.tagsIds ? prevRecipe.tagsIds : []
-            }
-
-            const urlObj = await saveCloudinaryImages()
-            const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
-            postRecipe(updatedRecipe2)
-            return updatedRecipe
-
-        })
-
+    const commitRecipe = async function (header, edit=null) {
+        if(edit){
+            const deletedRecipe = await deleteRecipe(token, recipeId)
+            
+            // wait a bit to sync the db
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            setNewRecipe(async (prevRecipe) => {
+                const updatedRecipe = {
+                    ...prevRecipe,
+                    userId: loggedUser._id,
+                    title: header.title,
+                    description: header.description,
+                    portions: header.portions,
+                    preparationTime: header.preparationTime,
+                    recipeVideoUrl: header.recipeVideoUrl,
+                    recipeImageUrl: header.recipeImagerUrl,
+                    privateRecipe: header.privateRecipe === "on" ? true : false,
+                    phases: prevRecipe.phases ? prevRecipe.phases : [],
+                    recipeIngredients: prevRecipe.recipeIngredients ? prevRecipe.recipeIngredients : [],
+                    tagsIds: prevRecipe.tagsIds ? prevRecipe.tagsIds : []
+                }
+                const urlObj = await saveCloudinaryImages()
+                const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
+                postRecipe(updatedRecipe2)
+                return updatedRecipe
+            })
+        }
+        else{
+            setNewRecipe(async (prevRecipe) => {
+                const updatedRecipe = {
+                    ...prevRecipe,
+                    userId: loggedUser._id,
+                    title: header.title,
+                    description: header.description,
+                    portions: header.portions,
+                    preparationTime: header.preparationTime,
+                    recipeVideoUrl: header.recipeVideoUrl,
+                    recipeImageUrl: header.recipeImagerUrl,
+                    privateRecipe: header.privateRecipe === "on" ? true : false,
+                    phases: prevRecipe.phases ? prevRecipe.phases : [],
+                    recipeIngredients: prevRecipe.recipeIngredients ? prevRecipe.recipeIngredients : [],
+                    tagsIds: prevRecipe.tagsIds ? prevRecipe.tagsIds : []
+                }
+                const urlObj = await saveCloudinaryImages()
+                const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
+                postRecipe(updatedRecipe2)
+                return updatedRecipe
+            })
+        }
     }
 
-    // const testUpdateNewRecipe = async function(){
-    //     const urlObj = await saveCloudinaryImages()
-    //     const updatedRecipe = updateRecipeImageUrls(urlObj, recipeData)
-    //     console.log(updatedRecipe)
-    // }
 
     const postRecipe = async function (updatedRecipe) {
-
         const savedRecipe = await saveRecipe(token, updatedRecipe)
         console.log(savedRecipe)
         return savedRecipe

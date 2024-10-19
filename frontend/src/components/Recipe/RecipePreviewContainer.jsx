@@ -7,6 +7,7 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
     // if context user = userId, get all recipes, otherwise only the public ones
     const {token, loggedUser} = useContext(LoginContext)
     const [recipes, setRecipes] = useState([])
+    const [refreshRecipes, setRefreshRecipes] = useState(false)
         
     const loadRecipes = async function(){
         let loadedRecipes = []
@@ -19,13 +20,16 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
         setRecipes(loadedRecipes)
     }
 
-    useEffect(() => {loadRecipes()}, [])
+    useEffect(() => {loadRecipes()}, [refreshRecipes])
     
     // console.log(recipes)
     return (    
         <>
             {
-                recipes.map(recipe => <RecipePreview key={recipe._id} recipe={recipe}/>)
+                recipes.map(recipe => 
+                    <RecipePreview key={recipe._id} recipe={recipe} 
+                        refreshRecipes={refreshRecipes}
+                        setRefreshRecipes={setRefreshRecipes}/>)
             }
         </>
     );

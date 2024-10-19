@@ -33,27 +33,27 @@ function EditRecipe() {
 
     const saveRecipe = async function (event) {
         event.preventDefault()
-        console.log('ricetta salvata: ', formData)
-        // try {
-        //     await commitRecipe(formData)
-        //     setModalConfig({
-        //         title: 'Successo!',
-        //         message: 'Ricetta salvata con successo.',
-        //         onConfirm: () => {
-        //             setShowModal(false);
-        //             navigate(`/profile/${loggedUser._id}`); 
-        //         },
-        //         showAbortButton: false
-        //     });
-        // } catch (error) {
-        //     setModalConfig({
-        //         title: 'Errore!',
-        //         message: 'Si è verificato un errore nel salvataggio della ricetta. Riprova.',
-        //         onConfirm: () => setShowModal(false), 
-        //         showAbortButton: false
-        //     });
-        // }
-        // setShowModal(true); 
+        console.log('sto editando la ricetta ', newRecipe._id)
+        try {
+            await commitRecipe(formData, true)
+            setModalConfig({
+                title: 'Successo!',
+                message: 'Ricetta modificata con successo.',
+                onConfirm: () => {
+                    setShowModal(false);
+                    navigate(`/profile/${loggedUser._id}`); 
+                },
+                showAbortButton: false
+            });
+        } catch (error) {
+            setModalConfig({
+                title: 'Errore!',
+                message: 'Si è verificato un errore nella modifica della ricetta. Riprovare più tardi.',
+                onConfirm: () => setShowModal(false), 
+                showAbortButton: false
+            });
+        }
+        setShowModal(true); 
     }
 
     const updateFormHeader = function(){
