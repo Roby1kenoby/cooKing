@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import AddIngredient from "../../components/Ingredient/AddIngredient";
@@ -10,11 +10,11 @@ import { LoginContext } from "../../contexts/LoginContextProvider";
 import CustomModal from "../../components/Modal/CustomModal";
 
 function EditRecipe() {
+    
     const navigate = useNavigate()
-    const { newRecipe, setNewRecipe, saveRecipeHeader, handlePhaseImageChange } = useContext(NewRecipeContext)
+    const { newRecipe, setNewRecipe, commitRecipe, handlePhaseImageChange, dataReady } = useContext(NewRecipeContext)
 
     const [formData, setFormData] = useState(newRecipe)
-    const [image, setImage] = useState()
     const [message, setMessage] = useState()
     const [messageType, setMessageType] = useState()
     const [showModal, setShowModal] = useState(false)
@@ -33,34 +33,51 @@ function EditRecipe() {
 
     const saveRecipe = async function (event) {
         event.preventDefault()
-        try {
-            await saveRecipeHeader(formData)
-            setModalConfig({
-                title: 'Successo!',
-                message: 'Ricetta salvata con successo.',
-                onConfirm: () => {
-                    setShowModal(false);
-                    navigate(`/profile/${loggedUser._id}`); 
-                },
-                showAbortButton: false
-            });
-        } catch (error) {
-            setModalConfig({
-                title: 'Errore!',
-                message: 'Si è verificato un errore nel salvataggio della ricetta. Riprova.',
-                onConfirm: () => setShowModal(false), 
-                showAbortButton: false
-            });
-        }
-        setShowModal(true); 
+        console.log('ricetta salvata: ', formData)
+        // try {
+        //     await commitRecipe(formData)
+        //     setModalConfig({
+        //         title: 'Successo!',
+        //         message: 'Ricetta salvata con successo.',
+        //         onConfirm: () => {
+        //             setShowModal(false);
+        //             navigate(`/profile/${loggedUser._id}`); 
+        //         },
+        //         showAbortButton: false
+        //     });
+        // } catch (error) {
+        //     setModalConfig({
+        //         title: 'Errore!',
+        //         message: 'Si è verificato un errore nel salvataggio della ricetta. Riprova.',
+        //         onConfirm: () => setShowModal(false), 
+        //         showAbortButton: false
+        //     });
+        // }
+        // setShowModal(true); 
     }
 
-    const handleCloseModal = () => {
-        setShowModal(false); // Chiude il Modal
-        if (messageType === 'success') {
-            navigate(`/profile/${newRecipe.creatorId}`); // Reindirizza alla pagina del profilo
+    const updateFormHeader = function(){
+        if(dataReady && newRecipe){
+            setFormData({
+                title: newRecipe.title || '',
+                description: newRecipe.description || '',
+                portions: newRecipe.portions || 1,
+                preparationTime: newRecipe.preparationTime || '',
+                recipeImageUrl: newRecipe.recipeImageUrl || '',
+                recipeVideoUrl: newRecipe.recipeVideoUrl || '',
+                privateRecipe: newRecipe.privateRecipe === undefined ? false : newRecipe.privateRecipe
+            });
         }
     }
+
+    useEffect(() => {
+        updateFormHeader()
+    }, [dataReady]);  // Effettua il reset ogni volta che newRecipe cambia
+
+    // useEffect(()=>{
+    //     console.log('dataready in EditRecipe', dataReady)
+    //     console.log('newRecipe in EditRecipe', newRecipe)
+    // }, [dataReady, newRecipe])
 
     return (
         <Container className="mainContainer">

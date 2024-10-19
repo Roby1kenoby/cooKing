@@ -21,7 +21,7 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
 
     useEffect(() => {loadRecipes()}, [])
     
-    console.log(recipes)
+    // console.log(recipes)
     return (    
         <>
             {

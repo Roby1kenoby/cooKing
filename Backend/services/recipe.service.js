@@ -120,7 +120,11 @@ export const getSpecificRecipe = async function(recipeId, userId){
     .populate({
         path: 'phases',
         populate: {
-            path: 'phaseIngredients'
+            path: 'phaseIngredients',
+            populate:{
+                path: 'ingredientId'
+            }
+            
         }
     })
     .populate({

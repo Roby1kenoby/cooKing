@@ -11,7 +11,7 @@ import CustomModal from "../../components/Modal/CustomModal";
 
 function NewRecipe() {
     const navigate = useNavigate()
-    const { newRecipe, setNewRecipe, saveRecipeHeader, handlePhaseImageChange } = useContext(NewRecipeContext)
+    const { newRecipe, setNewRecipe, commitRecipe, handlePhaseImageChange } = useContext(NewRecipeContext)
 
     const [formData, setFormData] = useState(newRecipe)
     const [image, setImage] = useState()
@@ -34,7 +34,7 @@ function NewRecipe() {
     const saveRecipe = async function (event) {
         event.preventDefault()
         try {
-            await saveRecipeHeader(formData)
+            await commitRecipe(formData)
             setModalConfig({
                 title: 'Successo!',
                 message: 'Ricetta salvata con successo.',
@@ -55,12 +55,12 @@ function NewRecipe() {
         setShowModal(true); 
     }
 
-    const handleCloseModal = () => {
-        setShowModal(false); // Chiude il Modal
-        if (messageType === 'success') {
-            navigate(`/profile/${newRecipe.creatorId}`); // Reindirizza alla pagina del profilo
-        }
-    }
+    // const handleCloseModal = () => {
+    //     setShowModal(false); // Chiude il Modal
+    //     if (messageType === 'success') {
+    //         navigate(`/profile/${newRecipe.creatorId}`); // Reindirizza alla pagina del profilo
+    //     }
+    // }
 
     return (
         <Container className="mainContainer">

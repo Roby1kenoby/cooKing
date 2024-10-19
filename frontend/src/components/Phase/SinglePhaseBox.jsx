@@ -5,19 +5,47 @@ import AddIngredient from "../Ingredient/AddIngredient";
 import './SinglePhaseBox.css'
 function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
 
-    // const initialFormData = {
-    //     "tempId": phaseId,
-    //     "phaseIngredients": [],
-    //     "phaseNumber": addedPhases.findIndex(p => p === phaseId) + 1,
-    //     "description": "",
-    //     "phaseImageUrl": ""
-    // }
-
     const [formData, setFormData] = useState(phase)
     const [disable, setDisable] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [phaseSaved, setPhaseSaved] = useState(false)
-    const { newRecipe, addPhase, editPhase, deletePhase, handlePhaseImageChange } = useContext(NewRecipeContext)
+    const { newRecipe, editPhase, deletePhase, handlePhaseImageChange, dataReady, editModeContext } = useContext(NewRecipeContext)
+
+    useEffect(()=>{
+        console.log('newRecipe ', newRecipe)
+    },[newRecipe])
+
+    // function to update formData after receiving the recipe from the context
+    const setDataFromContext = function () {
+        if (dataReady) {
+            console.log("phase:", phase)
+            setFormData({
+                tempId: phase.tempId,
+                description: phase.description,
+                phaseNumber: phase.phaseNumber,
+                phaseImageUrl: phase.phaseImageUrl,
+                phaseIngredients: phase.phaseIngredients
+
+                // title: newRecipe.title || '',
+                // description: newRecipe.description || '',
+                // portions: newRecipe.portions || 1,
+                // preparationTime: newRecipe.preparationTime || '',
+                // recipeImageUrl: newRecipe.recipeImageUrl || '',
+                // recipeVideoUrl: newRecipe.recipeVideoUrl || '',
+                // privateRecipe: newRecipe.privateRecipe === undefined ? false : newRecipe.privateRecipe
+            });
+        }
+    }
+
+    useEffect(()=>{
+        setDataFromContext()
+    }, [dataReady])
+
+    // function to change icons if editing a recipe instead of creating it.
+    useEffect(() => {
+        editModeContext ? setDisable(true) : setDisable(false)
+        editModeContext ?setPhaseSaved(true) : setPhaseSaved(false)
+    }, [])
 
     const handleFormChange = function (event) {
         const target = event.target
@@ -67,53 +95,6 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
 
 
 
-    // return (
-    //     <Row className="align-items-center">
-    //         <Col sm={12} md={10}>
-    //             <Form.Group>
-    //                 <Form.Label>Fase</Form.Label>
-    //                 <Form.Control type="text"
-    //                     name="phaseNumber"
-    //                     value={formData.phaseNumber}
-    //                     disabled
-    //                 />
-    //             </Form.Group>
-    //             <Form.Group>
-    //                 <Form.Label>Descrizione</Form.Label>
-    //                 <Form.Control type="text"
-    //                     name="description"
-    //                     placeholder="Descrivi i passaggi di questa fase"
-    //                     value={formData.description}
-    //                     onChange={handleFormChange}
-    //                     required
-    //                     disabled={disable} />
-    //             </Form.Group>
-    //             <Form.Group>
-    //                 <Form.Label>Immagine</Form.Label>
-    //                 <Form.Control type="file"
-    //                     name="phaseImage"
-    //                     onChange={updatePhaseImage}
-    //                 />
-    //             </Form.Group>
-    //             {phaseSaved && <Form.Group>
-    //                 <Form.Label>Ingredienti della fase</Form.Label>
-    //                 <AddIngredient phaseId={phase.tempId}/>
-    //             </Form.Group>}
-    //         </Col>
-    //         <Col sm={12} md={2}>
-    //             {!disable && <Button variant="primary" onClick={savePhase}>
-    //                 Salva
-    //             </Button>}
-    //             {disable && <Button variant="warning" onClick={toggleMode}>
-    //                 Modifica
-    //             </Button>}
-    //             {disable && <Button variant="danger" onClick={removePhase}>
-    //                 Elimina
-    //             </Button>}
-    //         </Col>
-    //     </Row>
-    // );
-
     return (
         <Card className="mb-1">
             <Card.Header>
@@ -123,7 +104,6 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
                 <Row className="align-items-center">
                     <Col sm={12} md={10} className="p-0">
                         <Form.Group className="p-0">
-                            {/* <Form.Label>Descrizione</Form.Label> */}
                             <Form.Control
                                 as="textarea"
                                 rows={3}

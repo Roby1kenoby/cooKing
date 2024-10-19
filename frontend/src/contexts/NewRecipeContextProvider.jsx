@@ -8,25 +8,65 @@ export const NewRecipeContext = createContext()
 
 export function NewRecipeContextProvider({ children }) {
     const { token, loggedUser } = useContext(LoginContext)
-
+    const [editModeContext, setEditModeContext] = useState(false)
+    const [dataReady, setDataReady] = useState(false)
+    const [newRecipe, setNewRecipe] = useState({})
     // if ther's an id in the url
     const params = useParams()
     const recipeId = params.recipeId
 
     // function to fetch recipe data from id
     const fetchRecipeData = async function () {
+        setEditModeContext(true)
         try {
             const resp = await getRecipeData(token, recipeId)
             if (!resp) {
                 console.log('resp non ricevuta)')
             }
             const data = await resp.json()
-            setNewRecipe(data);
-            console.log(data)
+            const dataWithTemp = injectTempId(data)
+            setNewRecipe(dataWithTemp);
+            setDataReady(true)
 
         } catch (error) {
             return error
         }
+    }
+
+    // function to inject tempId into a single ingredient
+    const injectTempIdIntoIngredient = function (ing, phaseId=null) {
+        return {
+            ...ing,
+            tempId: ing._id,
+            tempPhaseId: phaseId ? phaseId : null,
+            tempName: ing.ingredientId.name,
+            tempMeasurementCategory: ing.ingredientId.measurementCategory,
+            ingredientId: ing.ingredientId._id
+        }
+    }
+
+    // function to prepare the recipe for the edit components
+    const injectTempId = function (recipeData) {
+        const recipeIngredients = 
+            recipeData.recipeIngredients.map(ing => injectTempIdIntoIngredient(ing)
+        )
+        
+        const phases = recipeData.phases.map(ph => {
+            return {...ph, tempId: ph._id}
+        })
+        
+
+        const phasesWithIng = phases.map(ph => {
+            const phIng = ph.phaseIngredients.map(phi => injectTempIdIntoIngredient(phi, ph._id))
+            return {...ph, phaseIngredients: phIng}
+        })
+        // console.log('fasi con ingredienti e tempId')
+        // console.log(phasesWithIng)
+
+
+
+        return { ...recipeData, 
+                    recipeIngredients: recipeIngredients, phases: phasesWithIng } 
     }
 
     const newRecipeData = {
@@ -44,19 +84,28 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     useEffect(() => {
-        recipeId ? fetchRecipeData() : setNewRecipe(newRecipeData)
-    }, [recipeId])
+        if(recipeId){
+            fetchRecipeData()
+        }
+        else{
+            setNewRecipe(newRecipeData)
+        }
+    }, [])
+
+    // useEffect(()=>{
+    //     console.log('newRecipe cambiato in ', newRecipe)
+    //     console.log('dataReady cambiato in', dataReady)
+    // }, [dataReady])
 
 
-    
-    
-    const [newRecipe, setNewRecipe] = useState(newRecipeData)
+
+
     const [phaseImages, setPhaseImages] = useState({})
-    
 
 
 
-    const saveRecipeHeader = function (header) {
+
+    const commitRecipe = function (header) {
         setNewRecipe(async (prevRecipe) => {
             const updatedRecipe = {
                 ...prevRecipe,
@@ -78,7 +127,7 @@ export function NewRecipeContextProvider({ children }) {
             return updatedRecipe
 
         })
-        
+
     }
 
     // const testUpdateNewRecipe = async function(){
@@ -94,25 +143,26 @@ export function NewRecipeContextProvider({ children }) {
         return savedRecipe
     }
 
-    const saveCloudinaryImages = async function(){
+    const saveCloudinaryImages = async function () {
         const urlObj = await utility.saveImagesToCloud(token, phaseImages)
         console.log(urlObj)
-        return(urlObj)
+        return (urlObj)
     }
 
-    const updateRecipeImageUrls = function(urlObj, recipeData){
-        let updatedRecipe = {...recipeData}
-        
+    const updateRecipeImageUrls = function (urlObj, recipeData) {
+        let updatedRecipe = { ...recipeData }
+
         Object.entries(urlObj).forEach(([phaseId, url]) => {
             phaseId === 'recipeImage' ?
-            updatedRecipe = {...updatedRecipe, recipeImageUrl: url} :
-            updatedRecipe = {...updatedRecipe,
-                phases: newRecipe.phases.map(p => 
-                    p.tempId === phaseId ?
-                    {...p, phaseImageUrl: url} :
-                    p
-                )
-            }
+                updatedRecipe = { ...updatedRecipe, recipeImageUrl: url } :
+                updatedRecipe = {
+                    ...updatedRecipe,
+                    phases: newRecipe.phases.map(p =>
+                        p.tempId === phaseId ?
+                            { ...p, phaseImageUrl: url } :
+                            p
+                    )
+                }
         })
         return updatedRecipe
     }
@@ -182,8 +232,8 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     const editPhase = function (phase) {
-        console.log('sono in edit phase, voglio inserire questo')
-        console.log(phase)
+        // console.log('sono in edit phase, voglio inserire questo')
+        // console.log(phase)
         setNewRecipe(prevRecipe => ({
             ...prevRecipe,
             phases: prevRecipe.phases.map(p =>
@@ -262,7 +312,7 @@ export function NewRecipeContextProvider({ children }) {
 
     // props for the childrens
     const value = {
-        newRecipe, setNewRecipe, saveRecipeHeader,
+        newRecipe, setNewRecipe, commitRecipe, dataReady, editModeContext,
         addIngredient, editIngredient, deleteIngredient, addPhaseIngredient, deletePhaseIngredient,
         addTag, editTag, deleteTag,
         addPhase, editPhase, deletePhase, handlePhaseImageChange
