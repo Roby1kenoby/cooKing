@@ -27,12 +27,6 @@ function SearchBar({ optionsArray, setOptionsArray, type }) {
                 default: return ''
             }
             
-            // if (type === 'ingredientsIn') {
-            //     response = await getAllIngredients(token, query)
-            // }
-            // else {
-            //     response = await getAllTags(token, query)
-            // }
             setOptions(response);
             setLoading(false);
         } catch (error) {

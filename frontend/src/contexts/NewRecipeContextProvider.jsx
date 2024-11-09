@@ -34,7 +34,7 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     // function to inject tempId into a single ingredient
-    const injectTempIdIntoIngredient = function (ing, phaseId=null) {
+    const injectTempIdIntoIngredient = function (ing, phaseId = null) {
         return {
             ...ing,
             tempId: ing._id,
@@ -47,26 +47,28 @@ export function NewRecipeContextProvider({ children }) {
 
     // function to prepare the recipe for the edit components
     const injectTempId = function (recipeData) {
-        const recipeIngredients = 
+        const recipeIngredients =
             recipeData.recipeIngredients.map(ing => injectTempIdIntoIngredient(ing)
-        )
-        
+            )
+
         const phases = recipeData.phases.map(ph => {
-            return {...ph, tempId: ph._id}
+            return { ...ph, tempId: ph._id }
         })
-        
+
 
         const phasesWithIng = phases.map(ph => {
             const phIng = ph.phaseIngredients.map(phi => injectTempIdIntoIngredient(phi, ph._id))
-            return {...ph, phaseIngredients: phIng}
+            return { ...ph, phaseIngredients: phIng }
         })
         // console.log('fasi con ingredienti e tempId')
         // console.log(phasesWithIng)
 
 
 
-        return { ...recipeData, 
-                    recipeIngredients: recipeIngredients, phases: phasesWithIng } 
+        return {
+            ...recipeData,
+            recipeIngredients: recipeIngredients, phases: phasesWithIng
+        }
     }
 
     const newRecipeData = {
@@ -84,10 +86,10 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     useEffect(() => {
-        if(recipeId){
+        if (recipeId) {
             fetchRecipeData()
         }
-        else{
+        else {
             setNewRecipe(newRecipeData)
         }
     }, [])
@@ -98,10 +100,10 @@ export function NewRecipeContextProvider({ children }) {
 
 
 
-    const commitRecipe = async function (header, edit=null) {
-        if(edit){
+    const commitRecipe = async function (header, edit = null) {
+        if (edit) {
             const deletedRecipe = await deleteRecipe(token, recipeId)
-            
+
             // wait a bit to sync the db
             await new Promise(resolve => setTimeout(resolve, 1000));
             setNewRecipe(async (prevRecipe) => {
@@ -113,19 +115,19 @@ export function NewRecipeContextProvider({ children }) {
                     portions: header.portions,
                     preparationTime: header.preparationTime,
                     recipeVideoUrl: header.recipeVideoUrl,
-                    recipeImageUrl: header.recipeImagerUrl,
                     privateRecipe: header.privateRecipe === "on" ? true : false,
                     phases: prevRecipe.phases ? prevRecipe.phases : [],
                     recipeIngredients: prevRecipe.recipeIngredients ? prevRecipe.recipeIngredients : [],
                     tagsIds: prevRecipe.tagsIds ? prevRecipe.tagsIds : []
                 }
                 const urlObj = await saveCloudinaryImages()
+                console.log('updatedRecipe:', updatedRecipe)
                 const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
-                postRecipe(updatedRecipe2)
-                return updatedRecipe
+                const commitedRecipe = await postRecipe(updatedRecipe2)
+                return commitedRecipe
             })
         }
-        else{
+        else {
             setNewRecipe(async (prevRecipe) => {
                 const updatedRecipe = {
                     ...prevRecipe,
@@ -143,8 +145,8 @@ export function NewRecipeContextProvider({ children }) {
                 }
                 const urlObj = await saveCloudinaryImages()
                 const updatedRecipe2 = updateRecipeImageUrls(urlObj, updatedRecipe)
-                postRecipe(updatedRecipe2)
-                return updatedRecipe
+                const commitedRecipe = await postRecipe(updatedRecipe2)
+                return commitedRecipe
             })
         }
     }
@@ -158,7 +160,7 @@ export function NewRecipeContextProvider({ children }) {
 
     const saveCloudinaryImages = async function () {
         const urlObj = await utility.saveImagesToCloud(token, phaseImages)
-        console.log(urlObj)
+        console.log('immagini salvate:', urlObj)
         return (urlObj)
     }
 
@@ -245,13 +247,21 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     const editPhase = function (phase) {
-        // console.log('sono in edit phase, voglio inserire questo')
-        // console.log(phase)
+        // I need to only update the header of the phase, not the rest of it.
+        // So i need to find it to get all the other elements it contains.
+        const foundPhase = newRecipe.phases.find(ph => ph.tempId === phase.tempId)
+        const updatedPhase = foundPhase ? {
+            ...foundPhase,
+            description: phase.description, phaseNumber: phase.phaseNumber
+        } : phase
+
+        console.log('fase aggiornata nel context', updatedPhase)
+
         setNewRecipe(prevRecipe => ({
             ...prevRecipe,
             phases: prevRecipe.phases.map(p =>
                 p.tempId === phase.tempId ?
-                    phase :
+                    updatedPhase :
                     p
             )
         }
@@ -265,7 +275,6 @@ export function NewRecipeContextProvider({ children }) {
     }
 
     const addPhaseIngredient = function (ingredient) {
-        // debugger
         // find the saved phase in newRecipe
         const phase = newRecipe.phases.find(p => p.tempId === ingredient.tempPhaseId)
         // find if ingredient is already present in the phase

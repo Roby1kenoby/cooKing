@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import AddIngredient from "../../components/Ingredient/AddIngredient";
@@ -8,18 +8,21 @@ import AddPhase from "../../components/Phase/AddPhase";
 import './NewRecipe.css'
 import { LoginContext } from "../../contexts/LoginContextProvider";
 import CustomModal from "../../components/Modal/CustomModal";
+import './EditRecipe.css'
 
 function EditRecipe() {
-    
+
     const navigate = useNavigate()
     const { newRecipe, setNewRecipe, commitRecipe, handlePhaseImageChange, dataReady } = useContext(NewRecipeContext)
-
+    const {refresh, setRefresh} = useContext(LoginContext)
     const [formData, setFormData] = useState(newRecipe)
     const [message, setMessage] = useState()
     const [messageType, setMessageType] = useState()
     const [showModal, setShowModal] = useState(false)
     const [modalConfig, setModalConfig] = useState({});
-    const {loggedUser} = useContext(LoginContext)
+    const { loggedUser } = useContext(LoginContext)
+
+    const targetRef = useRef(null);
 
     const handleFormChange = function (event) {
         const target = event.target
@@ -41,7 +44,7 @@ function EditRecipe() {
                 message: 'Ricetta modificata con successo.',
                 onConfirm: () => {
                     setShowModal(false);
-                    navigate(`/profile/${loggedUser._id}`); 
+                    navigate(`/profile/${loggedUser._id}`);
                 },
                 showAbortButton: false
             });
@@ -49,15 +52,16 @@ function EditRecipe() {
             setModalConfig({
                 title: 'Errore!',
                 message: 'Si è verificato un errore nella modifica della ricetta. Riprovare più tardi.',
-                onConfirm: () => setShowModal(false), 
+                onConfirm: () => setShowModal(false),
                 showAbortButton: false
             });
         }
-        setShowModal(true); 
+        setShowModal(true);
+        setRefresh(!refresh)
     }
 
-    const updateFormHeader = function(){
-        if(dataReady && newRecipe){
+    const updateFormHeader = function () {
+        if (dataReady && newRecipe) {
             setFormData({
                 title: newRecipe.title || '',
                 description: newRecipe.description || '',
@@ -74,6 +78,9 @@ function EditRecipe() {
         updateFormHeader()
     }, [dataReady]);  // Effettua il reset ogni volta che newRecipe cambia
 
+    const goToPhases = function () {
+        targetRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
     // useEffect(()=>{
     //     console.log('dataready in EditRecipe', dataReady)
     //     console.log('newRecipe in EditRecipe', newRecipe)
@@ -218,16 +225,21 @@ function EditRecipe() {
                     <Col md={12}>
                         <Form.Group>
                             <Form.Label className="p-0">Fasi</Form.Label>
-                            <div className="p-0">
+                            <div ref={targetRef} className="p-0">
                                 <AddPhase />
                             </div>
                         </Form.Group>
                     </Col>
                 </Row>
 
-                <div className="text-center">
+                <div className="text-center btnContainer">
                     <Button variant="primary" type='submit'>
                         Salva Ricetta
+                    </Button>
+                    <Button variant="primary" onClick={goToPhases} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
+                        </svg>
                     </Button>
                 </div>
             </Form>

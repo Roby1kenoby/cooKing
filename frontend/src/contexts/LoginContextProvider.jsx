@@ -5,9 +5,10 @@ export const LoginContext = createContext()
 export function LoginContextProvider({ children }) {
     const [loggedUser, setLoggedUser] = useState(null)
     const [token, setToken] = useState(null)
+    const [refresh, setRefresh] = useState(false)
 
     // props for the childrens
-    const value = {loggedUser, setLoggedUser, token, setToken}
+    const value = {loggedUser, setLoggedUser, token, setToken, refresh, setRefresh}
     
     const manageToken = function (){
         

@@ -24,10 +24,13 @@ function AddIngredient({ phaseId = null }) {
                 tempName: existingIngredient?.name || i.name,
                 tempMeasurementCategory: existingIngredient?.measurementCategory || i.measurementCategory,
                 ingredientId: i._id,
-                measurementUnit: existingIngredient?.measurementUnit || '',
+                measurementUnit: existingIngredient?.measurementUnit || 
+                    (i.measurementCategory === 'Solid' ? 'g' : 
+                    i.measurementCategory === 'Liquid' ? 'ml' : ''),
                 phaseId: existingIngredient?.phaseId || null,
                 quantity: existingIngredient?.quantity || 0,
-                additionalInfos: existingIngredient?.additionalInfos || ''
+                additionalInfos: existingIngredient?.additionalInfos || '',
+                newIng: existingIngredient ? false : true
             }
             return singleIngredient
         })
@@ -84,14 +87,7 @@ function AddIngredient({ phaseId = null }) {
     useEffect(updateRecipe, [selectedIngredients])
 
 
-
-    // useEffect(()=>{
-    //     console.log('selectedingredients: ', selectedIngredients)
-    //     console.log('newRecipe: ', newRecipe)
-    // },[selectedIngredients, newRecipe])
-
-
-
+    
     return (
         <>
             <SearchBar optionsArray={selectedIngredients} setOptionsArray={setSelectedIngredients} type='ingredientsIn' />

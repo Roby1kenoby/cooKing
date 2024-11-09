@@ -25,27 +25,22 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
                 phaseNumber: phase.phaseNumber,
                 phaseImageUrl: phase.phaseImageUrl,
                 phaseIngredients: phase.phaseIngredients
-
-                // title: newRecipe.title || '',
-                // description: newRecipe.description || '',
-                // portions: newRecipe.portions || 1,
-                // preparationTime: newRecipe.preparationTime || '',
-                // recipeImageUrl: newRecipe.recipeImageUrl || '',
-                // recipeVideoUrl: newRecipe.recipeVideoUrl || '',
-                // privateRecipe: newRecipe.privateRecipe === undefined ? false : newRecipe.privateRecipe
             });
         }
     }
 
     useEffect(()=>{
-        setDataFromContext()
-    }, [dataReady])
-
-    // function to change icons if editing a recipe instead of creating it.
-    useEffect(() => {
-        editModeContext ? setDisable(true) : setDisable(false)
-        editModeContext ?setPhaseSaved(true) : setPhaseSaved(false)
+        !phase.newPhase ? setDisable(true) : setDisable(false)
+        !phase.newPhase ? setPhaseSaved(true) : setPhaseSaved(false)
     }, [])
+
+    // update of the page on loaded page and modeState management
+    useEffect(()=>{
+        setDataFromContext()
+        // // change icons if editing a recipe instead of creating it.
+        // editModeContext ? setDisable(true) : setDisable(false)
+        // editModeContext ? setPhaseSaved(true) : setPhaseSaved(false)
+    }, [dataReady])
 
     const handleFormChange = function (event) {
         const target = event.target
@@ -59,6 +54,7 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
     const savePhase = function () {
         // debugger
         if (editMode) {
+            console.log('formData in edit, ', formData)
             editPhase(formData)
             setEditMode(!editMode)
         }
@@ -123,6 +119,7 @@ function SinglePhaseBox({ phase, addedPhases, setAddedPhases }) {
                                 name="phaseImage"
                                 onChange={updatePhaseImage}
                                 className="text-form-field"
+                                disabled={disable}
                             />
                         </Form.Group>
                         {phaseSaved && (

@@ -1,0 +1,40 @@
+- Fork progetto
+- Backend
+    - Refactoring Backend per gestire ricette come unico oggetto
+        - Modifica degli schema coinvolti
+            - Ricetta
+            - Fasi
+            - Ingredienti Ricetta
+        - Modifica delle rotte coinvolte, dei loro controller, dei loro services e delle relative requests
+            - recipes
+            - recipeIngredients
+            - phases
+    - Implementare invio email su registrazione utente
+    - Implementare recupero password utente
+- Frontend
+    - Rifare il menù collassabile
+    - Rivedere la palette generale
+    - Far funzionare il redirect alla login page in seguito al Logout
+    - Includere paginazione per le ricette
+    - Spostare le logiche della ricerca sul backend
+    - Rivedere l'aspetto responsive della visualizzazione singola ricetta
+        - Immagine senza padding
+        - Testo lista ingredienti non deve andare a capo rispetto al check
+        - Larghezza fasi fissa a prescindere dall'immagine e dall'elenco di ingredienti
+        - Implementare carousel di lun - dev
+        - Migliorare icone per scorrere le fasi
+        - Se manca l'immagine di una fase, il testo deve coprire tutto lo spazio disponibile
+        - Implementare funzione di render degli ingredienti con corrette quantità in base a UM
+    - Inserimento Ricetta
+        - Su focus ricerca tags, proporre i più recenti utilizzati, o almeno qualche tag in ordine alfabetico
+        - Togliere il discorso del salvataggio della fase per far comparire la selezione degli ingredienti
+        - Togliere gli ingredienti di ricetta, generarli a partire da quelli inseriti nelle fasi (?)
+        - Impaginazione delle card ingredienti, altezza fissa per nome ingrediente
+        - Aggiungere preview immagini
+        - Pulsante aggiungi fase deve scendere con lo scroll della pagina nelle varie fasi
+        - Implementare funzione di conversione degli ingredienti pre-salvataggio su DB
+    - Profilo Utente
+        - Se visito pagina di altro utente, non devono apparire il messaggio di benvenuto, il pulsante per creare nuove ricette o i pulsanti di edit
+        - Creare pagina per la modifica delle propre informazioni personali
+        - Creare pagina per aggiungere i propri ingredienti
+        - Creare pagina per aggiungere i propri tag

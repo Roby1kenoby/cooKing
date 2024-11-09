@@ -5,7 +5,7 @@ import RecipePreview from './RecipePreview.jsx'
 
 function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
     // if context user = userId, get all recipes, otherwise only the public ones
-    const {token, loggedUser} = useContext(LoginContext)
+    const {token, loggedUser, refresh} = useContext(LoginContext)
     const [recipes, setRecipes] = useState([])
     const [refreshRecipes, setRefreshRecipes] = useState(false)
         
@@ -39,12 +39,15 @@ function RecipePreviewContainer({userId, tags, ingredients, searchValue}) {
             loadedRecipes = loadedRecipes.filter(recipe => 
                 recipe.title.toLowerCase().includes(searchValue.toLowerCase()))
         }
-    
+        
+        loadedRecipes.sort((t1, t2) => {
+            return t1.title.toLowerCase() < t2.title.toLowerCase() ? -1 : 1
+        })
         // filtra loadedRecipe per ingredientId
         setRecipes(loadedRecipes)
     }
 
-    useEffect(() => {loadRecipes()}, [refreshRecipes, tags, ingredients, searchValue])
+    useEffect(() => {loadRecipes()}, [refreshRecipes, refresh, tags, ingredients, searchValue])
     useEffect(()=>{
         console.log(ingredients)
         console.log(recipes)

@@ -18,7 +18,8 @@ function SingleIngredientBox({ ingredient, phaseId, setSelectedIngredients }) {
 
     // function to change icons if editing a recipe instead of creating it.
     useEffect(()=>{
-        editModeContext ? setDisable(true) : setDisable(false)
+        // editModeContext ? setDisable(true) : setDisable(false)
+        !ingredient.newIng ? setDisable(true) : setDisable(false)
     },[])
 
 

@@ -2,7 +2,7 @@ import './AddPhase.css'
 import { Button, Col, Row } from 'react-bootstrap';
 import SinglePhaseBox from './SinglePhaseBox';
 import {v4 as uuidv4} from 'uuid';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { NewRecipeContext } from '../../contexts/NewRecipeContextProvider';
 
 function AddPhase() {
@@ -12,6 +12,7 @@ function AddPhase() {
     const newPhase = function(){
         const tempId = uuidv4()
         setAddedPhases([...addedPhases, tempId])
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     
@@ -26,7 +27,8 @@ function AddPhase() {
             description: existingPhase?.description || '',
             phaseNumber: i+1,
             phaseIngredients : existingPhase?.phaseIngredients || [],
-            phaseImageUrl: existingPhase?.phaseImageUrl || ''
+            phaseImageUrl: existingPhase?.phaseImageUrl || '',
+            newPhase: true
             }
             return singlePhase
         })
@@ -50,10 +52,12 @@ function AddPhase() {
 
     useEffect(updateRecipe, [addedPhases])
 
+    const targetRef = useRef(null);
+
     // useEffect(() => {console.log(newRecipe); console.log(addedPhases)},[newRecipe, addedPhases])
 
     return ( 
-        <div className='d-flex flex-column justify-content-center'>
+        <div ref={targetRef} className='d-flex flex-column justify-content-center'>
             <Button className="mb-1" onClick={newPhase}>
                 Aggiungi Fase
             </Button>

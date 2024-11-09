@@ -4,24 +4,7 @@ import './Phase.css'
 
 function Phase({ phase }) {
 
-    
-    //     <Container>
-    //         <Row>
-    //             <Col sm={12} md={4}>
-    //                 <img src={phase.phaseImageUrl} alt="" />
-    //             </Col>
-    //             <Col sm={12} md={4}>
-    //                 <IngredientBox ingredients={phase.phaseIngredients} />
-    //             </Col>
-    //         </Row>
-    //         <Row>
-    //             <Col sm={12} md={4}>
-    //                 {phase.description}
-    //             </Col>
-    //         </Row>
-
-    //     </Container>
-    // );
+    console.log(phase._id, phase.phaseImageUrl)
     return (
         <Container className="phase-container d-flex">
             <Row>
