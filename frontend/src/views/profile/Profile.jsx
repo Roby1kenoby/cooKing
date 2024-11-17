@@ -50,7 +50,7 @@ function Profile() {
                     <h2>Benvenut*, <p>{`\n${userData.surname} ${userData.name} `}</p></h2>
                     <Button
                         as={Link}
-                        to={'/recipe/newRecipe'}
+                        to={'/api/recipe/newRecipe'}
                         className='btn-big btn-primary'
                     >
                         Crea nuova ricetta

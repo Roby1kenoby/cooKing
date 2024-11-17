@@ -1,4 +1,4 @@
-const URI = `${process.env.REACT_APP_API_URL}/users`
+const URI = `${process.env.REACT_APP_API_URL}/api/users`
 
 export const createUser = async function(userData, avatar){
     try {
@@ -13,6 +13,9 @@ export const createUser = async function(userData, avatar){
         formData.append('avatar', avatar)
         
         const resp = await fetch(URI+'/createUser',{
+            headers:{
+                'api-version': 'v1'
+            },
             method: 'POST',
             body: formData
         })

@@ -1,10 +1,11 @@
-const URI = `${process.env.REACT_APP_API_URL}/login`
+const URI = `${process.env.REACT_APP_API_URL}/api/login`
 
 export const Login = async (loginData) => {
     try {
         const resp = await fetch(URI, {
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'api-version': 'v1'
             },
             method: 'POST',
             body: JSON.stringify(loginData)
@@ -26,7 +27,8 @@ export const Me = async function(token){
     try {
         const request = await fetch(URI + '/me',{
             headers:{
-                Authorization: 'Bearer ' + token
+                Authorization: 'Bearer ' + token,
+                'api-version': 'v1'
             }
         })
         const loggedUserData = await request.json()

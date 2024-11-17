@@ -1,5 +1,5 @@
 import express from 'express'
-import authentication from '../middlewares/authentication.js'
+import authentication from '../../../middlewares/authentication.js'
 import * as recipeIngredientController from '../controllers/recipeIngredient.controller.js'
 
 const router = express.Router()

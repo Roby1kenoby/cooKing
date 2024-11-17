@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Recipe from '../models/recipeSchema.js'
+import Recipe from '../../../models/recipeSchema.js'
 import * as RecipeIngredientService from './recipeIngredient.service.js'
 import * as PhaseService from '../services/phase.service.js'
 

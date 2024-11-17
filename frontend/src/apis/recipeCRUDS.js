@@ -1,11 +1,12 @@
-const URI = `${process.env.REACT_APP_API_URL}/recipes`
+const URI = `${process.env.REACT_APP_API_URL}/api/recipes`
 
 export const getRecipeData = async function(token, recipeId){
     try {
         const recipeData = await fetch(`${URI}/${recipeId}`,{
             headers:{
                 Authorization: `Bearer ${token}`,
-                "Content-type": 'application/json'
+                "Content-type": 'application/json',
+                'api-version': 'v1'
             }
         })
         if(!recipeData){
@@ -29,6 +30,7 @@ export const saveRecipe = async function(token, recipeData){
             headers:{
                 Authorization: `Bearer ${token}`,
                 "Content-type": 'application/json',
+                'api-version': 'v1'
             },
             method: "POST",
             body: JSON.stringify(recipeData)
@@ -48,7 +50,8 @@ export const deleteRecipe = async function(token, recipeId){
         const deletedRecipe = await fetch(`${URI}/${recipeId}/deleteRecipe`,{
             headers:{
                 Authorization: `Bearer ${token}`,
-                "Content-type": 'application/json'
+                "Content-type": 'application/json',
+                'api-version': 'v1'
             },
             method:'DELETE'
         })

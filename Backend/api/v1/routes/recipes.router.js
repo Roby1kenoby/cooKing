@@ -1,6 +1,6 @@
 import express from 'express'
-import authentication from '../middlewares/authentication.js'
-import checkRecipe from '../middlewares/checkRecipe.js'
+import authentication from '../../../middlewares/authentication.js'
+import checkRecipe from '../../../middlewares/checkRecipe.js'
 import * as recipeController from '../controllers/recipe.controller.js'
 
 const router = express.Router()

@@ -1,7 +1,7 @@
 import express from 'express'
 import * as userController from '../controllers/user.controller.js'
-import authentication from '../middlewares/authentication.js'
-import cloudinary from '../middlewares/cloudinary.js'
+import authentication from '../../../middlewares/authentication.js'
+import cloudinary from '../../../middlewares/cloudinary.js'
 
 const router = express.Router()
 

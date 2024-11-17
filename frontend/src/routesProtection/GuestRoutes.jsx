@@ -8,7 +8,7 @@ function GuestRoutes() {
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('userId');
     
-    const redirectUrl = userId ? `/profile/${userId}` : `/profile/${loggedUser?._id}`
+    const redirectUrl = userId ? `/api/profile/${userId}` : `/api/profile/${loggedUser?._id}`
     
 
     

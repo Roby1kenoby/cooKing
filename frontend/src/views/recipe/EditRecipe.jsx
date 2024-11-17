@@ -44,7 +44,7 @@ function EditRecipe() {
                 message: 'Ricetta modificata con successo.',
                 onConfirm: () => {
                     setShowModal(false);
-                    navigate(`/profile/${loggedUser._id}`);
+                    navigate(`/api/profile/${loggedUser._id}`);
                 },
                 showAbortButton: false
             });

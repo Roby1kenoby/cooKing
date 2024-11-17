@@ -1,4 +1,4 @@
-import User from '../models/userSchema.js'
+import User from '../../../models/userSchema.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -62,7 +62,7 @@ export const getLoggedUserInfos = function(req, res) {
 export const callbackGoogle = (req,res) => {
     console.log(req.user.jwtToken)
 	const token = req.user.jwtToken
-    console.log(`sto facendo il redirect a ${process.env.FRONTEND_URL}/login?token=${token}`)
-	res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`)
+    console.log(`sto facendo il redirect a ${process.env.FRONTEND_URL}/api/login?token=${token}`)
+	res.redirect(`${process.env.FRONTEND_URL}/api/login?token=${token}`)
 }
 

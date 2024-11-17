@@ -1,4 +1,4 @@
-const URI = `${process.env.REACT_APP_API_URL}/ingredients`
+const URI = `${process.env.REACT_APP_API_URL}/api/ingredients`
 
 export const getAllIngredients = async function(token, searchString = null){
     try {
@@ -8,7 +8,8 @@ export const getAllIngredients = async function(token, searchString = null){
         const resp = await fetch(`${URI + qryString}`,{
             headers: {
                 Authorization: 'Bearer ' + token,
-                "Content-type": 'application/json'
+                "Content-type": 'application/json',
+                'api-version': 'v1'
             }
         })
 

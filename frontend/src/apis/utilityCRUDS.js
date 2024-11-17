@@ -1,4 +1,4 @@
-const URI = `${process.env.REACT_APP_API_URL}/utility`
+const URI = `${process.env.REACT_APP_API_URL}/api/utility`
 
 export const saveImage = async function(token, file){
     try {
@@ -8,7 +8,8 @@ export const saveImage = async function(token, file){
         
         const resp = await fetch(URI+'/saveImage',{
             headers:{
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'api-version': 'v1'
             },
             method: 'POST',
             body: formData

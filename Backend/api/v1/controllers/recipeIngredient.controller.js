@@ -1,4 +1,4 @@
-import RecipeIngredient from '../models/recipeIngredientSchema.js'
+import RecipeIngredient from '../../../models/recipeIngredientSchema.js'
 import * as RecipeIngredientService from '../services/recipeIngredient.service.js'
 
 /* -------------- GET --------------*/

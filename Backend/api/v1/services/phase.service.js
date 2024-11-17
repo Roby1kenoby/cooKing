@@ -1,4 +1,4 @@
-import Phase from '../models/phaseSchema.js'
+import Phase from '../../../models/phaseSchema.js'
 import * as RecipeIngredientService from '../services/recipeIngredient.service.js'
 
 export const createPhaseHeader = async function(data, session=null){

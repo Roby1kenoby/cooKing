@@ -1,4 +1,4 @@
-const URI = `${process.env.REACT_APP_API_URL}/tags`
+const URI = `${process.env.REACT_APP_API_URL}/api/tags`
 
 export const getAllTags = async function(token, searchString = null){
     try {
@@ -8,7 +8,8 @@ export const getAllTags = async function(token, searchString = null){
         const resp = await fetch(`${URI + qryString}`,{
             headers: {
                 Authorization: 'Bearer ' + token,
-                "Content-type": 'application/json'
+                "Content-type": 'application/json',
+                'api-version': 'v1'
             }
         })
 

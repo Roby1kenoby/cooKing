@@ -23,22 +23,22 @@ function App() {
         {token && <CustomNavbar></CustomNavbar>}
         <Routes>
           <Route element={<GuestRoutes/>}>
-            <Route path='/login' element={<Login />} />
+            <Route path='/api/login' element={<Login />} />
           </Route>
           <Route element={<ProtectedRoutes/>}>
             <Route path='/' element={<Home />}/>
-            <Route path='/recipe/:recipeId' element={<Recipe />}/>
-              <Route path='/recipe/newRecipe' element={
+            <Route path='/api/recipe/:recipeId' element={<Recipe />}/>
+              <Route path='/api/recipe/newRecipe' element={
                 <NewRecipeContextProvider>
                   <NewRecipe />
                 </NewRecipeContextProvider>    
                 }/>
-              <Route path='/recipe/editRecipe/:recipeId' element={
+              <Route path='/api/recipe/editRecipe/:recipeId' element={
                 <NewRecipeContextProvider>
                 <EditRecipe />
               </NewRecipeContextProvider>    
               }/>
-            <Route path='/profile/:profileId' element={<Profile />}/>
+            <Route path='/api/profile/:profileId' element={<Profile />}/>
           </Route>
         </Routes>
         {token && <CustomFooter />}

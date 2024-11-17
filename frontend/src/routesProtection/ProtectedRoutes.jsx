@@ -10,7 +10,7 @@ function ProtectedRoutes() {
     const params = useParams()
     const userId = params.profileId
 
-    const redirectUrl = userId ? `/login/?userId=${userId}` : '/login'
+    const redirectUrl = userId ? `/api/login/?userId=${userId}` : '/api/login'
     
     return ( 
         token ? <Outlet/> : <Navigate to={redirectUrl} />

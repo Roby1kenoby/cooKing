@@ -1,5 +1,5 @@
 import express from 'express'
-import authentication from '../middlewares/authentication.js'
+import authentication from '../../../middlewares/authentication.js'
 import * as tagController from '../controllers/tag.controller.js'
 
 const router = express.Router()
