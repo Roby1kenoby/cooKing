@@ -40,7 +40,7 @@ function NewRecipe() {
                 message: 'Ricetta salvata con successo.',
                 onConfirm: () => {
                     setShowModal(false);
-                    navigate(`/profile/${loggedUser._id}`); 
+                    navigate(`/api/profile/${loggedUser._id}`); 
                 },
                 showAbortButton: false
             });

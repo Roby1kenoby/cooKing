@@ -23,7 +23,7 @@ function CustomNavbar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <NavDropdown title="Menu" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to={`/profile/${loggedUser?._id}`}>Home</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={`api/profile/${loggedUser?._id}`}>Home</NavDropdown.Item>
                             <NavDropdown.Item as={Link} onClick={handleLogout}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
