@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Recipe from '../../../models/recipeSchema.js'
+import Recipe from '../../../models/v1/recipeSchema.js'
 import * as RecipeIngredientService from './recipeIngredient.service.js'
 import * as PhaseService from '../services/phase.service.js'
 
@@ -14,8 +14,9 @@ export const createRecipeHeader = async function(data, userId, session=null){
     }
 
     const newRecipe = new Recipe({
+        version: data.version,
         userId: userId,
-        tagsIds: data.tagsIds,
+        tags: data.tags,
         title: data.title,
         description: data.description,
         portions: data.portions,
@@ -41,9 +42,10 @@ export const createRecipeHeader = async function(data, userId, session=null){
 
 export const saveRecipe = async function(data, userId){
     
-    const recipeHeader = {
+    const newRecipe = new Recipe({
+        version: data.version,
         userId: userId,
-        tagsIds: data.tagsIds,
+        tags: data.tags,
         title: data.title,
         description: data.description,
         portions: data.portions,
@@ -51,64 +53,66 @@ export const saveRecipe = async function(data, userId){
         recipeImageUrl: data.recipeImageUrl,
         recipeVideoUrl: data.recipeVideoUrl,
         privateRecipe: data.privateRecipe,
-        phases: [],
-        recipeIngredients: []
-    }
+        phases: data.phases,
+        recipeIngredients: data.recipeIngredients
+    })
 
-    const ingredientsArray = data.recipeIngredients
-    const phasesArray = data.phases
 
-    // saving in one transaction
-    const session = await mongoose.startSession()
-    session.startTransaction()
+
+    // const ingredientsArray = data.recipeIngredients
+    // const phasesArray = data.phases
+
+    // // saving in one transaction
+    // const session = await mongoose.startSession()
+    // session.startTransaction()
 
     try {
-        const createdRecipe = await createRecipeHeader(recipeHeader, userId, session)
-        // at this point, we have a recipe on the db (in trasnaction) and in memory. I can edit
-        // the recipe in memory, but if i do, i have to save again to commit the differences.
-        const createdRecipeId = createdRecipe._id
+    //     const createdRecipe = await createRecipeHeader(recipeHeader, userId, session)
+    //     // at this point, we have a recipe on the db (in trasnaction) and in memory. I can edit
+    //     // the recipe in memory, but if i do, i have to save again to commit the differences.
+    //     const createdRecipeId = createdRecipe._id
         
-        /**
-         *      SAVING RECIPE INGREDIENTS
-         */
-        const savedIngredients = []
-        // saving ingredients and getting ids to append to recipe
-        for (let ingredient of ingredientsArray){
-            const currentIngredient = {...ingredient, recipeId:createdRecipeId}
-            const createdRecipeIngredient = await RecipeIngredientService.createRecipeIngredient(currentIngredient, session)
-            savedIngredients.push(createdRecipeIngredient._id)
-        }
+    //     /**
+    //      *      SAVING RECIPE INGREDIENTS
+    //      */
+    //     const savedIngredients = []
+    //     // saving ingredients and getting ids to append to recipe
+    //     for (let ingredient of ingredientsArray){
+    //         const currentIngredient = {...ingredient, recipeId:createdRecipeId}
+    //         const createdRecipeIngredient = await RecipeIngredientService.createRecipeIngredient(currentIngredient, session)
+    //         savedIngredients.push(createdRecipeIngredient._id)
+    //     }
 
-        createdRecipe.recipeIngredients = savedIngredients
+    //     createdRecipe.recipeIngredients = savedIngredients
 
-        /**
-         *      SAVING RECIPE PHASES
-         */
+    //     /**
+    //      *      SAVING RECIPE PHASES
+    //      */
 
-        const savedPhases = []
+    //     const savedPhases = []
         
-        for (let phase of phasesArray){
-            const currentPhase = {...phase, recipeId:createdRecipeId}
-            const createdPhase = await PhaseService.savePhase(currentPhase, session)
-            savedPhases.push(createdPhase._id)
-        }
+    //     for (let phase of phasesArray){
+    //         const currentPhase = {...phase, recipeId:createdRecipeId}
+    //         const createdPhase = await PhaseService.savePhase(currentPhase, session)
+    //         savedPhases.push(createdPhase._id)
+    //     }
 
-        createdRecipe.phases = savedPhases
+    //     createdRecipe.phases = savedPhases
 
-        // need to save again to commit the edits
-        await createdRecipe.save(session)
+    //     // need to save again to commit the edits
+    //     await createdRecipe.save(session)
 
 
-        await session.commitTransaction();
-        session.endSession();
-
+    //     await session.commitTransaction();
+    //     session.endSession();
+        const createdRecipe = await newRecipe.save()
         return createdRecipe
 
     } catch (error) {
         console.log(error)
         // if any error is thrown, abort transaction
-        await session.abortTransaction();
-        session.endSession();
+        // await session.abortTransaction();
+        // session.endSession();
         
         throw error
     }

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import User from '../models/userSchema.js'
+import User from '../models/v1/userSchema.js'
 import 'dotenv/config'
 
 export default (req, res, next) => {

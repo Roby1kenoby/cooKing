@@ -1,0 +1,158 @@
+@baseUrl=http://localhost:5000/api/recipes
+
+### GET PUBLIC RECIPES
+POST {{baseUrl}}/public
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjUzNDIsImV4cCI6MTcyNzEyODk0Mn0.ZJkBFbn-RvqVfrXNABbuRAyATVjYw16BZfZnDELKRCg
+Content-Type: application/json
+
+{
+    "searchString": "",
+    "tagsIds":[]
+}
+
+### GET PRIVATE RECIPE
+POST {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxNzg3NzgsImV4cCI6MTcyNzE4MjM3OH0.79a0ClMceNyGAKpk2Deo7ZZuK7U4Y3ELQclQ02AA9wE
+Content-Type: application/json
+
+{
+    "searchString": "",
+    "tagsIds":[]
+}
+
+### GET ALL RECIPES
+POST {{baseUrl}}/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjkxODU5OTQsImV4cCI6MTcyOTE4OTU5NH0.M149Ghx7qDrxOVGAgga0VejhZPQoglwCVpBl_udGttM
+Content-Type: application/json
+
+{
+    "ingredients":["66eb43ae558e722c226da767"]
+}
+
+
+### GET SPECIFIC RECIPE
+GET {{baseUrl}}/66f19b734312ea187b1b2227
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjgyOTAzMjMsImV4cCI6MTcyODI5MzkyM30.JFXmUfJEKBWx5xVQsiJnaJj3OfnburXY2j4ZYjLS_ws
+
+
+### GET ALL INGREDIENTS
+GET {{baseUrl}}?searchString=ac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMDk5MjEsImV4cCI6MTcyNzExMzUyMX0.t7JM8RlI8Ja8m1ZjXm5atj2zqdKCVD2QXe-1w9dZ1AE
+
+### GET PRIVATE INGREDIENTS
+GET {{baseUrl}}/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjY3Njg5NTAsImV4cCI6MTcyNjc3MjU1MH0.BjazopgYqVluvLfDA0RsN3jNXO81f5RulTbIQjhL-uQ
+
+### CREATE RECIPE HEADER
+POST {{baseUrl}}/createRecipeHeader
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMTUzMjMsImV4cCI6MTcyNzExODkyM30.GxNIm3PcU-UuUcpkoKpTQfMuWnfSHbLXfjl5agvlq5Q
+
+{
+    "userId": "66e9e8b66f379cea82c39785",
+    "tagsIds": [],
+    "title": "Ricetta Test 1",
+    "description": "Descrizione Ricetta Test 1",
+    "portions": "4",
+    "preparationTime": "10",
+    "recipeImageUrl": "https://picsum.photos/200/300",
+    "recipeVideoUrl": "",
+    "privateRecipe": true,
+    "phases": [],
+    "recipeIngredients": []
+}
+
+### SAVE RECIPE
+POST {{baseUrl}}/saveRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MzU0ODU2ODMsImV4cCI6MTczNTUyMTY4M30.NBa9p8QOnIktxQpQx8VJaciXVeJMM0i3VDLrG1xZedU
+
+{
+    "versione": "v1",
+    "userId": "66e9e8b66f379cea82c39785",
+    "tags": [
+        "670a9f3777643a5bbc5c6f33"
+    ],
+    "title": "Ricetta Test Post API 5",
+    "description": "Descrizione Ricetta Test POST API",
+    "portions": "8",
+    "preparationTime": "20",
+    "recipeImageUrl": "https://picsum.photos/200/300",
+    "recipeVideoUrl": "",
+    "privateRecipe": false,
+    "phases": [
+        {
+            "phaseIngredients": [
+                {
+                    "ingredient": "66eb43ae558e722c226da775",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "100",
+                    "additionalInfos": "fave di stocazzo"
+                },
+                {
+                    "ingredient": "66eb43ae558e722c226da77c",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "50",
+                    "additionalInfos": "non so cosa sia"
+                }
+            ],
+            "phaseNumber": 1,
+            "description": "fase 1",
+            "phaseImageUrl": "https://picsum.photos/200/300"
+        },
+        {
+            "phaseIngredients": [
+                {
+                    "ingredient": "66eb43ae558e722c226da784",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "30",
+                    "additionalInfos": "bianchissimo"
+                },
+                {
+                    "ingredient": "66eb43ae558e722c226da78c",
+                    "measurementUnit": "g",
+                    "phaseId": null,
+                    "quantity": "20",
+                    "additionalInfos": "sniff"
+                }
+            ],
+            "phaseNumber": 2,
+            "description": "fase 2",
+            "phaseImageUrl": "https://picsum.photos/200/300"
+        }
+    ],
+    "recipeIngredients": [
+        {
+            "ingredient": "66eb43ae558e722c226da767",
+            "measurementUnit": "g",
+            "phaseId": null,
+            "quantity": "10",
+            "additionalInfos": "battuta al coltello"
+        },
+        {
+            "ingredient": "66eb43ae558e722c226da772",
+            "measurementUnit": "g",
+            "phaseId": null,
+            "quantity": "10",
+            "additionalInfos": "puliti bene"
+        }
+    ]
+
+}
+
+### UPDATE RECIPE
+PUT {{baseUrl}}/66f19b734312ea187b1b2227/editRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcxMjIzNzAsImV4cCI6MTcyNzEyNTk3MH0.HHf4vfRuLviiDXTVPndKVGfrV-nuWMv50hKdZUIMVdI
+
+{
+    "tagsIds": ["66f1cc312fd6d849ac614cae", "66f1cc492fd6d849ac614caf"]
+}
+
+### DELETE RECIPE
+DELETE {{baseUrl}}/66f0865b1fb087d1337cf55f/deleteRecipe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmU5ZThiNjZmMzc5Y2VhODJjMzk3ODUiLCJpYXQiOjE3MjcwMzg5MDIsImV4cCI6MTcyNzA0MjUwMn0.fEFh5l0j07P4TrbSYPa7VjcF3iNxJoJ_jSvCeKLipW0

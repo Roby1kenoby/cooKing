@@ -1,4 +1,4 @@
-import Tag from '../../../models/tagSchema.js'
+import Tag from '../../../models/v1/tagSchema.js'
 
 /* -------------- GET --------------*/
 

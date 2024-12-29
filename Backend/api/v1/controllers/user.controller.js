@@ -1,7 +1,7 @@
-import User from '../../../models/userSchema.js'
-import Recipe from '../../../models/recipeSchema.js'
-import Ingredient from '../../../models/ingredientSchema.js'
-import Tag from '../../../models/tagSchema.js'
+import User from '../../../models/v1/userSchema.js'
+import Recipe from '../../../models/v1/recipeSchema.js'
+import Ingredient from '../../../models/v1/ingredientSchema.js'
+import Tag from '../../../models/v1/tagSchema.js'
 
 import bcrypt from 'bcrypt'
 

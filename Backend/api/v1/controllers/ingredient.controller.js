@@ -1,4 +1,4 @@
-import Ingredient from '../../../models/ingredientSchema.js'
+import Ingredient from '../../../models/v1/ingredientSchema.js'
 
 
 /* -------------- GET --------------*/

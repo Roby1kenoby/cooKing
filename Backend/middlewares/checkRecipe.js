@@ -1,4 +1,4 @@
-import Recipe from "../models/recipeSchema.js"
+import Recipe from "../models/v1/recipeSchema.js"
 
 export default async (req,res,next) => {
     const userId = req.loggedUser._id

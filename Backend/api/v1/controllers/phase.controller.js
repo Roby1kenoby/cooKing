@@ -1,4 +1,4 @@
-import Phase from '../../../models/phaseSchema.js'
+import Phase from '../../../models/v1/phaseSchema.js'
 import * as PhaseService from '../services/phase.service.js'
 
 /* -------------- GET --------------*/

@@ -1,4 +1,4 @@
-import Recipe from '../../../models/recipeSchema.js'
+import Recipe from '../../../models/v1/recipeSchema.js'
 import * as RecipeService from '../services/recipe.service.js'
 
 /* -------------- GET --------------*/

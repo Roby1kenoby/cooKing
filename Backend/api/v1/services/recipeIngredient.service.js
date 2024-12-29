@@ -1,4 +1,4 @@
-import RecipeIngredient from '../../../models/recipeIngredientSchema.js'
+import RecipeIngredient from '../../../models/v1/recipeIngredientSchema.js'
 
 export const createRecipeIngredient = async function(data, session=null){
     const newRecipeIngredient = new RecipeIngredient({
